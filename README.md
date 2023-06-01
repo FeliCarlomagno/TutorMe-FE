@@ -11,7 +11,7 @@ Questo progetto ha lo scopo di  realizzare un servizio di tutoraggio che risulti
   - Javascript
   - Redux
   - React-Bootstrap
-  - - SCSS
+  - SCSS
   
        
 ## Avviare il progetto       
