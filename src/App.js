@@ -1,24 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "./App.scss";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Singup from "./components/Signup";
+import NotFoundPage from "./components/NotFoundPage";
+import CustomNavbar from "./components/CustomNavbar";
+import CardTeacher from "./components/CardTeacher";
+import Home from "./components/Home";
+import CreaAnnuncio from "./components/CreaAnnuncio";
+import LogIn from "./components/LogIn";
+import PaginaUtenti from "./components/PaginaUtenti";
+import PaginaPrenotazione from "./components/PaginaPrenotazione";
+import Profilo from "./components/Profilo";
+import ProveComponenti from "./components/ProveComponenti";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <CustomNavbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LogIn />} />
+          <Route path="/signUp" element={<Singup />} />
+          <Route path="/teachers/:searchValue" element={<CardTeacher />} />
+          <Route
+            path="/paginaAnnuncioSelezionato/:annuncioId"
+            element={<PaginaUtenti />}
+          />
+          <Route path="/creaAnnuncio" element={<CreaAnnuncio />} />
+          <Route path="/paginaPrenotazione/:annuncio" element={<PaginaPrenotazione />} />
+          <Route path="/profilo" element={<Profilo />} />
+
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/prove" element={<ProveComponenti />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

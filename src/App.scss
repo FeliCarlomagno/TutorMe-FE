@@ -1,0 +1,304 @@
+$primary: #cadc6f;
+$secondary: #dde5dd;
+$info: #e9f1eeee;
+$success: #edf5ed;
+$danger: rgb(206, 67, 67);
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+html {
+  min-height: 110%;
+  min-width: 100%;
+  font-size: 1.1em;
+}
+
+.App {
+  text-align: center;
+  min-width: 100%;
+}
+
+body {
+  min-height: 100%;
+  min-width: 100%;
+  background-color: #eef3ee;
+  background-repeat: no-repeat;
+  font-family: "Manrope", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1em;
+  color: black;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.header-menu {
+  position: absolute;
+  top: 60px;
+  right: 40px;
+  z-index: 1;
+}
+
+//css custom:-----------------------------------------------------------------------
+
+.logo:hover {
+  background: linear-gradient(to left, rgb(217, 255, 0), blue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background 5s ease;
+}
+
+//DROPDOWN NAVBAR
+.dropdown-toggle::after {
+  display: none;
+}
+
+.navbar-expand .navbar-nav .dropdown-menu {
+  position: absolute;
+  left: -150px;
+}
+
+.form_navbar {
+  border: none;
+}
+
+//CARD TEACHER:
+.card_teacher {
+  border: none;
+}
+
+//IMG_HOME
+
+.row_home {
+  margin-top: 5em;
+  .img_home {
+    width: 25em;
+  }
+  h1 {
+    font-size: 4em;
+    font-weight: 600;
+  }
+  .photo_cointainer_home_top {
+    display: flex;
+    justify-content: end;
+  }
+}
+
+.container_center {
+  max-width: 40%;
+  min-width: 35%;
+  .row_center_top {
+    margin-top: 10em;
+    .img_people_togheter {
+      width: 15em;
+    }
+    h2 {
+      font-size: 2em;
+      font-weight: 600;
+    }
+  }
+
+  .row_center {
+    margin-top: 4em;
+    .img_people_talk {
+      width: 15em;
+    }
+    h2 {
+      font-size: 2em;
+      font-weight: 600;
+    }
+  }
+
+  .row_center_end {
+    margin-top: 4em;
+    .img_people_smartphone {
+      width: 15em;
+    }
+    h2 {
+      font-size: 2em;
+      font-weight: 600;
+    }
+  }
+}
+
+//immagini carousel
+.carousel_home {
+  margin-top: 10em;
+  padding: 2em;
+  .img_carousel {
+    width: 25em;
+  }
+
+  .carousel-caption {
+    left: 50%;
+  }
+  .carousel-control-prev {
+    display: none;
+  }
+  .carousel-control-next {
+    display: none;
+  }
+}
+
+.div_banner_Tutor {
+  margin-top: 10em;
+  display: flex;
+  width: 40em;
+  background-color: black;
+  background-image: url("../public/assets/Webinar.gif");
+  background-size: 20em;
+  background-position: right;
+  background-repeat: no-repeat;
+  height: 40vh;
+  margin-bottom: 5em;
+  color: white;
+  h2 {
+    font-weight: bolder;
+  }
+}
+
+.comments_card {
+  border: 0;
+  box-shadow: 2px 2px 4px #50585536;
+  .comments_img {
+    width: 2em;
+    border-radius: 50%;
+  }
+}
+
+//immagine di pagina annuncio selezionato
+.img_Annuncio_selected {
+  width: 7em;
+  border-radius: 30%;
+}
+
+//form signup
+#signup_container {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+  background-image: url("../public/assets/5512.jpg");
+  background-size: cover;
+}
+.signup_form_control {
+  border-color: #eef3ee;
+}
+
+.left_row_Signup {
+  h1 {
+    font-weight: 600;
+  }
+}
+
+//step 1 creazione annuncio:
+
+.col_step_one {
+  h2 {
+    font-weight: 800;
+  }
+}
+
+//div con le materie:
+.div_materie {
+  overflow-y: auto;
+  height: 500px;
+  padding-right: none;
+}
+
+//barra di scorrimento div di creazione annuncio, step scelta materie:
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.modal-content {
+  border: none;
+}
+
+//DIV PROFILO DI UPLOAD PHOTO
+
+.upload_photo_div {
+  display: flex;
+  justify-content: center;
+
+  padding: 3px;
+
+  .identity_photo {
+    max-width: 5em;
+  }
+}
+
+//footer
+
+#footer {
+  background-color: black;
+}
+
+//PAGINA CREA ANNUNCIO ----------------------------------------
+#crea_annuncio_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../public/assets/School\ teacher\ explaining\ geography\ lesson.jpg");
+  background-size: cover;
+  .form_label_annuncio {
+    font-size: 12px;
+    color: rgb(96, 94, 94);
+  }
+}
+
+//PROVE CREAZIONE COMPONENTI--------------------------------------------------------------------
+
+#searcbar_with_toast_container {
+  position: absolute;
+  top: 15em;
+  #toast_body {
+    overflow-y: auto;
+    height: 500px;
+    padding-right: none;
+  }
+  #button_toast {
+    position: relative;
+  }
+}
+//---------------------------------------------------------------------------------------------
+
+//form pagina principale
+#form_container_principal {
+  width: 17.5em;
+  #form_principal {
+    width: 23em;
+    height: 3em;
+  }
+}
