@@ -14,10 +14,10 @@ Questo progetto ha lo scopo di  realizzare un servizio di tutoraggio che risulti
   
        
 ## Avviare il progetto       
-- Per avviare il progetto, una volta scaricato e aperto con un editor di testo (In questo caso è stato utilizzato Visual Studio Code), aprire il terminale e digitare il comando:
+- Per avviare il progetto, una volta scaricato e aperto con un editor di testo (In questo caso è stato utilizzato Visual Studio Code), aprire il terminale e digitare il comando che installerà   tutte le dipendenze del progetto:
    ### `npm install`
    
- - Una volta avviato il secondo comando da eseguire a terminale è il comando che installerà tutte le dipendenze del progetto:
+ - Una volta installate tutte le dipendeze possiamo avviare il progetto con il comando da terminale:
    ### `npm start`
    
    
