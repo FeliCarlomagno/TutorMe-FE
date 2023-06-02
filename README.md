@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+# TutorMe
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Questo progetto ha lo scopo di  realizzare un servizio di tutoraggio che risulti semplice e di facile utilizzo da parte di tutti gli utenti che hanno bisogno di ripetizioni in materie scolastiche e non, inoltre un ulteriore scopo è quello di poter permettere a chiunque di poter offrire servizi di lezioni e ripetizioni anche se non si è un professore qualificato ma capace di poter condividere le prorpie passioni in qualsiasi ambito e offrirle agli utenti.
 
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Collegamenti
+  Il progetto è direttamente collegato ad una sua parte di beckend realizzato con tecnologia Java(SpringBoot) realizzato, pensato e progettato anch'esso da me.
+  La sorgente del codice è reperibile al link: "https://github.com/FeliCarlomagno/TutorMe-BE"
+  
+## Software utilizzate per la realizzazione
+  - React
+  - Javascript
+  - Redux
+  - React-Bootstrap
+  - SCSS
+  
+       
+## Avviare il progetto       
+- Per avviare il progetto, una volta scaricato e aperto con un editor di testo (In questo caso è stato utilizzato Visual Studio Code), aprire il terminale e digitare il comando che installerà   tutte le dipendenze del progetto:
+   ### `npm install`
+   
+ - Una volta installate tutte le dipendeze possiamo avviare il progetto con il comando da terminale:
+   ### `npm start`
+   
+   
+## Com'è nata questa idea?
+L'idea è nata dall'esigenza di una persona a me molto cara di avere un'entrata che potesse aiutala a gestire al meglio le spese. Scorrendo un po' tra le varie opportunità che offriva il web ci siamo accorti che tutti i siti o almeno la maggior parte offrivano un servizio difficile da gestire, dove la sola iscrizione richiedeva di tutto e di piu', alcuni anche video di presentazione che magari per una persona che è un po' timida o una persona non troppo avvezza alla tecnologia, puo' essere un motivo di NON scelta di iscriversi a quel sito. 
+Dunque questa idea nasce dalla necessitaì di poter avere un sito semplice ed efficace per poter studiare o dare ripetizioni a chiunque ne abbia volgia o necessità e si cerca di farlo nel modo più semplice possibile.
+  
+    
