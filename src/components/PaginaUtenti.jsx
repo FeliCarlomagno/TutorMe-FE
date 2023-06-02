@@ -21,6 +21,8 @@ const PaginaUtenti = () => {
     (state) => state.annuncioSelezionato.annuncioSelezionato
   );
 
+  console.log("Annuncio Stok", annuncioStock);
+
   const fetchAnnunci = async () => {
     try {
       const response = await fetch(
@@ -52,167 +54,170 @@ const PaginaUtenti = () => {
 
   return (
     <>
-      <Container>
-        <Row>
-          <Col xs={12} md={4} className="mt-4">
-            <Card
-              style={{ maxWidth: "18rem" }}
-              className=" text-center rounded-4 d-block border-0 shadow-sm"
-            >
-              <Card.Img
-                variant="top"
-                src="https://picsum.photos/200/200"
-                className=" p-1 py-3 img_Annuncio_selected "
-              />
-              <Card.Body className="py-3">
-                <Card.Title>{annuncioStock?.user.name}</Card.Title>
-                <Card.Text>{annuncioStock?.tariffaOraria}</Card.Text>
-                {userLogged ? (
-                  <Button
-                    onClick={(e) => {
-                      navigate("/paginaPrenotazione/" + annuncioStock.id);
-                    }}
-                    className="rounded-pill"
-                  >
-                    Prenota una lezione
-                  </Button>
-                ) : (
-                  <>
-                    <Button onClick={toggleShowA} className="mb-2">
-                      Prenota
-                    </Button>
-                    <Toast
-                      show={showA}
-                      onClose={toggleShowA}
-                      className="border-0"
-                      delay={3000}
-                      autohide
+      <div id="pagina_annnuncio_select" className="bg-light">
+        <Container>
+          <Row>
+            <Col xs={12} md={4} className="mt-4">
+              <Card
+                style={{ maxWidth: "18rem" }}
+                className=" text-center rounded-4 d-block border-0 shadow-sm"
+              >
+                <Card.Img
+                  variant="top"
+                  src="https://picsum.photos/200/200"
+                  className=" p-1 py-3 img_Annuncio_selected "
+                />
+                <Card.Body className="py-3">
+                  <Card.Title>{annuncioStock?.user.name}</Card.Title>
+                  <Card.Text>{annuncioStock?.tariffaOraria}</Card.Text>
+                  {userLogged ? (
+                    <Button
+                      onClick={(e) => {
+                        navigate("/paginaPrenotazione/" + annuncioStock.id);
+                      }}
+                      className="rounded-pill"
                     >
-                      <Toast.Body>Accedi per poter prenotare</Toast.Body>
-                    </Toast>
-                  </>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
+                      Prenota una lezione
+                    </Button>
+                  ) : (
+                    <>
+                      <Button onClick={toggleShowA} className="mb-2">
+                        Prenota
+                      </Button>
+                      <Toast
+                        show={showA}
+                        onClose={toggleShowA}
+                        className="border-0"
+                        delay={3000}
+                        autohide
+                      >
+                        <Toast.Body>Accedi per poter prenotare</Toast.Body>
+                      </Toast>
+                    </>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
 
-          <Col xs={12} md={8} className="mt-3">
-            {annuncioStock?.listaMaterie.map((a) => (
-              <Badge bg="primary" className="me-1">
-                {a}
-              </Badge>
-            ))}
+            <Col xs={12} md={8} className="mt-3">
+              {annuncioStock?.listaMaterie.map((a) => (
+                <Badge bg="primary" className="me-1">
+                  {a}
+                </Badge>
+              ))}
 
-            <p className="fs-3 fw-bold">
-              {annuncioStock?.descrizioneAnnuncio} = descrizione annuncio
-            </p>
-            <Row>
-              <Col>
-                <h3> Riguardo a **nome Insegnante**</h3>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, ea.
-                  Perferendis, atque. Ea quos praesentium est, perferendis officiis harum,
-                  placeat eos tempore laboriosam omnis minus voluptatibus eaque quidem,
-                  iste sapiente!
-                </p>
-                <h3>Commenti</h3>
-                {/**CARD COMMENTI */}
-                <Card className="rounded-4 comments_card mt-2 ">
-                  <Card.Body className="rounded-4 ">
-                    <Row>
-                      <Col>
-                        <div>
-                          <Image src="/assets/55058.jpg" className="comments_img" />
-                          <span className="ms-1">Maria Grazia</span>
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
-                        ea labore illo voluptas esse libero obcaecati,
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-                <Card className="rounded-4 comments_card mt-2">
-                  <Card.Body className=" rounded-4">
-                    <Row>
-                      <Col>
-                        <div>
-                          <Image src="/assets/55058.jpg" className="comments_img" />
-                          <span className="ms-1">Federico neri</span>
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
-                        ea labore illo voluptas esse libero obcaecati,
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-                <Card className="rounded-4 comments_card mt-2">
-                  <Card.Body className=" rounded-4">
-                    <Row>
-                      <Col>
-                        <div>
-                          <Image src="/assets/55058.jpg" className="comments_img" />
-                          <span className="ms-1">Giuseppe Casini</span>
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
-                        ea labore illo voluptas esse libero obcaecati,
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-                <Card className="rounded-4 comments_card mt-2">
-                  <Card.Body className=" rounded-4">
-                    <Row>
-                      <Col>
-                        <div>
-                          <Image src="/assets/55058.jpg" className="comments_img" />
-                          <span className="ms-1">Alessandro Montegrandi</span>
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
-                        ea labore illo voluptas esse libero obcaecati,
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-                <Card className="rounded-4 comments_card mt-2">
-                  <Card.Body className=" rounded-4">
-                    <Row>
-                      <Col>
-                        <div>
-                          <Image src="/assets/55058.jpg" className="comments_img" />
-                          <span className="ms-1">Vittoria Brunelli</span>
-                        </div>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
-                        ea labore illo voluptas esse libero obcaecati,
-                      </Col>
-                    </Row>
-                  </Card.Body>
-                </Card>
-                {/**CARD COMMENTI */}
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-      </Container>
+              <p className="fs-1 lh-sm fw-bold">{annuncioStock?.descrizioneAnnuncio}</p>
+              <Row>
+                <Col>
+                  <h3> Riguardo a {annuncioStock?.user?.name}</h3>
+                  <p>
+                    INserire la descrizione presente sulla pagina di profilo che si andrà
+                    a creare
+                  </p>
+                  <h3>Luogo del corso</h3>
+                  {annuncioStock?.tipoLezione.map((tipo) => (
+                    <Badge>{tipo}</Badge>
+                  ))}
+
+                  <h3 className="mt-5">Commenti</h3>
+                  {/**CARD COMMENTI */}
+                  <Card className="rounded-4 comments_card mt-2 ">
+                    <Card.Body className="rounded-4 ">
+                      <Row>
+                        <Col>
+                          <div>
+                            <Image src="/assets/55058.jpg" className="comments_img" />
+                            <span className="ms-1">Maria Grazia</span>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                          Suscipit ea labore illo voluptas esse libero obcaecati,
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                  <Card className="rounded-4 comments_card mt-2">
+                    <Card.Body className=" rounded-4">
+                      <Row>
+                        <Col>
+                          <div>
+                            <Image src="/assets/55058.jpg" className="comments_img" />
+                            <span className="ms-1">Federico neri</span>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                          Suscipit ea labore illo voluptas esse libero obcaecati,
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                  <Card className="rounded-4 comments_card mt-2">
+                    <Card.Body className=" rounded-4">
+                      <Row>
+                        <Col>
+                          <div>
+                            <Image src="/assets/55058.jpg" className="comments_img" />
+                            <span className="ms-1">Giuseppe Casini</span>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                          Suscipit ea labore illo voluptas esse libero obcaecati,
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                  <Card className="rounded-4 comments_card mt-2">
+                    <Card.Body className=" rounded-4">
+                      <Row>
+                        <Col>
+                          <div>
+                            <Image src="/assets/55058.jpg" className="comments_img" />
+                            <span className="ms-1">Alessandro Montegrandi</span>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                          Suscipit ea labore illo voluptas esse libero obcaecati,
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                  <Card className="rounded-4 comments_card mt-2">
+                    <Card.Body className=" rounded-4">
+                      <Row>
+                        <Col>
+                          <div>
+                            <Image src="/assets/55058.jpg" className="comments_img" />
+                            <span className="ms-1">Vittoria Brunelli</span>
+                          </div>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <Col>
+                          Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                          Suscipit ea labore illo voluptas esse libero obcaecati,
+                        </Col>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                  {/**CARD COMMENTI */}
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </>
   );
 };
