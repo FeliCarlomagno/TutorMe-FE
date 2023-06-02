@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
@@ -47,38 +47,46 @@ const PaginaPrenotazione = () => {
             Ciao
           </Col>
           <Col>
-            <h2>Organizza</h2>
-            <p>la tua prima lezione con NOME PROF E CREATORE DELL'ANNUNCIO</p>
-            <Form onSubmit={handelSubmit}>
-              <Form.Group className="mb-3" controlId="formBasicDescription">
-                <Form.Label>Aggiungi una breve presentazione su di te</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Presentati "
-                  onChange={(e) => {
-                    setPrenotazione({
-                      ...prenotazione,
-                      descrizionePrenotazione: e.target.value,
-                    });
-                  }}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="formBasicDate">
-                <Form.Label>Aggiungi una breve presentazione su di te</Form.Label>
-                <Form.Control
-                  type="date"
-                  onChange={(e) => {
-                    setPrenotazione({
-                      ...prenotazione,
-                      dataPrenotazione: e.target.value,
-                    });
-                  }}
-                />
-              </Form.Group>
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form>
+            <Card className="border-0 shadow-sm rounded-4">
+              <Card.Body>
+                <h2>Organizza</h2>
+                <p>la tua prima lezione con NOME PROF E CREATORE DELL'ANNUNCIO</p>
+                <Form onSubmit={handelSubmit}>
+                  <Form.Group className="mb-3" controlId="formBasicDescription">
+                    <Form.Label>Aggiungi una breve presentazione su di te</Form.Label>
+                    <Form.Control
+                      className="border-0 shadow-sm"
+                      type="text"
+                      placeholder="Presentati "
+                      onChange={(e) => {
+                        setPrenotazione({
+                          ...prenotazione,
+                          descrizionePrenotazione: e.target.value,
+                        });
+                      }}
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicDate">
+                    <Form.Label className="fs-6">
+                      Aggiungi una breve presentazione su di te
+                    </Form.Label>
+                    <Form.Control
+                      className="border-0 shadow-sm"
+                      type="date"
+                      onChange={(e) => {
+                        setPrenotazione({
+                          ...prenotazione,
+                          dataPrenotazione: e.target.value,
+                        });
+                      }}
+                    />
+                  </Form.Group>
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </Container>
