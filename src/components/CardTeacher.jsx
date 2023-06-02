@@ -21,13 +21,13 @@ const CardTeacher = () => {
     <Container>
       <Row>
         <h2 className="mt-5">
-          Ricerca per{" "}
+          Ricerca per
           <span className="text-primary">{params.searchValue.toUpperCase()}</span>
         </h2>
         {hasFetchError && navigate("*")}
         {teachersInStock
           .filter((obj) =>
-            obj.listaMaterie.every((materia) =>
+            obj.listaMaterie?.some((materia) =>
               materia.toLowerCase().includes(params.searchValue.toLowerCase())
             )
           )
