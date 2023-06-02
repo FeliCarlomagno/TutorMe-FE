@@ -11082,4 +11082,12 @@ body {
 #form_container_principal #form_principal {
   width: 23em;
   height: 3em;
+}
+
+.accordion-button::after {
+  display: none;
+}
+
+.accordion-button {
+  justify-content: space-between;
 }/*# sourceMappingURL=App.css.map */
