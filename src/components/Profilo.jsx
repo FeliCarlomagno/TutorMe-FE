@@ -164,6 +164,27 @@ const Profilo = () => {
               </Form>
             </Card.Body>
           </Card>
+
+          <Card className="border-0 shadow-sm rounded-4 mt-2">
+            <p className="text-center pt-3 m-0 fw-semibold">Descriviti ✒️</p>
+            <Card.Body>
+              <Form.Group className="mb-3 " controlId="formBasicName">
+                <Form.Control
+                  type="text"
+                  as="textarea"
+                  rows={6}
+                  placeholder="Inserisci una descrizione su di te"
+                  className=" border border-2 border-light "
+                />
+              </Form.Group>
+              <Row xs={3} className="justify-content-center">
+                {/*INSERIRE FETCH DI MODIFICA UTENTE*/}
+                <Button variant="primary" type="submit" className="rounded-4">
+                  Invia
+                </Button>
+              </Row>
+            </Card.Body>
+          </Card>
         </Col>
 
         {/* SEZIONE CENTRALE*/}
