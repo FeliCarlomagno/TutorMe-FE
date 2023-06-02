@@ -13,7 +13,7 @@ const signupUserReducer = (state = initialState, action) => {
     case SET_USER_INFORMATION:
       return {
         ...state,
-        user: action.payload,
+        userSignUp: action.payload,
       };
     default:
       return state;
