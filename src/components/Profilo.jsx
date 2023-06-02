@@ -8,14 +8,16 @@ import {
   Card,
   Alert,
   InputGroup,
+  Accordion,
 } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { handleDeleteAnnunci } from "../redux/actions";
 
 const Profilo = () => {
   const userName = useSelector((state) => state.userLogin.userLogin);
   const [user, setUser] = useState(null);
-  const [deletePrenotazione, setDeletePrenotazione] = useState(null);
-  console.log("Prenotazione selezionata", deletePrenotazione);
+  const [refresh, setRefresh] = useState(false);
+  console.log("User", user);
 
   //funzione di input file
   const fileInputRef = useRef();
@@ -42,7 +44,6 @@ const Profilo = () => {
       );
       if (response.ok) {
         const fetchedUser = await response.json();
-        alert("trova utente by username ok");
         setUser(fetchedUser);
       } else {
         alert("response not ok");
@@ -56,10 +57,19 @@ const Profilo = () => {
     fetchUser();
   }, []);
 
-  const handleDelete = async () => {
+  //ftech di modifica utente:
+  const fetchEditUser = async () => {
+    try {
+      const resposne = await fetch;
+    } catch (error) {}
+  };
+
+  //FETCH DI CANCELLAZIONE PRENOTAZIONE
+
+  const handleDeletePrenotazione = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/prenotazioni/eliminaPrenotazione/${deletePrenotazione}`,
+        `http://localhost:8080/prenotazioni/eliminaPrenotazione/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -69,27 +79,56 @@ const Profilo = () => {
         }
       );
       if (response.ok) {
+        setRefresh(true);
       } else {
-        <Alert>qualcosa non va</Alert>;
+        alert("qualcosa è andato storto");
       }
     } catch (error) {
       alert("FATAL_ERROR", error);
     }
   };
 
+  //fetch elimna annunci
+  const handleDeleteAnnunci = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/annuncio/eliminaAnnuncio/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: process.env.REACT_API_KEY,
+            "content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        setRefresh(true);
+      } else {
+        alert("Qualcosa non va con l'eliminazione del tuo annuncio");
+      }
+    } catch (error) {
+      alert("FATAL ERROR", error);
+    }
+  };
+
+  //update dopo aver cancellato una pagina
+  useEffect(() => {
+    fetchUser();
+  }, [refresh]);
+
   return (
     <Container>
       <Row className="justify-content-center">
         <Col xs={12} md={3}>
           <Card className="border-0 shadow-sm rounded-4">
-            <p className="text-center pt-2 m-0 fw-semibold">Info Generali 😎</p>
+            <p className="text-center pt-3 m-0 fw-semibold">Info Generali 😎</p>
             <Card.Body>
               <Form className="p-2 rounded-4">
                 <Form.Group className="mb-3 " controlId="formBasicName">
                   <Form.Control
                     type="text"
-                    placeholder={userName?.username}
-                    className=" border border-2 border-light text-light"
+                    placeholder={userName ? userName.username : "Nome"}
+                    className=" border border-2 border-light "
                   />
                 </Form.Group>
 
@@ -198,17 +237,21 @@ const Profilo = () => {
           >
             <h4 className="mt-2">Lista Prenotazioni</h4>
             {user?.listaPrenotazioni?.map((p, i) => (
-              <Card.Body className="d-flex p-1">
-                <Button data-bs-toggle="button" key={i} className="w-100">
-                  {p.dataPrenotazione} {p.id}
-                  <ion-icon
-                    name="trash-bin-outline"
-                    onClick={(e) => {
-                      setDeletePrenotazione(p.id);
-                      handleDelete();
-                    }}
-                  />
-                </Button>
+              <Card.Body className="d-flex p-1 justify-content-center" key={i}>
+                <Accordion className="w-100">
+                  <Accordion.Item eventKey="0" className="border-0">
+                    <Accordion.Header>
+                      {p.dataPrenotazione}
+                      <ion-icon
+                        name="trash-bin-outline"
+                        onClick={(e) => {
+                          handleDeletePrenotazione(p.id);
+                        }}
+                      />
+                    </Accordion.Header>
+                    <Accordion.Body>{p.descrizionePrenotazione}</Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
               </Card.Body>
             ))}
           </Card>
@@ -219,17 +262,21 @@ const Profilo = () => {
           >
             <h4 className="mt-2">Lista Annunci</h4>
             {user?.listaAnnunci?.map((p, i) => (
-              <Card.Body className="d-flex p-1">
-                <Button data-bs-toggle="button" key={i} className="w-100">
-                  {p.listaMaterie}
-                  <ion-icon
-                    name="trash-bin-outline"
-                    onClick={(e) => {
-                      setDeletePrenotazione(p.id);
-                      handleDelete();
-                    }}
-                  />
-                </Button>
+              <Card.Body className="d-flex p-1" key={i}>
+                <Accordion className="w-100 justify-content-between">
+                  <Accordion.Item eventKey="0" className="border-0">
+                    <Accordion.Header>
+                      {p.listaMaterie}
+                      <ion-icon
+                        name="trash-bin-outline"
+                        onClick={(e) => {
+                          handleDeleteAnnunci(p.id);
+                        }}
+                      />
+                    </Accordion.Header>
+                    <Accordion.Body></Accordion.Body>
+                  </Accordion.Item>
+                </Accordion>
               </Card.Body>
             ))}
           </Card>

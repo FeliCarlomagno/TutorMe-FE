@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { Col, Container, Row, Button, Form, Card } from "react-bootstrap";
+import { Col, Container, Row, Button, Form, Card, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { SEND_ANNUNCIO } from "../redux/actions";
 import { materieInsegnabili } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const CreaAnnuncio = () => {
   const userName = useSelector((state) => state.userLogin.userLogin);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [annuncio, setAnnuncio] = useState({
     listaMaterie: [],
@@ -14,6 +16,7 @@ const CreaAnnuncio = () => {
     descrizioneAnnuncio: "",
     tariffaOraria: 1,
     tipoLezione: [],
+    isCreate: false,
   });
 
   //PROVA RENDERIZZAZIONE DI PARTI DI CODICE USANDO LO STATE
@@ -34,7 +37,6 @@ const CreaAnnuncio = () => {
   };
 
   //FORM DI RICERCA MATERIE:
-
   const [formValue, setFormValue] = useState("");
 
   const handleSet = (e) => {
@@ -68,6 +70,8 @@ const CreaAnnuncio = () => {
           type: SEND_ANNUNCIO,
           payload: annuncio,
         });
+        alert("annuncio creato");
+        navigate("/");
       } else {
         alert("qualcosa è andato storto");
       }

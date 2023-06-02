@@ -302,3 +302,11 @@ body {
     height: 3em;
   }
 }
+
+//ACCORDION PROFILO
+.accordion-button::after {
+  display: none;
+}
+.accordion-button {
+  justify-content: space-between;
+}

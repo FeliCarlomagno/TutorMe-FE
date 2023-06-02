@@ -114,8 +114,9 @@ const Singup = () => {
                     type="submit"
                     className="d-block mx-auto rounded-pill "
                   >
-                    Submit
+                    Iscriviti
                   </Button>
+                  <p className="text-center">Hai già un account? Accedi</p>
                 </Form>
               </Card.Body>
             </Card>

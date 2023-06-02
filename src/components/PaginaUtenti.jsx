@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_ANNUNCIO_SELEZIONATO } from "../redux/actions";
-import { Button, Col, Container, Row, Card, Badge, Image } from "react-bootstrap";
+import { Button, Col, Container, Row, Card, Badge, Image, Toast } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import CustomModal from "./CustomModal";
 
 const PaginaUtenti = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
   const userLogged = useSelector((state) => state.userLogin.userLogin?.username);
+
+  //stato per il toast
+  const [showA, setShowA] = useState(true);
+  const toggleShowA = () => setShowA(!showA);
+
+  console.log("parametri ricevuti da cardTeacher", params);
 
   const annuncioStock = useSelector(
     (state) => state.annuncioSelezionato.annuncioSelezionato
@@ -41,7 +48,7 @@ const PaginaUtenti = () => {
 
   useEffect(() => {
     fetchAnnunci();
-  }, [params.annuncioId]);
+  }, []);
 
   return (
     <>
@@ -70,14 +77,20 @@ const PaginaUtenti = () => {
                     Prenota una lezione
                   </Button>
                 ) : (
-                  <Button
-                    onClick={(e) => {
-                      navigate("/login");
-                    }}
-                    className="rounded-pill"
-                  >
-                    Prenota una lezione
-                  </Button>
+                  <>
+                    <Button onClick={toggleShowA} className="mb-2">
+                      Prenota
+                    </Button>
+                    <Toast
+                      show={showA}
+                      onClose={toggleShowA}
+                      className="border-0"
+                      delay={3000}
+                      autohide
+                    >
+                      <Toast.Body>Accedi per poter prenotare</Toast.Body>
+                    </Toast>
+                  </>
                 )}
               </Card.Body>
             </Card>

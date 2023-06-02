@@ -147,3 +147,8 @@ export const addToFavourite = (insegnante) => ({
   type: ADD_TO_FAVOURITE,
   payload: insegnante,
 });
+
+//Funzione disconnetti
+export const handleLogout = () => {
+  window.location.reload();
+};

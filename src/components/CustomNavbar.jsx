@@ -3,6 +3,7 @@ import { Navbar, Nav, Button, Dropdown, Form } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CustomModal from "./CustomModal";
+import { handleLogout } from "../redux/actions";
 
 const CustomNavbar = () => {
   const userName = useSelector((state) => state.userLogin.userLogin?.username);
@@ -57,7 +58,14 @@ const CustomNavbar = () => {
                   <Link to="/profilo" className="text-decoration-none">
                     <Dropdown.Item href="#/action-2">Profilo</Dropdown.Item>
                   </Link>
-                  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                  <Dropdown.Item
+                    href="#/action-3"
+                    onClick={() => {
+                      handleLogout();
+                    }}
+                  >
+                    Disconnettiti
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
               <Button className="rounded-pill ms-3 button d-flex align-items-center shadow-sm">

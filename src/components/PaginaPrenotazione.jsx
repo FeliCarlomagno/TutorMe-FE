@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 const PaginaPrenotazione = () => {
   const user = useSelector((state) => state.userLogin.userLogin);
   const params = useParams();
+  console.log("parametro ricevuto", params);
+  console.log("user che prenota", user?.username);
 
   const [prenotazione, setPrenotazione] = useState({
     descrizionePrenotazione: "",
@@ -25,10 +27,12 @@ const PaginaPrenotazione = () => {
           },
         }
       );
+      const data = await response;
       if (response.ok) {
         alert("tutto ok");
       } else {
         alert("Qualcosa non va bene");
+        console.log(data);
       }
     } catch (error) {
       alert("FATAL ERROR", error);
@@ -39,7 +43,9 @@ const PaginaPrenotazione = () => {
     <>
       <Container>
         <Row>
-          <Col></Col>
+          <Col xs={12} md={6}>
+            Ciao
+          </Col>
           <Col>
             <h2>Organizza</h2>
             <p>la tua prima lezione con NOME PROF E CREATORE DELL'ANNUNCIO</p>
