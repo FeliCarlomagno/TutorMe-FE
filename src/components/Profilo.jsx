@@ -6,20 +6,23 @@ import {
   Form,
   Button,
   Card,
-  Alert,
   InputGroup,
   Accordion,
 } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { handleDeleteAnnunci } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 const Profilo = () => {
   const userName = useSelector((state) => state.userLogin.userLogin);
   const [user, setUser] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  const dispatch = useDispatch();
+
   console.log("User", user);
 
-  //funzione di input file
+  //STATO PER AGGIUNTA IMMAGINE:
+  const [image, setImage] = useState(null);
+
+  //funzione di input file per trasformare un bottone in un input-------------------------
   const fileInputRef = useRef();
 
   const handleButtonClick = () => {
@@ -30,7 +33,7 @@ const Profilo = () => {
     const file = event.target.files[0];
     console.log("File selezionato:", file);
   };
-  //fine funzione input
+  //fine funzione input---------------------------------------------------------------
 
   const fetchUser = async (e) => {
     try {
@@ -57,15 +60,32 @@ const Profilo = () => {
     fetchUser();
   }, []);
 
-  //ftech di modifica utente:
-  const fetchEditUser = async () => {
+  //FETCH di modifica utente:--------------------------------------------------------
+  const handleEdit = async (e) => {
+    e.preventDefault();
     try {
-      const resposne = await fetch;
-    } catch (error) {}
+      const response = await fetch(
+        `http://localhost:8080/api/auth/modificaUtente/${user.id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(user),
+          headers: {
+            Authorization: process.env.REACT_API_KEY,
+            "content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("TUTTO OK");
+      } else {
+        alert("NIENTE DI BUONO");
+      }
+    } catch (error) {
+      alert("FATAL ERROR", error);
+    }
   };
 
-  //FETCH DI CANCELLAZIONE PRENOTAZIONE
-
+  //FETCH DI CANCELLAZIONE PRENOTAZIONE-----------------------------------------------------------
   const handleDeletePrenotazione = async (id) => {
     try {
       const response = await fetch(
@@ -88,7 +108,7 @@ const Profilo = () => {
     }
   };
 
-  //fetch elimna annunci
+  //fetch elimina annunci-----------------------------------------------------------------------------
   const handleDeleteAnnunci = async (id) => {
     try {
       const response = await fetch(
@@ -115,6 +135,31 @@ const Profilo = () => {
   useEffect(() => {
     fetchUser();
   }, [refresh]);
+
+  //FETCH DI AGGIUNTA IMMAGINE------------------------------------------------------------------------------------------
+  const handleSetImage = async () => {
+    try {
+      const response = await fetch(
+        `localhost:8080/api/auth/setImmagine/${userName?.username}`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization: process.env.REACT_API_KEY,
+            "content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setImage(data);
+        alert("Immagine caricata con successo");
+      } else {
+        alert("qualcosa non va bene con il caricamento dell'immagine");
+      }
+    } catch (error) {
+      alert("FATAL ERROR", error);
+    }
+  };
 
   return (
     <Container>
@@ -168,21 +213,23 @@ const Profilo = () => {
           <Card className="border-0 shadow-sm rounded-4 mt-2">
             <p className="text-center pt-3 m-0 fw-semibold">Descriviti ✒️</p>
             <Card.Body>
-              <Form.Group className="mb-3 " controlId="formBasicName">
-                <Form.Control
-                  type="text"
-                  as="textarea"
-                  rows={6}
-                  placeholder="Inserisci una descrizione su di te"
-                  className=" border border-2 border-light "
-                />
-              </Form.Group>
-              <Row xs={3} className="justify-content-center">
-                {/*INSERIRE FETCH DI MODIFICA UTENTE*/}
+              <Form onSubmit={handleEdit}>
+                <Form.Group className="mb-3 " controlId="formBasicName">
+                  <Form.Control
+                    type="text"
+                    as="textarea"
+                    rows={6}
+                    value={user?.descrizione}
+                    placeholder="Inserisci una descrizione su di te"
+                    className=" border border-2 border-light "
+                    onChange={(e) => setUser({ ...user, descrizione: e.target.value })}
+                  />
+                </Form.Group>
                 <Button variant="primary" type="submit" className="rounded-4">
                   Invia
                 </Button>
-              </Row>
+              </Form>
+              <Row xs={3} className="justify-content-center"></Row>
             </Card.Body>
           </Card>
         </Col>
@@ -199,25 +246,28 @@ const Profilo = () => {
                   className="identity_photo"
                 />
               </div>
-              <Button onClick={handleButtonClick} className="mt-4 rounded-4">
-                Carica una foto
+
+              <Form onClick={handleButtonClick}>
                 <input
                   type="file"
                   ref={fileInputRef}
                   className="d-none"
                   onChange={handleFileChange}
                 />
-              </Button>
+                <Button className="mt-4 rounded-4" /*onClick={handleSetImage}*/>
+                  Carica una foto
+                </Button>
+              </Form>
             </Card.Body>
           </Card>
 
-          <Card className="border-0 shadow-sm rounded-4 text-center mt-2">
+          {/*<Card className="border-0 shadow-sm rounded-4 text-center mt-2">
             <Card.Body>
               <p className="fw-semibold">Password 🔑</p>
 
               <Button className="mt-4 rounded-4">Cambia password</Button>
             </Card.Body>
-          </Card>
+            </Card>*/}
 
           <Card className="border-0 rounded-4 text-center shadow-sm mt-2">
             <Card.Body>
