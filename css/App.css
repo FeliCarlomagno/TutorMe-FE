@@ -10819,14 +10819,14 @@ textarea.form-control-lg {
   }
 }
 html {
-  min-height: 110%;
-  min-width: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
   font-size: 1.1em;
 }
 
 .App {
   text-align: center;
-  min-width: 100%;
+  min-width: 100vw;
 }
 
 body {
@@ -10891,7 +10891,7 @@ body {
   display: none;
 }
 
-.navbar-expand .navbar-nav .dropdown-menu {
+.navbar-expand-lg .navbar-nav .dropdown-menu {
   position: absolute;
   left: -150px;
 }
@@ -10986,6 +10986,51 @@ body {
 }
 .div_banner_Tutor h2, .div_banner_Tutor .h2 {
   font-weight: bolder;
+}
+.div_banner_Tutor .p_banner_tutor {
+  margin-top: 1em;
+}
+@media screen and (max-width: 890px) {
+  .div_banner_Tutor {
+    width: 35em;
+  }
+}
+@media screen and (max-width: 750px) {
+  .div_banner_Tutor {
+    width: 30em;
+  }
+  .div_banner_Tutor .p_banner_tutor {
+    width: 11em;
+    margin-top: 0 !important;
+  }
+}
+@media screen and (max-width: 650px) {
+  .div_banner_Tutor {
+    justify-content: space-between;
+    align-items: center;
+    width: 25em;
+  }
+  .div_banner_Tutor .p_banner_tutor {
+    display: none;
+  }
+}
+@media screen and (max-width: 550px) {
+  .div_banner_Tutor {
+    width: 20em;
+  }
+}
+@media screen and (max-width: 400px) {
+  .div_banner_Tutor {
+    justify-content: space-between;
+    width: 15em;
+    background-size: 15em;
+  }
+  .div_banner_Tutor h2, .div_banner_Tutor .h2 {
+    font-size: 1em;
+  }
+  .div_banner_Tutor .p_banner_tutor {
+    display: none;
+  }
 }
 
 .comments_card {
