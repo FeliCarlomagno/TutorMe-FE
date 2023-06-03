@@ -10891,6 +10891,16 @@ body {
   display: none;
 }
 
+.navbar-toggler {
+  border: none;
+}
+
+@media screen and (max-width: 992px) {
+  .offcanvas_body_small_screen {
+    display: none;
+  }
+}
+
 .navbar-expand-lg .navbar-nav .dropdown-menu {
   position: absolute;
   left: -150px;
@@ -10907,12 +10917,34 @@ body {
 .row_home {
   margin-top: 5em;
 }
+@media screen and (max-width: 350px) {
+  .row_home {
+    margin-top: 0;
+  }
+}
 .row_home .img_home {
   width: 25em;
+}
+@media screen and (max-width: 991px) {
+  .row_home .img_home {
+    width: 16em;
+  }
+}
+@media screen and (max-width: 350px) {
+  .row_home .img_home {
+    width: 16em;
+    margin-top: 2em;
+  }
 }
 .row_home h1, .row_home .h1 {
   font-size: 4em;
   font-weight: 600;
+}
+@media screen and (max-width: 990px) {
+  .row_home h1, .row_home .h1 {
+    font-size: 2em;
+    text-align: center;
+  }
 }
 .row_home .photo_cointainer_home_top {
   display: flex;
@@ -10920,14 +10952,16 @@ body {
 }
 
 .container_center {
-  max-width: 40%;
-  min-width: 35%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15vw;
+  padding-right: 15vw;
 }
 .container_center .row_center_top {
   margin-top: 10em;
 }
 .container_center .row_center_top .img_people_togheter {
-  width: 15em;
+  width: 17em;
 }
 .container_center .row_center_top h2, .container_center .row_center_top .h2 {
   font-size: 2em;
@@ -10936,18 +10970,28 @@ body {
 .container_center .row_center {
   margin-top: 4em;
 }
+@media screen and (max-width: 350px) {
+  .container_center .row_center p {
+    font-size: 15px;
+  }
+}
 .container_center .row_center .img_people_talk {
-  width: 15em;
+  width: 17em;
 }
 .container_center .row_center h2, .container_center .row_center .h2 {
   font-size: 2em;
   font-weight: 600;
 }
+@media screen and (max-width: 991px) {
+  .container_center .row_center {
+    flex-direction: column-reverse;
+  }
+}
 .container_center .row_center_end {
   margin-top: 4em;
 }
 .container_center .row_center_end .img_people_smartphone {
-  width: 15em;
+  width: 17em;
 }
 .container_center .row_center_end h2, .container_center .row_center_end .h2 {
   font-size: 2em;
@@ -10977,7 +11021,7 @@ body {
   width: 40em;
   background-color: black;
   background-image: url("../public/assets/Webinar.gif");
-  background-size: 20em;
+  background-size: 25em;
   background-position: right;
   background-repeat: no-repeat;
   height: 40vh;
@@ -11006,6 +11050,7 @@ body {
 }
 @media screen and (max-width: 650px) {
   .div_banner_Tutor {
+    text-align: center !important;
     justify-content: space-between;
     align-items: center;
     width: 25em;
@@ -11017,6 +11062,7 @@ body {
 @media screen and (max-width: 550px) {
   .div_banner_Tutor {
     width: 20em;
+    background-size: 20em;
   }
 }
 @media screen and (max-width: 400px) {
@@ -11124,9 +11170,19 @@ body {
 #form_container_principal {
   width: 17.5em;
 }
+@media screen and (min-width: 350px) {
+  #form_container_principal {
+    width: 13em;
+  }
+}
 #form_container_principal #form_principal {
   width: 23em;
   height: 3em;
+}
+@media screen and (min-width: 350px) {
+  #form_container_principal #form_principal {
+    width: 18em;
+  }
 }
 
 .accordion-button::after {

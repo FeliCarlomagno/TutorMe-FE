@@ -83,6 +83,16 @@ body {
   display: none;
 }
 
+.navbar-toggler {
+  border: none;
+}
+
+.offcanvas_body_small_screen {
+  @media screen and (max-width: 992px) {
+    display: none;
+  }
+}
+
 .navbar-expand-lg .navbar-nav .dropdown-menu {
   position: absolute;
   left: -150px;
@@ -97,16 +107,30 @@ body {
   border: none;
 }
 
-//IMG_HOME
-
+//ROW-HOME----------------------------------------------------------
 .row_home {
   margin-top: 5em;
+  @media screen and (max-width: 350px) {
+    margin-top: 0;
+  }
+
   .img_home {
     width: 25em;
+    @media screen and (max-width: 991px) {
+      width: 16em;
+    }
+    @media screen and (max-width: 350px) {
+      width: 16em;
+      margin-top: 2em;
+    }
   }
   h1 {
     font-size: 4em;
     font-weight: 600;
+    @media screen and (max-width: 990px) {
+      font-size: 2em;
+      text-align: center;
+    }
   }
   .photo_cointainer_home_top {
     display: flex;
@@ -115,12 +139,15 @@ body {
 }
 
 .container_center {
-  max-width: 40%;
-  min-width: 35%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 15vw;
+  padding-right: 15vw;
+
   .row_center_top {
     margin-top: 10em;
     .img_people_togheter {
-      width: 15em;
+      width: 17em;
     }
     h2 {
       font-size: 2em;
@@ -130,19 +157,27 @@ body {
 
   .row_center {
     margin-top: 4em;
+    @media screen and (max-width: 350px) {
+      p {
+        font-size: 15px;
+      }
+    }
     .img_people_talk {
-      width: 15em;
+      width: 17em;
     }
     h2 {
       font-size: 2em;
       font-weight: 600;
+    }
+    @media screen and (max-width: 991px) {
+      flex-direction: column-reverse;
     }
   }
 
   .row_center_end {
     margin-top: 4em;
     .img_people_smartphone {
-      width: 15em;
+      width: 17em;
     }
     h2 {
       font-size: 2em;
@@ -176,7 +211,7 @@ body {
   width: 40em;
   background-color: black;
   background-image: url("../public/assets/Webinar.gif");
-  background-size: 20em;
+  background-size: 25em;
   background-position: right;
   background-repeat: no-repeat;
   height: 40vh;
@@ -200,6 +235,7 @@ body {
     }
   }
   @media screen and (max-width: 650px) {
+    text-align: center !important;
     justify-content: space-between;
     align-items: center;
     width: 25em;
@@ -209,6 +245,7 @@ body {
   }
   @media screen and (max-width: 550px) {
     width: 20em;
+    background-size: 20em;
   }
   @media screen and (max-width: 400px) {
     justify-content: space-between;
@@ -333,9 +370,15 @@ body {
 //form pagina principale
 #form_container_principal {
   width: 17.5em;
+  @media screen and (min-width: 350px) {
+    width: 13em;
+  }
   #form_principal {
     width: 23em;
     height: 3em;
+    @media screen and (min-width: 350px) {
+      width: 18em;
+    }
   }
 }
 

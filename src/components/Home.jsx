@@ -48,7 +48,7 @@ const Home = () => {
             </Form>
           </Col>
           <Col xs={12} md={6}>
-            <div className="photo_cointainer_home_top">
+            <div className="photo_cointainer_home_top justify-content-center">
               <img
                 src="/assets/58167.jpg"
                 alt="people_job"
@@ -60,8 +60,8 @@ const Home = () => {
       </Container>
 
       <Container className="container_center">
-        <Row className="row_center_top">
-          <Col>
+        <Row className="row_center_top d-flex justify-content-center">
+          <Col xs={12} sm={12} md={12} lg={6}>
             <div className="d-flex justify-content-center">
               <img
                 src="/assets/56893.jpg"
@@ -80,14 +80,14 @@ const Home = () => {
         </Row>
 
         <Row className="row_center">
-          <Col xs={12} md={6}>
+          <Col>
             <h2>2. Contattalo e scegli una data per la tua lezione</h2>
             <p>
               Veloci come un lampo, gli insegnanti ti rispondono in qualche ora! E se non
               trovi l'insegnante perfetto, la nostra equipe ti aiuterà nella ricerca.
             </p>
           </Col>
-          <Col>
+          <Col xs={12} sm={12} md={12} lg={6}>
             <div className="d-flex justify-content-center">
               <img
                 src="/assets/55058.jpg"
@@ -98,8 +98,8 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Row className="row_center_end" xs={12}>
-          <Col>
+        <Row className="row_center_end">
+          <Col xs={12} sm={12} md={12} lg={6}>
             <div className="d-flex justify-content-center">
               <img
                 src="/assets/58255.jpg"
@@ -109,7 +109,7 @@ const Home = () => {
             </div>
           </Col>
           <Col>
-            <h2>3. Concorda con il tuo tutor il metodo e quando vedervi</h2>
+            <h2>3. Concorda con il tuo tutor quando vedervi</h2>
             <p>
               Discuti e programma le lezioni con il tuo insegnante o istruttore
               direttamente tramite la messaggeria del tuo account.
@@ -184,12 +184,14 @@ const Home = () => {
       <Container className="mt-5 d-flex justify-content-center" xs={12}>
         <Row>
           <Col>
-            <div className=" rounded-4 div_banner_Tutor d-flex flex-column align-items-top p-5">
-              <h2 className="text-start">Diventa anche tu un SUPER TUTOR</h2>
-              <p className="p_banner_tutor">
-                Condividi le tue conoscenze,
-                <br /> vivi della tua passione!
-              </p>
+            <div className=" rounded-4 div_banner_Tutor d-flex flex-column justify-content-between p-2">
+              <div>
+                <h2 className="text-start">Diventa anche tu un SUPER TUTOR</h2>
+                <p className="p_banner_tutor">
+                  Condividi le tue conoscenze,
+                  <br /> vivi della tua passione!
+                </p>
+              </div>
               {userName ? (
                 <Link to="/creaAnnuncio" className="mt-5">
                   <Button className="rounded-pill ms-3">Crea il tuo annuncio</Button>
