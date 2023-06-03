@@ -6,14 +6,14 @@ $danger: rgb(206, 67, 67);
 @import "../node_modules/bootstrap/scss/bootstrap";
 
 html {
-  min-height: 110%;
-  min-width: 100%;
+  min-height: 100vh;
+  min-width: 100vw;
   font-size: 1.1em;
 }
 
 .App {
   text-align: center;
-  min-width: 100%;
+  min-width: 100vw;
 }
 
 body {
@@ -83,7 +83,7 @@ body {
   display: none;
 }
 
-.navbar-expand .navbar-nav .dropdown-menu {
+.navbar-expand-lg .navbar-nav .dropdown-menu {
   position: absolute;
   left: -150px;
 }
@@ -184,6 +184,42 @@ body {
   color: white;
   h2 {
     font-weight: bolder;
+  }
+  .p_banner_tutor {
+    margin-top: 1em;
+  }
+
+  @media screen and (max-width: 890px) {
+    width: 35em;
+  }
+  @media screen and (max-width: 750px) {
+    width: 30em;
+    .p_banner_tutor {
+      width: 11em;
+      margin-top: 0 !important;
+    }
+  }
+  @media screen and (max-width: 650px) {
+    justify-content: space-between;
+    align-items: center;
+    width: 25em;
+    .p_banner_tutor {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 550px) {
+    width: 20em;
+  }
+  @media screen and (max-width: 400px) {
+    justify-content: space-between;
+    width: 15em;
+    background-size: 15em;
+    h2 {
+      font-size: 1em;
+    }
+    .p_banner_tutor {
+      display: none;
+    }
   }
 }
 
