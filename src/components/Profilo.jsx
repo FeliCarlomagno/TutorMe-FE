@@ -210,7 +210,7 @@ const Profilo = () => {
             </Card.Body>
           </Card>
 
-          <Card className="border-0 shadow-sm rounded-4 mt-2">
+          <Card className="border-0 shadow-sm rounded-4 mt-2 text-center">
             <p className="text-center pt-3 m-0 fw-semibold">Descriviti ✒️</p>
             <Card.Body>
               <Form onSubmit={handleEdit}>

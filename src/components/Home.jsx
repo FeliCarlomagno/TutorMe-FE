@@ -98,7 +98,7 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Row className="row_center_end">
+        <Row className="row_center_end" xs={12}>
           <Col>
             <div className="d-flex justify-content-center">
               <img
@@ -181,12 +181,12 @@ const Home = () => {
       </Container>
       {/**Carousel */}
 
-      <Container className="mt-5 d-flex justify-content-center">
+      <Container className="mt-5 d-flex justify-content-center" xs={12}>
         <Row>
           <Col>
             <div className=" rounded-4 div_banner_Tutor d-flex flex-column align-items-top p-5">
               <h2 className="text-start">Diventa anche tu un SUPER TUTOR</h2>
-              <p className="mt-5">
+              <p className="p_banner_tutor">
                 Condividi le tue conoscenze,
                 <br /> vivi della tua passione!
               </p>
@@ -195,8 +195,10 @@ const Home = () => {
                   <Button className="rounded-pill ms-3">Crea il tuo annuncio</Button>
                 </Link>
               ) : (
-                <Link to="/signUp" className="mt-5">
-                  <Button className="rounded-pill ms-3">Dare lezioni</Button>
+                <Link to="/signUp" className="a_banner_tutor">
+                  <Button className="rounded-pill  button_banner_tutor">
+                    Dare lezioni
+                  </Button>
                 </Link>
               )}
             </div>
