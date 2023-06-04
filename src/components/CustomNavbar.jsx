@@ -14,6 +14,7 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CustomModal from "./CustomModal";
 import { handleLogout } from "../redux/actions";
+import LogIn from "./LogIn";
 
 const CustomNavbar = () => {
   const userName = useSelector((state) => state.userLogin.userLogin?.username);
@@ -25,7 +26,7 @@ const CustomNavbar = () => {
 
   return (
     <>
-      <Navbar key="sm" bg="light" expand="lg" className="mb-3">
+      <Navbar key="sm" bg="light" expand="lg" className=" bg-transparent">
         <Container fluid>
           <Link to="/" className="text-decoration-none">
             <Navbar.Brand className="logo fw-bold">TutorMe</Navbar.Brand>
@@ -37,10 +38,10 @@ const CustomNavbar = () => {
             placement="end"
           >
             <Offcanvas.Header closeButton></Offcanvas.Header>
-            <Offcanvas.Body className="justify-content-between display-xs-none">
-              <div className="offcanvas_body_small_screen">
+            <Offcanvas.Body className=" justify-content-between">
+              <div className="w-100 d-flex justify-content-between offcanvas_body_small_screen">
                 <div className="d-flex">
-                  <Form className=" d-flex align-items-center justify-content-center ">
+                  <Form className=" d-flex align-items-center justify-content-center">
                     <Form.Group controlId="formBasicMateria">
                       <Form.Control
                         type="text"
@@ -115,7 +116,7 @@ const CustomNavbar = () => {
                 </Nav>
               </div>
 
-              <div>
+              <div className="d-md-none">
                 <Col>
                   <Button
                     variant="primary"
@@ -134,7 +135,9 @@ const CustomNavbar = () => {
                 </Col>
               </div>
             </Offcanvas.Body>
-            <CustomModal show={modalShow} onHide={() => setModalShow(false)} />
+            <CustomModal show={modalShow} onHide={() => setModalShow(false)}>
+              <LogIn />
+            </CustomModal>
           </Navbar.Offcanvas>
         </Container>
       </Navbar>

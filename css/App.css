@@ -11191,4 +11191,11 @@ body {
 
 .accordion-button {
   justify-content: space-between;
+}
+
+#not_found {
+  height: 100vh;
+  background-image: url("../public/assets/6333070.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }/*# sourceMappingURL=App.css.map */

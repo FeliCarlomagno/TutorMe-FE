@@ -57,6 +57,8 @@ const PaginaPrenotazione = () => {
                     <Form.Control
                       className="border-0 shadow-sm"
                       type="text"
+                      as="textarea"
+                      rows={5}
                       placeholder="Presentati "
                       onChange={(e) => {
                         setPrenotazione({
