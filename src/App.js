@@ -11,7 +11,6 @@ import LogIn from "./components/LogIn";
 import PaginaUtenti from "./components/PaginaUtenti";
 import PaginaPrenotazione from "./components/PaginaPrenotazione";
 import Profilo from "./components/Profilo";
-import ProveComponenti from "./components/ProveComponenti";
 
 function App() {
   return (
@@ -32,7 +31,6 @@ function App() {
           <Route path="/profilo" element={<Profilo />} />
 
           <Route path="*" element={<NotFoundPage />} />
-          <Route path="/prove" element={<ProveComponenti />} />
         </Routes>
       </BrowserRouter>
     </>

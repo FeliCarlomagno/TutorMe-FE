@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { Col, Container, Row, Button, Form, Card, Alert } from "react-bootstrap";
+import { Col, Container, Row, Button, Form, Card, Alert, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { SEND_ANNUNCIO } from "../redux/actions";
 import { materieInsegnabili } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const CreaAnnuncio = () => {
-  const userName = useSelector((state) => state.userLogin.userLogin);
+  const userName = useSelector((state) => state.userLogin?.userLogin);
+  const isCreated = useSelector((state) => state.annuncioCreato?.isCreated);
+  console.log("Created", isCreated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [modalShow, setModalShow] = useState(false);
 
   const [annuncio, setAnnuncio] = useState({
     listaMaterie: [],
@@ -59,8 +62,7 @@ const CreaAnnuncio = () => {
           method: "POST",
           body: JSON.stringify(annuncio),
           headers: {
-            Authorization: `Bearer ${userName?.accessToken}`, //<-- IL BEARER VA CAMBIATO E TENUTO SEMPRE AGGIORNATO
-            //POICHE' SI COLLEGA ALLA RICERCA DELLA MAIL PER AUTORIZZARSI
+            Authorization: `Bearer ${userName?.accessToken}`,
             "Content-Type": "application/json",
           },
         }
@@ -70,8 +72,10 @@ const CreaAnnuncio = () => {
           type: SEND_ANNUNCIO,
           payload: annuncio,
         });
-        alert("annuncio creato");
-        navigate("/");
+        dispatch({
+          type: "IS_CREATED",
+        });
+        //navigate("/");
       } else {
         alert("qualcosa è andato storto");
       }
@@ -81,12 +85,24 @@ const CreaAnnuncio = () => {
   };
   return (
     <div id="crea_annuncio_container">
-      <Container className="h-100">
-        <Row>
+      <Container className="h-100 mt-5">
+        {isCreated && (
+          <Modal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            size="xl"
+            className="modal_isCreated"
+          >
+            <Modal.Body className="bg-transparent modal_isCreated_body">
+              <h1>Annuncio creato</h1>
+            </Modal.Body>
+          </Modal>
+        )}
+        <Row className="justify-content-evenly">
           <Col className="d-flex justify-content-around " xs={12} md={5}>
             <Card
               style={{ maxWidth: "17em", maxHeight: "20em" }}
-              className="rounded-4 border-0 shadow mt-5"
+              className="rounded-4 border-0 shadow mt-5 mb-5"
             >
               <Card.Body className="p-4">
                 <h1>Tutor Pill</h1>
@@ -371,6 +387,7 @@ const CreaAnnuncio = () => {
                   <Button
                     onClick={(e) => {
                       addAnnuncioInfo();
+                      setModalShow(true);
                     }}
                     className="ms-1 bg-danger border-0"
                   >

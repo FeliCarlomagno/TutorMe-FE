@@ -86,6 +86,7 @@ const CustomNavbar = () => {
                               href="#/action-3"
                               onClick={() => {
                                 handleLogout();
+                                navigate("/");
                               }}
                             >
                               Disconnettiti
@@ -137,6 +138,7 @@ const CustomNavbar = () => {
                           href="#/action-3"
                           onClick={() => {
                             handleLogout();
+                            navigate("/");
                           }}
                         >
                           Disconnettiti

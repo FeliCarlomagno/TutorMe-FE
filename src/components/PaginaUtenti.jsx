@@ -1,19 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_ANNUNCIO_SELEZIONATO } from "../redux/actions";
-import {
-  Button,
-  Col,
-  Container,
-  Row,
-  Card,
-  Badge,
-  Image,
-  Toast,
-  Modal,
-} from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import CustomModal from "./CustomModal";
+import { Button, Col, Container, Row, Card, Badge, Toast, Modal } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+
 import PaginaPrenotazione from "./PaginaPrenotazione";
 
 const PaginaUtenti = () => {

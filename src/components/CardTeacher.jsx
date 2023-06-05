@@ -15,8 +15,6 @@ const CardTeacher = () => {
     dispatch(getTeacherAction());
   }, []);
 
-  console.log("parametro", params);
-
   return (
     <Container>
       <Row>

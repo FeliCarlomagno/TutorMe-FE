@@ -358,6 +358,12 @@ body {
   padding-right: none;
 }
 
+.materieInsegnabili_edit {
+  overflow-y: auto;
+  height: 300px;
+  padding-right: none;
+}
+
 //barra di scorrimento div di creazione annuncio, step scelta materie:--------------
 ::-webkit-scrollbar {
   width: 0;
@@ -472,4 +478,25 @@ body {
   background-position: center;
   background-size: cover;
   background-position-y: 25%;
+}
+
+//MODALE DI CREAZIONE ANNUNCIO EFFETTUATA:
+
+.modal_isCreated {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #fff; /* Colore del testo bianco */
+  text-shadow: 0 0 10px #fff, /* Ombra bianca */ 0 0 20px #fff,
+    /* Ombra bianca */ 0 0 30px #fff, /* Ombra bianca */ 0 0 40px #00ff62,
+    /* Ombra neon */ 0 0 70px #0095ff, /* Ombra neon */ 0 0 80px #0000ff,
+    /* Ombra neon */ 0 0 100px #ff00e6; /* Ombra neon */
+  --bs-modal-bg: none;
+  .modal_isCreated_body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
 }

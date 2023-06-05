@@ -8,21 +8,29 @@ import {
   Card,
   InputGroup,
   Accordion,
+  Modal,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { BsPencil } from "react-icons/bs";
+import { materieInsegnabili } from "../redux/actions";
 
 const Profilo = () => {
   const userName = useSelector((state) => state.userLogin.userLogin);
   const [user, setUser] = useState([]);
   const [refresh, setRefresh] = useState(false);
-  const dispatch = useDispatch();
+  const [idAnnuncioEdit, setIdAnnuncioEdit] = useState("");
+  const [annuncioEdit, setAnnuncioEdit] = useState({
+    listaMaterie: [],
+    titoloAnnuncio: "",
+    descrizioneAnnuncio: "",
+    tariffaOraria: 10,
+    tipoLezione: [],
+  });
+  const [buttonState, setButtonState] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [image, setImage] = useState(null); //STATO PER AGGIUNTA IMMAGINE:
 
-  console.log("User", user);
-
-  //STATO PER AGGIUNTA IMMAGINE:
-  const [image, setImage] = useState(null);
-
-  //funzione di input file per trasformare un bottone in un input-------------------------
+  //funzione di input file per trasformare un bottone in un input
   const fileInputRef = useRef();
 
   const handleButtonClick = () => {
@@ -33,7 +41,13 @@ const Profilo = () => {
     const file = event.target.files[0];
     console.log("File selezionato:", file);
   };
-  //fine funzione input---------------------------------------------------------------
+
+  //funzione bottoni cambio di stato:
+  const handleButtonState = (i) => {
+    const updatedButtonStates = [...buttonState];
+    updatedButtonStates[i] = !updatedButtonStates[i];
+    setButtonState(updatedButtonStates);
+  };
 
   const fetchUser = async (e) => {
     try {
@@ -159,6 +173,31 @@ const Profilo = () => {
     } catch (error) {
       alert("FATAL ERROR", error);
     }
+  }; //---------------------------------------------------------------------------------------------------------------------------
+
+  //FETCH DI MODIFICA Annuncio
+  const handleEditAnnuncio = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `http://localhost:8080/annuncio/modificaAnnuncio/${idAnnuncioEdit}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(annuncioEdit),
+          headers: {
+            Authorization: `Bearer ${userName?.accessToken}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("Annuncio modificato");
+      } else {
+        alert("modifica annuncio errata");
+      }
+    } catch (error) {
+      alert("FATAL ERROR", error);
+    }
   };
 
   return (
@@ -168,19 +207,11 @@ const Profilo = () => {
           <Card className="border-0 shadow-sm rounded-4">
             <p className="text-center pt-3 m-0 fw-semibold">Info Generali 😎</p>
             <Card.Body>
-              <Form className="p-2 rounded-4">
-                <Form.Group className="mb-3 " controlId="formBasicName">
+              <Form className="p-2 rounded-4" onSubmit={handleEdit}>
+                <Form.Group className="mb-3" controlId="formBasiclastUsername">
                   <Form.Control
                     type="text"
                     placeholder={userName ? userName.username : "Nome"}
-                    className=" border border-2 border-light "
-                  />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasiclastName">
-                  <Form.Control
-                    type="text"
-                    placeholder="Cognome"
                     className=" border border-2 border-light"
                   />
                 </Form.Group>
@@ -278,11 +309,10 @@ const Profilo = () => {
                 L'azione che stai per compiere è irreversibile. Sii sicuro prima di
                 procedere.
               </p>
-              <Button>
-                <InputGroup className="mb-3">
-                  <InputGroup.Checkbox aria-label="Checkbox for following text input" />
-                </InputGroup>
-              </Button>
+
+              <InputGroup className="mb-3 border-0">
+                <InputGroup.Checkbox aria-label="Checkbox for following text input" />
+              </InputGroup>
             </Card.Body>
           </Card>
         </Col>
@@ -307,12 +337,14 @@ const Profilo = () => {
                   <Accordion.Item eventKey="0" className="border-0">
                     <Accordion.Header>
                       {p.dataPrenotazione}
-                      <ion-icon
-                        name="trash-bin-outline"
-                        onClick={(e) => {
-                          handleDeletePrenotazione(p.id);
-                        }}
-                      />
+                      <div className="d-flex ">
+                        <ion-icon
+                          name="trash-bin-outline"
+                          onClick={(e) => {
+                            handleDeletePrenotazione(p.id);
+                          }}
+                        />
+                      </div>
                     </Accordion.Header>
                     <Accordion.Body>{p.descrizionePrenotazione}</Accordion.Body>
                   </Accordion.Item>
@@ -323,20 +355,36 @@ const Profilo = () => {
 
           <Card className="border-0 text-center shadow-sm rounded-4 mt-2 w-100">
             <h4 className="mt-2">Lista Annunci</h4>
-            {user?.listaAnnunci?.map((p, i) => (
-              <Card.Body className="d-flex p-1" key={i}>
+            {user?.listaAnnunci?.map((a, i) => (
+              <Card.Body
+                className="d-flex p-1"
+                key={i}
+                onClick={(e) => console.log("Annunio cliccato", e.target)}
+              >
                 <Accordion className="w-100 justify-content-between">
                   <Accordion.Item eventKey="0" className="border-0">
                     <Accordion.Header>
-                      {p.listaMaterie}
-                      <ion-icon
-                        name="trash-bin-outline"
-                        onClick={(e) => {
-                          handleDeleteAnnunci(p.id);
-                        }}
-                      />
+                      {a.listaMaterie}
+                      <div className="d-flex ">
+                        <ion-icon
+                          name="trash-bin-outline"
+                          onClick={(e) => {
+                            handleDeleteAnnunci(a.id);
+                          }}
+                        />
+                        <BsPencil
+                          className="ms-2"
+                          onClick={(e) => {
+                            setModalShow(true);
+                            setIdAnnuncioEdit(a.id);
+                          }}
+                        />
+                      </div>
                     </Accordion.Header>
-                    <Accordion.Body></Accordion.Body>
+                    <Accordion.Body>
+                      <p>{a.tipoLezione}</p>
+                      <p>{a.tariffaOraria}€/h</p>
+                    </Accordion.Body>
                   </Accordion.Item>
                 </Accordion>
               </Card.Body>
@@ -344,6 +392,124 @@ const Profilo = () => {
           </Card>
         </Col>
       </Row>
+      <Modal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        {/* MODALE DI MODIFICA ANNUNCIO*/}
+        <Modal.Body>
+          <Card className="border-0">
+            <Card.Body>
+              <Form className="p-2 rounded-4" onSubmit={handleEditAnnuncio}>
+                <Form.Group
+                  className="mb-3 materieInsegnabili_edit"
+                  controlId="formBasiclastUsername"
+                >
+                  {materieInsegnabili.map((m, i) => (
+                    <Button
+                      value={m}
+                      key={i}
+                      onClick={(e) => {
+                        if (!annuncioEdit.listaMaterie.includes(e.target.value)) {
+                          setAnnuncioEdit({
+                            ...annuncioEdit,
+                            listaMaterie: [...annuncioEdit.listaMaterie, e.target.value],
+                          });
+                        }
+                      }}
+                      className="mb-2 py-3  border-0"
+                      style={{ backgroundColor: buttonState[i] ? "#e3c579" : null }}
+                    >
+                      {m}
+                    </Button>
+                  ))}
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicDateofAge">
+                  <Form.Control
+                    type="text"
+                    placeholder="inserisci il titolo"
+                    value={annuncioEdit.titoloAnnuncio}
+                    className=" border border-2 border-light"
+                    onChange={(e) => {
+                      setAnnuncioEdit({
+                        ...annuncioEdit,
+                        titoloAnnuncio: e.target.value,
+                      });
+                    }}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3 rounded-4" controlId="formBasiclastEmail">
+                  <Form.Control
+                    type="text"
+                    placeholder="descrizione"
+                    value={annuncioEdit.descrizioneAnnuncio}
+                    className=" border border-2 border-light"
+                    onChange={(e) => {
+                      setAnnuncioEdit({
+                        ...annuncioEdit,
+                        descrizioneAnnuncio: e.target.value,
+                      });
+                    }}
+                  />
+                </Form.Group>
+
+                <Form.Group className="mb-3 rounded-4" controlId="formBasiclastEmail">
+                  <Form.Control
+                    type="text"
+                    placeholder="tariffa oraria"
+                    value={annuncioEdit.tariffaOraria}
+                    className=" border border-2 border-light"
+                    onChange={(e) => {
+                      setAnnuncioEdit({
+                        ...annuncioEdit,
+                        tariffaOraria: parseInt(e.target.value),
+                      });
+                    }}
+                  />
+                </Form.Group>
+                <div className="d-flex flex-column">
+                  <Button
+                    value="ONLINE"
+                    onClick={(e) => {
+                      console.log(e);
+                      setAnnuncioEdit({
+                        ...annuncioEdit,
+                        tipoLezione: [...annuncioEdit.tipoLezione, e.target.value],
+                      });
+                    }}
+                  >
+                    ONLINE
+                  </Button>
+                  <Button
+                    value="DAL_VIVO"
+                    className="mt-2"
+                    onClick={(e) => {
+                      console.log(e);
+                      setAnnuncioEdit({
+                        ...annuncioEdit,
+                        tipoLezione: [...annuncioEdit.tipoLezione, e.target.value],
+                      });
+                    }}
+                  >
+                    DAL VIVO
+                  </Button>
+                </div>
+
+                <Row xs={3} className="justify-content-center mt-2">
+                  <Button variant="primary" type="submit" className="rounded-4">
+                    Invia
+                  </Button>
+                </Row>
+              </Form>
+            </Card.Body>
+          </Card>
+        </Modal.Body>
+      </Modal>
     </Container>
   );
 };
