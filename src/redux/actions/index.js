@@ -1,3 +1,5 @@
+import { useSelector } from "react-redux";
+
 export const ADD_TO_FAVOURITE = "ADD_TO_FAVOURITE";
 export const SET_USER_INFORMATION = "SET_USER_INFORMATION";
 export const GET_TEACHER = "GET_TEACHER";
@@ -120,13 +122,17 @@ export const materieInsegnabili = [
 //FUNZIONE CHE FETCHA GLI INSEGNANTI:
 export const getTeacherAction = () => {
   return async (dispatch, getState) => {
+    const state = getState();
+    const token = state.userLogin?.userLogin?.accessToken;
+
     //possiamo chiamare la funzione dispatch(primo parametro, che è un dispatcher interno alla funzione) dopo la funzione asincrona
     try {
       const response = await fetch("http://localhost:8080/annuncio/listaAnnunci", {
         headers: {
-          Authorization: process.env.REACT_API_KEY,
+          Authorization: `Bearer ${token}`,
         },
       });
+
       if (response.ok) {
         const fetchedTeachers = await response.json();
         dispatch({
