@@ -119,11 +119,11 @@ const Home = () => {
       </Container>
 
       {/**Carousel */}
-      <Container>
+      <Container id="container_carousel">
         <Carousel className="carousel_home">
           <Carousel.Item>
             <img
-              className="d-flex img_carousel rounded-4 justify-content-between"
+              className="img_carousel rounded-4 justify-content-between"
               src="/assets/students-coffee-break.jpg"
               alt="First slide"
             />
@@ -139,9 +139,10 @@ const Home = () => {
               </div>
             </Carousel.Caption>
           </Carousel.Item>
+
           <Carousel.Item>
             <img
-              className="d-block img_carousel rounded-4"
+              className="img_carousel rounded-4"
               src="/assets/friendly-students.jpg"
               alt="Second slide"
             />
@@ -158,9 +159,10 @@ const Home = () => {
               </div>
             </Carousel.Caption>
           </Carousel.Item>
+
           <Carousel.Item>
             <img
-              className="d-block img_carousel rounded-4"
+              className="img_carousel rounded-4"
               src="/assets/teen-girl-doing-homework-with-friends.jpg"
               alt="Third slide"
             />
@@ -181,10 +183,12 @@ const Home = () => {
       </Container>
       {/**Carousel */}
 
-      <Container className="mt-5 d-flex justify-content-center" xs={12}>
+      <div></div>
+
+      <Container className="d-flex justify-content-center container_banner_tutor" xs={12}>
         <Row>
           <Col>
-            <div className=" rounded-4 div_banner_Tutor d-flex flex-column justify-content-between p-2">
+            <div className=" rounded-4 div_banner_Tutor d-flex flex-column justify-content-evenly p-3">
               <div>
                 <h2 className="text-start">Diventa anche tu un SUPER TUTOR</h2>
                 <p className="p_banner_tutor">
