@@ -39,7 +39,7 @@ const CustomNavbar = () => {
           >
             <Offcanvas.Header closeButton></Offcanvas.Header>
             <Offcanvas.Body className=" justify-content-between">
-              <div className="w-100 d-flex justify-content-between offcanvas_body_small_screen">
+              <div className="w-100 offcanvas_body_small_screen">
                 <div className="d-flex">
                   <Form className=" d-flex align-items-center justify-content-center">
                     <Form.Group controlId="formBasicMateria">
@@ -116,23 +116,53 @@ const CustomNavbar = () => {
                 </Nav>
               </div>
 
-              <div className="d-md-none">
-                <Col>
-                  <Button
-                    variant="primary"
-                    onClick={() => setModalShow(true)}
-                    className="rounded-pill shadow-sm w-100"
-                  >
-                    ACCEDI
-                  </Button>
-                </Col>
-                <Col>
-                  <Link to="/signUp">
-                    <Button className="rounded-pill mt-2 shadow-sm w-100">
-                      Dare lezioni
+              <div className="d-lg-none d-flex">
+                {userName ? (
+                  <>
+                    <Dropdown>
+                      <Dropdown.Toggle
+                        id="dropdown-button-drop-up"
+                        className="variant-secondary rounded-4 fw-bold shadow-sm"
+                      >
+                        {userName.toUpperCase()}
+                      </Dropdown.Toggle>
+                      <Dropdown.Menu className="me-5 border-0 shadow">
+                        <Link to="/creaAnnuncio" className="text-decoration-none">
+                          <Dropdown.Item href="#/action-1">Crea Annuncio</Dropdown.Item>
+                        </Link>
+                        <Link to="/profilo" className="text-decoration-none">
+                          <Dropdown.Item href="#/action-2">Profilo</Dropdown.Item>
+                        </Link>
+                        <Dropdown.Item
+                          href="#/action-3"
+                          onClick={() => {
+                            handleLogout();
+                          }}
+                        >
+                          Disconnettiti
+                        </Dropdown.Item>
+                      </Dropdown.Menu>
+                    </Dropdown>
+                    <Button className="rounded-pill ms-3 button d-flex align-items-center shadow-sm">
+                      <ion-icon name="heart-outline" className="fs-2"></ion-icon>
                     </Button>
-                  </Link>
-                </Col>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      variant="primary"
+                      onClick={() => setModalShow(true)}
+                      className="rounded-pill shadow-sm"
+                    >
+                      ACCEDI
+                    </Button>
+                    <Link to="/signUp">
+                      <Button className="rounded-pill ms-3 shadow-sm">
+                        Dare lezioni
+                      </Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </Offcanvas.Body>
             <CustomModal show={modalShow} onHide={() => setModalShow(false)}>
