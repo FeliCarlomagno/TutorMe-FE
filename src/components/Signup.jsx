@@ -1,10 +1,11 @@
 import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SET_USER_INFORMATION } from "../redux/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Singup = () => {
+  const userLog = useSelector((state) => state.userLogin?.userLogin);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
