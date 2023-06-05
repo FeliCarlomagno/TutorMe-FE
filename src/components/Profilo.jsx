@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Profilo = () => {
   const userName = useSelector((state) => state.userLogin.userLogin);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const dispatch = useDispatch();
 
@@ -41,7 +41,7 @@ const Profilo = () => {
         `http://localhost:8080/api/auth/trovaUtenteByUsername/${userName?.username}`,
         {
           headers: {
-            Authorization: process.env.REACT_API_KEY,
+            Authorization: `Bearer ${userName?.accessToken}`,
           },
         }
       );
@@ -70,7 +70,7 @@ const Profilo = () => {
           method: "PUT",
           body: JSON.stringify(user),
           headers: {
-            Authorization: process.env.REACT_API_KEY,
+            Authorization: `Bearer ${userName?.accessToken}`,
             "content-Type": "application/json",
           },
         }
@@ -93,7 +93,7 @@ const Profilo = () => {
         {
           method: "DELETE",
           headers: {
-            Authorization: process.env.REACT_API_KEY,
+            Authorization: `Bearer ${userName?.accessToken}`,
             "content-Type": "application/json",
           },
         }
@@ -116,7 +116,7 @@ const Profilo = () => {
         {
           method: "DELETE",
           headers: {
-            Authorization: process.env.REACT_API_KEY,
+            Authorization: `Bearer ${userName?.accessToken}`,
             "content-Type": "application/json",
           },
         }
@@ -144,7 +144,7 @@ const Profilo = () => {
         {
           method: "PUT",
           headers: {
-            Authorization: process.env.REACT_API_KEY,
+            Authorization: `Bearer ${userName?.accessToken}`,
             "content-Type": "application/json",
           },
         }
@@ -163,7 +163,7 @@ const Profilo = () => {
 
   return (
     <Container>
-      <Row className="justify-content-center">
+      <Row className="justify-content-center profile_container">
         <Col xs={12} md={3}>
           <Card className="border-0 shadow-sm rounded-4">
             <p className="text-center pt-3 m-0 fw-semibold">Info Generali 😎</p>
