@@ -1,36 +1,47 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const CustomFooter = () => {
   return (
     <>
-      <div className="text-light pt-5" id="footer">
-        <Container className="d-flex justify-content-center">
-          <Row>
-            <Col>
+      <div className="text-light" id="footer">
+        <Container className="d-flex justify-content-center flex-column">
+          <Row className="w-100 py-3 footer_row">
+            <Col className="d-flex flex-column justify-content-between align-items-center lh-1">
               <h3 className="fs-3">Su di noi</h3>
-              <p>Chi siamo?</p>
-              <p>privacy</p>
-              <p>Informativa</p>
-              <p>Menzioni legali</p>
+              <div>
+                <p>Chi siamo?</p>
+                <p>privacy</p>
+                <p>Informativa</p>
+                <p>Menzioni legali</p>
+              </div>
             </Col>
-            <Col>
+            <Col className="d-flex flex-column align-items-center lh-1">
               <h3 className="fs-3">Assistenza</h3>
-              <p>Bisogno di aiuto?</p>
-              <p>Contatti</p>
+              <div>
+                <p>Bisogno di aiuto?</p>
+                <p>Contatti</p>
+              </div>
             </Col>
-            <Col>
-              <h3 className="fs-3">Seguici</h3>
-              <Button className="rounded-circle d-flex align-items-center b-0 p-2">
-                <ion-icon name="logo-instagram"></ion-icon>
-              </Button>
-              <Button className="rounded-circle d-flex align-items-center b-0 p-2">
-                <ion-icon name="logo-linkedin"></ion-icon>
-              </Button>
+            <Col className="d-flex flex-column justify-content-between align-items-center footer_end">
+              <h3 className="fs-3">Seguici</h3>{" "}
+              <Link to="https://www.instagram.com/feli_carlomagno/" target="_blank">
+                <Button className="rounded-circle d-flex align-items-center b-0 p-2">
+                  <ion-icon name="logo-instagram"></ion-icon>
+                </Button>
+              </Link>
+              <Link
+                to="https://www.linkedin.com/in/feliciano-carlomagno-85743020b/"
+                target="_blank"
+              >
+                <Button className="rounded-circle d-flex align-items-center b-0 p-2">
+                  <ion-icon name="logo-linkedin"></ion-icon>
+                </Button>
+              </Link>
               <Button className="rounded-circle d-flex align-items-center b-0 p-2">
                 <ion-icon name="logo-whatsapp"></ion-icon>
               </Button>
             </Col>
-            <Col>Colonna 4</Col>
           </Row>
         </Container>
       </div>
