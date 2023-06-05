@@ -10819,18 +10819,17 @@ textarea.form-control-lg {
   }
 }
 html {
-  min-height: 100vh;
-  min-width: 100vw;
+  min-height: 100%;
+  min-width: 100%;
   font-size: 1.1em;
 }
 
 .App {
   text-align: center;
-  min-width: 100vw;
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   min-width: 100%;
   background-color: #eef3ee;
   background-repeat: no-repeat;
@@ -10895,7 +10894,11 @@ body {
   border: none;
 }
 
-@media screen and (max-width: 992px) {
+.offcanvas_body_small_screen {
+  display: flex;
+  justify-content: space-between;
+}
+@media screen and (max-width: 991px) {
   .offcanvas_body_small_screen {
     display: none;
   }
@@ -10930,7 +10933,7 @@ body {
     width: 16em;
   }
 }
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 767px) and (min-width: 350px) {
   .row_home .img_home {
     width: 16em;
     margin-top: 2em;
@@ -10998,25 +11001,33 @@ body {
   font-weight: 600;
 }
 
-.carousel_home {
+@media screen and (max-width: 1400px) {
+  #container_carousel {
+    display: none;
+  }
+}
+#container_carousel .carousel_home {
   margin-top: 10em;
   padding: 2em;
 }
-.carousel_home .img_carousel {
+#container_carousel .carousel_home .img_carousel {
   width: 25em;
 }
-.carousel_home .carousel-caption {
+#container_carousel .carousel_home .carousel-caption {
   left: 50%;
 }
-.carousel_home .carousel-control-prev {
+#container_carousel .carousel_home .carousel-control-prev {
   display: none;
 }
-.carousel_home .carousel-control-next {
+#container_carousel .carousel_home .carousel-control-next {
   display: none;
 }
 
-.div_banner_Tutor {
-  margin-top: 10em;
+.container_banner_tutor {
+  margin-top: 5em;
+  margin-bottom: 5em;
+}
+.container_banner_tutor .div_banner_Tutor {
   display: flex;
   width: 40em;
   background-color: black;
@@ -11024,57 +11035,68 @@ body {
   background-size: 25em;
   background-position: right;
   background-repeat: no-repeat;
-  height: 40vh;
-  margin-bottom: 5em;
+  height: 35vh;
   color: white;
 }
-.div_banner_Tutor h2, .div_banner_Tutor .h2 {
+.container_banner_tutor .div_banner_Tutor h2, .container_banner_tutor .div_banner_Tutor .h2 {
   font-weight: bolder;
 }
-.div_banner_Tutor .p_banner_tutor {
+.container_banner_tutor .div_banner_Tutor .p_banner_tutor {
   margin-top: 1em;
 }
-@media screen and (max-width: 890px) {
-  .div_banner_Tutor {
+@media screen and (min-width: 891px) and (max-width: 2500px) {
+  .container_banner_tutor .div_banner_Tutor {
     width: 35em;
+    height: 20em;
+  }
+}
+@media screen and (max-width: 890px) {
+  .container_banner_tutor .div_banner_Tutor {
+    width: 35em;
+    height: 20em;
   }
 }
 @media screen and (max-width: 750px) {
-  .div_banner_Tutor {
+  .container_banner_tutor .div_banner_Tutor {
     width: 30em;
   }
-  .div_banner_Tutor .p_banner_tutor {
+  .container_banner_tutor .div_banner_Tutor .p_banner_tutor {
     width: 11em;
     margin-top: 0 !important;
   }
 }
 @media screen and (max-width: 650px) {
-  .div_banner_Tutor {
+  .container_banner_tutor .div_banner_Tutor {
     text-align: center !important;
-    justify-content: space-between;
+    justify-content: space-between !important;
     align-items: center;
     width: 25em;
   }
-  .div_banner_Tutor .p_banner_tutor {
+  .container_banner_tutor .div_banner_Tutor .p_banner_tutor {
     display: none;
+  }
+  .container_banner_tutor .div_banner_Tutor h2, .container_banner_tutor .div_banner_Tutor .h2 {
+    text-align: center !important;
   }
 }
 @media screen and (max-width: 550px) {
-  .div_banner_Tutor {
+  .container_banner_tutor .div_banner_Tutor {
     width: 20em;
+    height: 15em;
+    justify-content: space-between;
     background-size: 20em;
   }
 }
 @media screen and (max-width: 400px) {
-  .div_banner_Tutor {
+  .container_banner_tutor .div_banner_Tutor {
     justify-content: space-between;
     width: 15em;
     background-size: 15em;
   }
-  .div_banner_Tutor h2, .div_banner_Tutor .h2 {
+  .container_banner_tutor .div_banner_Tutor h2, .container_banner_tutor .div_banner_Tutor .h2 {
     font-size: 1em;
   }
-  .div_banner_Tutor .p_banner_tutor {
+  .container_banner_tutor .div_banner_Tutor .p_banner_tutor {
     display: none;
   }
 }
@@ -11088,9 +11110,35 @@ body {
   border-radius: 50%;
 }
 
+#selected_page_container {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  background-image: url(../public/assets/Learning-cuate.png);
+  background-repeat: no-repeat;
+  background-size: 70em;
+  background-position-x: 2px;
+}
+#selected_page_container .img_Annuncio_selected {
+  width: 7em;
+  border-radius: 50%;
+}
+#selected_page_container .teacher_description {
+  font-size: 0.8em;
+}
+#selected_page_container .p_lesson_description_title {
+  font-size: 0.8em;
+}
+#selected_page_container .p_lesson_description {
+  font-size: 0.65em;
+}
+#selected_page_container .img_annuncio_comments {
+  width: 2em;
+}
+
 .img_Annuncio_selected {
   width: 7em;
-  border-radius: 30%;
+  border-radius: 50%;
 }
 
 #signup_container {
@@ -11128,17 +11176,33 @@ body {
   border: none;
 }
 
-.upload_photo_div {
+@media screen and (max-width: 1200px) {
+  .profile_container {
+    flex-wrap: wrap;
+  }
+}
+.profile_container .upload_photo_div {
   display: flex;
   justify-content: center;
   padding: 3px;
 }
-.upload_photo_div .identity_photo {
+.profile_container .upload_photo_div .identity_photo {
   max-width: 5em;
 }
 
 #footer {
   background-color: black;
+}
+#footer .footer_row p {
+  font-size: 15px;
+}
+@media screen and (max-width: 420px) {
+  #footer .footer_row {
+    flex-direction: column !important;
+  }
+  #footer .footer_row .footer_end {
+    flex-direction: row !important;
+  }
 }
 
 #crea_annuncio_container {
@@ -11198,4 +11262,12 @@ body {
   background-image: url("../public/assets/6333070.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
+}
+
+#div_PaginaPrenotazione {
+  display: flex;
+  align-items: center;
+  background-position: center;
+  background-size: cover;
+  background-position-y: 25%;
 }/*# sourceMappingURL=App.css.map */
