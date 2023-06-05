@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Col, Container, Row, Form, Button } from "react-bootstrap";
+import { Col, Container, Row, Form, Button, Alert } from "react-bootstrap";
 import { SET_LOGIN_INFORMATION } from "../redux/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const LogIn = () => {
@@ -11,6 +11,8 @@ const LogIn = () => {
     username: "",
     password: "",
   });
+
+  const isLogged = useSelector((state) => state.userLogin?.isLogged);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +31,10 @@ const LogIn = () => {
           type: SET_LOGIN_INFORMATION,
           payload: data,
         });
-        navigate("/");
+
+        dispatch({
+          type: "SET_IS_LOGGED",
+        });
       } else {
         navigate("*");
       }
@@ -42,6 +47,7 @@ const LogIn = () => {
     <>
       <Container>
         <Row className="d-flex text-center">
+          {isLogged && <Alert> Accesso eseguito</Alert>}
           <Col>
             <h2 className="mb-5 text-black">Connettiti</h2>
             <Form onSubmit={handleSubmit}>

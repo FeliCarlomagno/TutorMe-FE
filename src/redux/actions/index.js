@@ -124,13 +124,14 @@ export const getTeacherAction = () => {
   return async (dispatch, getState) => {
     const state = getState();
     const token = state.userLogin?.userLogin?.accessToken;
+    console.log("Token", token);
 
     //possiamo chiamare la funzione dispatch(primo parametro, che è un dispatcher interno alla funzione) dopo la funzione asincrona
     try {
       const response = await fetch("http://localhost:8080/annuncio/listaAnnunci", {
-        headers: {
+        /* headers: {
           Authorization: `Bearer ${token}`,
-        },
+        },*/
       });
 
       if (response.ok) {

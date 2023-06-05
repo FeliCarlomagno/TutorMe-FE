@@ -164,7 +164,7 @@ const Profilo = () => {
   return (
     <Container>
       <Row className="justify-content-center profile_container">
-        <Col xs={12} md={3}>
+        <Col xs={12} md={8} lg={4}>
           <Card className="border-0 shadow-sm rounded-4">
             <p className="text-center pt-3 m-0 fw-semibold">Info Generali 😎</p>
             <Card.Body>
@@ -210,7 +210,7 @@ const Profilo = () => {
             </Card.Body>
           </Card>
 
-          <Card className="border-0 shadow-sm rounded-4 mt-2 text-center">
+          <Card className="border-0 shadow-sm rounded-4 mt-2 text-center mb-2">
             <p className="text-center pt-3 m-0 fw-semibold">Descriviti ✒️</p>
             <Card.Body>
               <Form onSubmit={handleEdit}>
@@ -235,7 +235,7 @@ const Profilo = () => {
         </Col>
 
         {/* SEZIONE CENTRALE*/}
-        <Col xs={12} md={3}>
+        <Col xs={12} md={8} lg={4}>
           <Card className="border-0 shadow-sm rounded-4 text-center">
             <Card.Body>
               <p className="fw-semibold">Identità 🪪</p>
@@ -269,7 +269,7 @@ const Profilo = () => {
             </Card.Body>
             </Card>*/}
 
-          <Card className="border-0 rounded-4 text-center shadow-sm mt-2">
+          <Card className="border-0 rounded-4 text-center shadow-sm mt-2 mb-2">
             <Card.Body>
               <p className="fw-semibold">Cancella account 😧</p>
               <p className="fs-6">
@@ -287,11 +287,8 @@ const Profilo = () => {
           </Card>
         </Col>
 
-        <Col xs={12} md={3}>
-          <Card
-            style={{ maxWidth: "18rem" }}
-            className="text-center rounded-4 d-block border-0 mb-2 shadow-sm"
-          >
+        <Col xs={12} md={8} lg={4} className="d-flex flex-column text-center">
+          <Card className="text-center rounded-4 d-block border-0 mb-2 shadow-sm">
             <Card.Img
               variant="top"
               src="https://picsum.photos/200/200"
@@ -302,10 +299,7 @@ const Profilo = () => {
             </Card.Body>
           </Card>
 
-          <Card
-            style={{ maxWidth: "17rem" }}
-            className="border-0 text-center shadow-sm rounded-4"
-          >
+          <Card className="border-0 text-center shadow-sm rounded-4">
             <h4 className="mt-2">Lista Prenotazioni</h4>
             {user?.listaPrenotazioni?.map((p, i) => (
               <Card.Body className="d-flex p-1 justify-content-center" key={i}>
@@ -327,10 +321,7 @@ const Profilo = () => {
             ))}
           </Card>
 
-          <Card
-            style={{ maxWidth: "17rem" }}
-            className="border-0 text-center shadow-sm rounded-4 mt-2"
-          >
+          <Card className="border-0 text-center shadow-sm rounded-4 mt-2 w-100">
             <h4 className="mt-2">Lista Annunci</h4>
             {user?.listaAnnunci?.map((p, i) => (
               <Card.Body className="d-flex p-1" key={i}>

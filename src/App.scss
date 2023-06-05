@@ -293,8 +293,7 @@ body {
 //immagine di pagina annuncio selezionato-----------------------------------------------
 #selected_page_container {
   display: flex;
-  align-items: center;
-  height: 100vh;
+  min-height: 100vh;
   background-image: url(../public/assets/Learning-cuate.png);
   background-repeat: no-repeat;
   background-size: 70em;

@@ -81,7 +81,7 @@ const CreaAnnuncio = () => {
   };
   return (
     <div id="crea_annuncio_container">
-      <Container>
+      <Container className="h-100">
         <Row>
           <Col className="d-flex justify-content-around " xs={12} md={5}>
             <Card

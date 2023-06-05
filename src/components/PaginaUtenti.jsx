@@ -44,9 +44,9 @@ const PaginaUtenti = () => {
       const response = await fetch(
         `http://localhost:8080/annuncio/annuncioById/${params.annuncioId}`,
         {
-          headers: {
+          /*headers: {
             Authorization: `Bearer ${userLogged?.accessToken}`,
-          },
+          },*/
         }
       );
       if (response.ok) {
@@ -75,9 +75,9 @@ const PaginaUtenti = () => {
         `http://localhost:8080/api/auth/trovaUtenteByUsername/${annuncioStock?.user?.username}`,
         {
           method: "GET",
-          headers: {
+          /*headers: {
             Authorization: `Bearer ${userLogged?.accessToken}`,
-          },
+          },*/
         }
       );
       if (response.ok) {
@@ -99,12 +99,12 @@ const PaginaUtenti = () => {
   return (
     <>
       <div id="selected_page_container" className="p-2">
-        <Container>
-          <Row>
-            <Col xs={12} md={4} className=" d-flex justify-content-center">
+        <Container className=" d-flex align-items-center">
+          <Row className="d-flex align-content-center">
+            <Col xs={12} md={12} xl={5} className="d-flex justify-content-center">
               <Card
                 style={{ maxWidth: "18rem" }}
-                className=" text-center rounded-4 border-0 shadow w-100 d-flex "
+                className=" text-center rounded-4 border-0 shadow w-100 d-flex mb-2"
               >
                 <Card.Body className="d-flex flex-column justify-content-evenly align-items-center">
                   <Card.Img

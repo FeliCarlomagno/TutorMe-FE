@@ -6,8 +6,8 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const CardTeacher = () => {
   const dispatch = useDispatch();
-  const teachersInStock = useSelector((state) => state.teachers.teacherStock);
-  const hasFetchError = useSelector((state) => state.teachers.hasError);
+  const teachersInStock = useSelector((state) => state.teachers?.teacherStock);
+  const hasFetchError = useSelector((state) => state.teachers?.hasError);
   const navigate = useNavigate();
   const params = useParams();
 
