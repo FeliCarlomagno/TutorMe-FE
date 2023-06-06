@@ -23,8 +23,8 @@ const CustomFooter = () => {
                 <p>Contatti</p>
               </div>
             </Col>
-            <Col className="d-flex flex-column justify-content-between align-items-center footer_end">
-              <h3 className="fs-3">Seguici</h3>{" "}
+            <Col className="d-flex flex-column justify-content-evenly align-items-center footer_end">
+              <h3 className="fs-3 d-none d-sm-block">Seguici</h3>
               <Link to="https://www.instagram.com/feli_carlomagno/" target="_blank">
                 <Button className="rounded-circle d-flex align-items-center b-0 p-2">
                   <ion-icon name="logo-instagram"></ion-icon>
