@@ -11143,7 +11143,7 @@ body {
 #signup_container {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   align-items: center;
   background-image: url("../public/assets/5512.jpg");
   background-size: cover;
@@ -11282,8 +11282,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  color: #fff; /* Colore del testo bianco */
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #00ff62, 0 0 70px #0095ff, 0 0 80px #0000ff, 0 0 100px #ff00e6; /* Ombra neon */
+  color: #fff;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #00ff62, 0 0 70px #0095ff, 0 0 80px #0000ff, 0 0 100px #ff00e6;
   --bs-modal-bg: none;
 }
 .modal_isCreated .modal_isCreated_body {
