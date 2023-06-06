@@ -9,6 +9,7 @@ import {
   InputGroup,
   Accordion,
   Modal,
+  FormGroup,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
@@ -16,22 +17,28 @@ import { materieInsegnabili } from "../redux/actions";
 
 const Profilo = () => {
   const userName = useSelector((state) => state.userLogin.userLogin);
+  const editAnnuncio = useSelector((state) => state.annuncioEdit.annuncioEdit);
+  console.log("Annuncio da reducer", editAnnuncio);
+  const fileInputRef = useRef();
+  const dispatch = useDispatch();
+  const [formValue, setFormValue] = useState("");
   const [user, setUser] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [idAnnuncioEdit, setIdAnnuncioEdit] = useState("");
+  const [buttonState, setButtonState] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [image, setImage] = useState(null);
+
   const [annuncioEdit, setAnnuncioEdit] = useState({
     listaMaterie: [],
     titoloAnnuncio: "",
     descrizioneAnnuncio: "",
-    tariffaOraria: 10,
+    tariffaOraria: 1,
     tipoLezione: [],
+    isCreate: false,
   });
-  const [buttonState, setButtonState] = useState([]);
-  const [modalShow, setModalShow] = useState(false);
-  const [image, setImage] = useState(null); //STATO PER AGGIUNTA IMMAGINE:
 
   //funzione di input file per trasformare un bottone in un input
-  const fileInputRef = useRef();
 
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -177,10 +184,9 @@ const Profilo = () => {
 
   //FETCH DI MODIFICA Annuncio
   const handleEditAnnuncio = async (e) => {
-    e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8080/annuncio/modificaAnnuncio/${idAnnuncioEdit}`,
+        `http://localhost:8080/annuncio/modificaAnnuncio/${idAnnuncioEdit}/${user?.id}`,
         {
           method: "PUT",
           body: JSON.stringify(annuncioEdit),
@@ -292,14 +298,6 @@ const Profilo = () => {
             </Card.Body>
           </Card>
 
-          {/*<Card className="border-0 shadow-sm rounded-4 text-center mt-2">
-            <Card.Body>
-              <p className="fw-semibold">Password 🔑</p>
-
-              <Button className="mt-4 rounded-4">Cambia password</Button>
-            </Card.Body>
-            </Card>*/}
-
           <Card className="border-0 rounded-4 text-center shadow-sm mt-2 mb-2">
             <Card.Body>
               <p className="fw-semibold">Cancella account 😧</p>
@@ -356,11 +354,7 @@ const Profilo = () => {
           <Card className="border-0 text-center shadow-sm rounded-4 mt-2 w-100">
             <h4 className="mt-2">Lista Annunci</h4>
             {user?.listaAnnunci?.map((a, i) => (
-              <Card.Body
-                className="d-flex p-1"
-                key={i}
-                onClick={(e) => console.log("Annunio cliccato", e.target)}
-              >
+              <Card.Body className="d-flex p-1" key={i}>
                 <Accordion className="w-100 justify-content-between">
                   <Accordion.Item eventKey="0" className="border-0">
                     <Accordion.Header>
@@ -377,6 +371,11 @@ const Profilo = () => {
                           onClick={(e) => {
                             setModalShow(true);
                             setIdAnnuncioEdit(a.id);
+                            dispatch({
+                              type: "GET_EDIT_ANNUNCIO",
+                              payload: a,
+                            });
+                            setAnnuncioEdit(editAnnuncio);
                           }}
                         />
                       </div>
@@ -404,107 +403,122 @@ const Profilo = () => {
           <Card className="border-0">
             <Card.Body>
               <Form className="p-2 rounded-4" onSubmit={handleEditAnnuncio}>
-                <Form.Group
-                  className="mb-3 materieInsegnabili_edit"
-                  controlId="formBasiclastUsername"
-                >
-                  {materieInsegnabili.map((m, i) => (
-                    <Button
-                      value={m}
-                      key={i}
-                      onClick={(e) => {
-                        if (!annuncioEdit.listaMaterie.includes(e.target.value)) {
-                          setAnnuncioEdit({
-                            ...annuncioEdit,
-                            listaMaterie: [...annuncioEdit.listaMaterie, e.target.value],
-                          });
-                        }
-                      }}
-                      className="mb-2 py-3  border-0"
-                      style={{ backgroundColor: buttonState[i] ? "#e3c579" : null }}
-                    >
-                      {m}
-                    </Button>
-                  ))}
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicDateofAge">
+                <Form.Group controlId="formBasicMateria">
                   <Form.Control
                     type="text"
-                    placeholder="inserisci il titolo"
-                    value={annuncioEdit.titoloAnnuncio}
-                    className=" border border-2 border-light"
-                    onChange={(e) => {
+                    placeholder="Cosa vuoi imparare? ↧ scorri tra le materie"
+                    className="p-3 border-0 "
+                    value={formValue}
+                    onChange={(e) => setFormValue(e.target.value)}
+                  />
+                </Form.Group>
+                <div className="materieInsegnabili_edit d-flex flex-column mt-2">
+                  {materieInsegnabili
+                    .filter((v) => v.toLowerCase().includes(formValue.toLowerCase()))
+                    .map((m, i) => (
+                      <Button
+                        value={m}
+                        key={i}
+                        className="mb-2 py-3  border-0"
+                        style={{ backgroundColor: buttonState[i] ? "#e3c579" : null }}
+                        onClick={(e) =>
+                          setAnnuncioEdit({
+                            ...annuncioEdit,
+                            listaMaterie: [...annuncioEdit?.listaMaterie, e.target.value],
+                          })
+                        }
+                      >
+                        {m}
+                      </Button>
+                    ))}
+                </div>
+                <FormGroup>
+                  <Form.Control
+                    type="text"
+                    as="textarea"
+                    value={annuncioEdit?.titoloAnnuncio}
+                    className=" border border-2 border-light mt-2"
+                    onChange={(e) =>
                       setAnnuncioEdit({
                         ...annuncioEdit,
                         titoloAnnuncio: e.target.value,
-                      });
-                    }}
+                      })
+                    }
                   />
-                </Form.Group>
+                </FormGroup>
 
-                <Form.Group className="mb-3 rounded-4" controlId="formBasiclastEmail">
+                <FormGroup>
                   <Form.Control
                     type="text"
-                    placeholder="descrizione"
-                    value={annuncioEdit.descrizioneAnnuncio}
-                    className=" border border-2 border-light"
-                    onChange={(e) => {
+                    as="textarea"
+                    value={annuncioEdit?.descrizioneAnnuncio}
+                    className=" border border-2 border-light mt-2"
+                    onChange={(e) =>
                       setAnnuncioEdit({
                         ...annuncioEdit,
                         descrizioneAnnuncio: e.target.value,
-                      });
-                    }}
+                      })
+                    }
                   />
-                </Form.Group>
+                </FormGroup>
 
-                <Form.Group className="mb-3 rounded-4" controlId="formBasiclastEmail">
+                <FormGroup>
                   <Form.Control
                     type="text"
-                    placeholder="tariffa oraria"
-                    value={annuncioEdit.tariffaOraria}
-                    className=" border border-2 border-light"
-                    onChange={(e) => {
+                    value={annuncioEdit?.tariffaOraria}
+                    className=" border border-2 border-light mt-2"
+                    onChange={(e) =>
                       setAnnuncioEdit({
                         ...annuncioEdit,
-                        tariffaOraria: parseInt(e.target.value),
-                      });
-                    }}
+                        tariffaOraria: e.target.value,
+                      })
+                    }
                   />
-                </Form.Group>
-                <div className="d-flex flex-column">
+                </FormGroup>
+
+                <FormGroup>
+                  <div className="d-flex flex-column mt-2">
+                    <Button
+                      value="ONLINE"
+                      onClick={(e) => {
+                        setAnnuncioEdit({
+                          ...annuncioEdit,
+                          tipoLezione: [...annuncioEdit.tipoLezione, e.target.value],
+                        });
+                      }}
+                    >
+                      ONLINE
+                    </Button>
+                    <Button
+                      value="DAL_VIVO"
+                      className="mt-2"
+                      onClick={(e) => {
+                        setAnnuncioEdit({
+                          ...annuncioEdit,
+                          tipoLezione: [...annuncioEdit.tipoLezione, e.target.value],
+                        });
+                      }}
+                    >
+                      DAL VIVO
+                    </Button>
+                  </div>
+                </FormGroup>
+
+                <div className="">
                   <Button
-                    value="ONLINE"
                     onClick={(e) => {
-                      console.log(e);
-                      setAnnuncioEdit({
-                        ...annuncioEdit,
-                        tipoLezione: [...annuncioEdit.tipoLezione, e.target.value],
+                      dispatch({
+                        type: "SET_ANNUNCIO_EDIT",
+                        payload: annuncioEdit,
                       });
+
+                      handleEditAnnuncio();
                     }}
+                    className=" bg-danger border-0 mt-2 "
                   >
-                    ONLINE
-                  </Button>
-                  <Button
-                    value="DAL_VIVO"
-                    className="mt-2"
-                    onClick={(e) => {
-                      console.log(e);
-                      setAnnuncioEdit({
-                        ...annuncioEdit,
-                        tipoLezione: [...annuncioEdit.tipoLezione, e.target.value],
-                      });
-                    }}
-                  >
-                    DAL VIVO
+                    Crea Annuncio
                   </Button>
                 </div>
-
-                <Row xs={3} className="justify-content-center mt-2">
-                  <Button variant="primary" type="submit" className="rounded-4">
-                    Invia
-                  </Button>
-                </Row>
               </Form>
             </Card.Body>
           </Card>
