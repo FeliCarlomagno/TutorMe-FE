@@ -89,7 +89,7 @@ const PaginaUtenti = () => {
   return (
     <>
       <div id="selected_page_container" className="p-2">
-        <Container className=" d-flex align-items-center">
+        <Container className=" d-flex align-items-center justify-content-center">
           <Row className="d-flex align-content-center">
             <Col xs={12} md={12} xl={5} className="d-flex justify-content-center">
               <Card
