@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Modal, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
@@ -7,18 +7,16 @@ import { AiFillStar } from "react-icons/ai";
 const PaginaPrenotazione = () => {
   const user = useSelector((state) => state.userLogin.userLogin);
   const params = useParams();
-  console.log("parametro ricevuto", params);
-  console.log("user che prenota", user?.username);
-
+  const [modalShow, setModalShow] = useState(false);
   const [prenotazione, setPrenotazione] = useState({
     descrizionePrenotazione: "",
     dataPrenotazione: null,
+    isBookedUp: false,
   });
 
   const annuncioStock = useSelector(
     (state) => state.annuncioSelezionato.annuncioSelezionato
   );
-  console.log(annuncioStock);
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -36,7 +34,7 @@ const PaginaPrenotazione = () => {
       );
       //const data = await response;
       if (response.ok) {
-        alert("tutto ok");
+        setPrenotazione({ isBookedUp: true });
       } else {
         alert("Qualcosa non va bene non puoi ");
       }
@@ -49,6 +47,18 @@ const PaginaPrenotazione = () => {
     <>
       <div id="div_PaginaPrenotazione">
         <Container className="d-flex justify-content-evenly align-items-center h-100">
+          {prenotazione.isBookedUp && (
+            <Modal
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+              size="xl"
+              className="modal_isCreated "
+            >
+              <Modal.Body className="bg-transparent modal_isBookedUp_body text-dark ">
+                <h1 className="text-center">Prenotazione effettuata</h1>
+              </Modal.Body>
+            </Modal>
+          )}
           <Row>
             <Col xs={12} md={5}>
               <Card
@@ -113,7 +123,13 @@ const PaginaPrenotazione = () => {
                         }}
                       />
                     </Form.Group>
-                    <Button variant="primary" type="submit">
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      onClick={() => {
+                        setModalShow(true);
+                      }}
+                    >
                       Submit
                     </Button>
                   </Form>
