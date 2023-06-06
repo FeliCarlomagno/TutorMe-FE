@@ -37,7 +37,10 @@ const CustomNavbar = () => {
             aria-labelledby="offcanvasNavbarLabel-expand-lg"
             placement="end"
           >
-            <Offcanvas.Header closeButton></Offcanvas.Header>
+            <Offcanvas.Header
+              closeButton
+              className="justify-content-end"
+            ></Offcanvas.Header>
             <Offcanvas.Body className=" justify-content-between">
               <div className="w-100 offcanvas_body_small_screen">
                 <div className="d-flex">
@@ -117,7 +120,7 @@ const CustomNavbar = () => {
                 </Nav>
               </div>
 
-              <div className="d-lg-none d-flex">
+              <div className="d-lg-none d-flex flex-column">
                 {userName ? (
                   <>
                     <Dropdown>
@@ -154,13 +157,13 @@ const CustomNavbar = () => {
                     <Button
                       variant="primary"
                       onClick={() => setModalShow(true)}
-                      className="rounded-pill shadow-sm"
+                      className="rounded-pill shadow-sm fw-semibold"
                     >
-                      ACCEDI
+                      Accedi
                     </Button>
                     <Link to="/signUp">
-                      <Button className="rounded-pill ms-3 shadow-sm">
-                        Dare lezioni
+                      <Button className="rounded-pill shadow-sm w-100 mt-2 fw-semibold">
+                        Dare Lezioni
                       </Button>
                     </Link>
                   </>
