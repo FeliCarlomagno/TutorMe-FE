@@ -4,6 +4,7 @@ import teacherReducer from "../reducers/teacherReducer";
 import loginUserReducer from "../reducers/loginUser";
 import annuncioReducer from "../reducers/AnnunciReducer";
 import annuncioSelezionatoReducer from "../reducers/annuncioSelezionato";
+import annuncioEditReducer from "../reducers/annuncioEdit";
 
 const rootReducer = combineReducers({
   userSignUp: signupUserReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   userLogin: loginUserReducer,
   annuncioCreato: annuncioReducer,
   annuncioSelezionato: annuncioSelezionatoReducer,
+  annuncioEdit: annuncioEditReducer,
 });
 
 const store = configureStore({
