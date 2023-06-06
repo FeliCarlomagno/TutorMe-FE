@@ -43,10 +43,10 @@ const Singup = () => {
 
   return (
     <div id="signup_container">
-      <Container className="p-5 m-5">
+      <Container className="p-5 m-5 h-100">
         <Row className="justify-content-center left_row_Signup">
           <Col className="d-flex flex-column justify-content-center p-5">
-            <h1>Dare lezioni Fare crescere gli allievi</h1>
+            <h1 className="text-danger">Dare lezioni Fare crescere gli allievi</h1>
             <p>
               TutorMe ti offre la possibilità di condividere le tue conoscenze e insegnare
               in oltre 500 materie diverse. Che tu sia uno studente, un autodidatta, un
@@ -60,7 +60,7 @@ const Singup = () => {
           <Col xs={12} md={6} className="d-flex justify-content-center">
             <Card style={{ width: "20em" }} className="py-3 px-2 border-0 shadow">
               <Card.Body>
-                <h2 className="text-center">Crea il tuo account</h2>
+                <h2 className="text-center fw-semibold">Crea il tuo account</h2>
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Control
@@ -117,7 +117,7 @@ const Singup = () => {
                   >
                     Iscriviti
                   </Button>
-                  <p className="text-center">Hai già un account? Accedi</p>
+                  <p className="text-center mt-2">Hai già un account? Accedi</p>
                 </Form>
               </Card.Body>
             </Card>
