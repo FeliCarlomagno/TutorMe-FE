@@ -6,14 +6,13 @@ import {
   Form,
   Button,
   Card,
-  InputGroup,
   Accordion,
   Modal,
   FormGroup,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
-import { handleLogout, materieInsegnabili, removeAnnuncio } from "../redux/actions";
+import { handleLogout, materieInsegnabili } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const Profilo = () => {
@@ -29,7 +28,6 @@ const Profilo = () => {
   const [buttonState, setButtonState] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [image, setImage] = useState(null);
-  console.log("User pe modifica utente", user);
 
   const [annuncioEdit, setAnnuncioEdit] = useState({
     listaMaterie: [],
@@ -46,9 +44,29 @@ const Profilo = () => {
     fileInputRef.current.click();
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files[0];
-    console.log("File selezionato:", file);
+    setImage(file);
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/auth/setImmagine/${userName?.username}`,
+        {
+          method: "PUT",
+          body: JSON.stringify(image),
+          headers: {
+            Authorization: `Bearer ${userName?.accessToken}`,
+            "content-Type": "application/json",
+          },
+        }
+      );
+      if (response.ok) {
+        alert("Immagine caricata con successo");
+      } else {
+        alert("qualcosa non va bene con il caricamento dell'immagine");
+      }
+    } catch (error) {
+      alert("FATAL ERROR", error);
+    }
   };
 
   //funzione bottoni cambio di stato:
@@ -139,10 +157,9 @@ const Profilo = () => {
         `http://localhost:8080/annuncio/eliminaAnnuncio/${id}`,
         {
           method: "DELETE",
-          /*{headers: {
+          headers: {
             Authorization: `Bearer ${userName?.accessToken}`,
-            "content-Type": "application/json",
-          },}*/
+          },
         }
       );
       if (response.ok) {
@@ -156,29 +173,7 @@ const Profilo = () => {
   };
 
   //FETCH DI AGGIUNTA IMMAGINE------------------------------------------------------------------------------------------
-  const handleSetImage = async () => {
-    try {
-      const response = await fetch(
-        `localhost:8080/api/auth/setImmagine/${userName?.username}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${userName?.accessToken}`,
-            "content-Type": "application/json",
-          },
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setImage(data);
-        alert("Immagine caricata con successo");
-      } else {
-        alert("qualcosa non va bene con il caricamento dell'immagine");
-      }
-    } catch (error) {
-      alert("FATAL ERROR", error);
-    }
-  }; //---------------------------------------------------------------------------------------------------------------------------
+  const handleSetImage = async () => {}; //---------------------------------------------------------------------------------------------------------------------------
 
   //FETCH DI MODIFICA Annuncio
   const handleEditAnnuncio = async (e) => {
@@ -313,7 +308,7 @@ const Profilo = () => {
                   className="d-none"
                   onChange={handleFileChange}
                 />
-                <Button className="mt-4 rounded-4" /*onClick={handleSetImage}*/>
+                <Button className="mt-4 rounded-4" onClick={() => handleSetImage()}>
                   Carica una foto
                 </Button>
               </Form>

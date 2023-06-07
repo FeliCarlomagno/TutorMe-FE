@@ -96,9 +96,6 @@ const CustomNavbar = () => {
                             </Dropdown.Item>
                           </Dropdown.Menu>
                         </Dropdown>
-                        <Button className="rounded-pill ms-3 button d-flex align-items-center shadow-sm">
-                          <ion-icon name="heart-outline" className="fs-2"></ion-icon>
-                        </Button>
                       </>
                     ) : (
                       <>
