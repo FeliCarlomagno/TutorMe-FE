@@ -301,7 +301,12 @@ const Profilo = () => {
                 />
               </div>
 
-              <Form onClick={handleButtonClick}>
+              <Form
+                onClick={handleButtonClick}
+                action="`http://localhost:8080/api/auth/setImmagine`"
+                method="PUT"
+                encType="multipart/form-data"
+              >
                 <input
                   type="file"
                   ref={fileInputRef}
