@@ -1,11 +1,13 @@
-import { Container, Row, Col, Form, Button, Card } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Card, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { SET_USER_INFORMATION } from "../redux/actions";
+import { IS_SIGNUP, SET_USER_INFORMATION } from "../redux/actions";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Singup = () => {
-  const userLog = useSelector((state) => state.userLogin?.userLogin);
+  const isSingup = useSelector((state) => state?.userSignUp);
+  setInterval(() => {}, 3500);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -15,6 +17,7 @@ const Singup = () => {
     email: "",
     password: "",
   });
+  const [modalShow, setModalShow] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,19 +34,31 @@ const Singup = () => {
           type: SET_USER_INFORMATION,
           payload: user,
         });
-        navigate("/");
-        alert("Richiesta eseguita correttamente");
+        dispatch({
+          type: IS_SIGNUP,
+        });
       } else {
-        alert("Qualcosa è andato storto");
       }
     } catch (error) {
-      alert("errore Fatale", error);
+      navigate("*");
     }
   };
 
   return (
     <div id="signup_container">
       <Container className="p-5 m-5 h-100">
+        {isSingup && (
+          <Modal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            size="xl"
+            className="modal_isCreated"
+          >
+            <Modal.Body className="bg-transparent modal_isCreated_body">
+              <h1>Profilo Creato. Benvenuto {isSingup?.userSignUp?.name}</h1>
+            </Modal.Body>
+          </Modal>
+        )}
         <Row className="justify-content-center left_row_Signup">
           <Col className="d-flex flex-column justify-content-center p-5">
             <h1 className="text-danger">Dare lezioni Fare crescere gli allievi</h1>
@@ -114,6 +129,9 @@ const Singup = () => {
                     variant="primary"
                     type="submit"
                     className="d-block mx-auto rounded-pill "
+                    onClick={() => {
+                      setModalShow(true);
+                    }}
                   >
                     Iscriviti
                   </Button>

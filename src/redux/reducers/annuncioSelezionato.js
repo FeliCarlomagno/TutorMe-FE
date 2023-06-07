@@ -1,6 +1,8 @@
 import { GET_ANNUNCIO_SELEZIONATO } from "../actions";
 
-const initialState = {};
+const initialState = {
+  hasError: null,
+};
 
 const annuncioSelezionatoReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -8,6 +10,11 @@ const annuncioSelezionatoReducer = (state = initialState, action) => {
       return {
         ...state,
         annuncioSelezionato: action.payload,
+      };
+
+    case "GET_ANNUNCI_ERROR":
+      return {
+        hasError: true,
       };
     default:
       return state;

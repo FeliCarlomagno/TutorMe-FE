@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_ANNUNCIO_SELEZIONATO } from "../redux/actions";
-import { Button, Col, Container, Row, Card, Badge, Toast, Modal } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Row,
+  Card,
+  Badge,
+  Toast,
+  Modal,
+  Spinner,
+} from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-
 import PaginaPrenotazione from "./PaginaPrenotazione";
+import { BiMessageAlt } from "react-icons/bi";
 
 const PaginaUtenti = () => {
   const dispatch = useDispatch();
@@ -45,12 +55,13 @@ const PaginaUtenti = () => {
           type: GET_ANNUNCIO_SELEZIONATO,
           payload: fetchedAnnunci,
         });
-        alert("Inserire una pagina di prenotazione conclusa o un modale di conferma");
       } else {
-        console.log("Qualcosa è andato storto");
+        dispatch({
+          type: "GET_ANNUNCI_ERROR",
+        });
       }
     } catch (error) {
-      console.log("FATAL ERROR", error);
+      navigate("*");
     }
   };
 
@@ -75,7 +86,7 @@ const PaginaUtenti = () => {
         alert("Tutto ok");
         setSelectedUser(responseData);
       } else {
-        alert("QUALCOSA NON VA");
+        //alert("QUALCOSA NON VA");
       }
     } catch (error) {
       alert("FATAL ERROR", error);
@@ -89,6 +100,7 @@ const PaginaUtenti = () => {
   return (
     <>
       <div id="selected_page_container" className="p-2">
+        {annuncioStock?.hasError && <Spinner animation="grow" variant="primary" />}
         <Container className=" d-flex align-items-center justify-content-center">
           <Row className="d-flex align-content-center">
             <Col xs={12} md={12} xl={5} className="d-flex justify-content-center">
@@ -109,13 +121,12 @@ const PaginaUtenti = () => {
 
                   {userLogged?.username ? (
                     <Button
-                      onClick={(e) => {
-                        /*navigate("/paginaPrenotazione/" + annuncioStock.id);*/
+                      onClick={() => {
                         setModalShow(true);
                       }}
-                      className="rounded-pill"
+                      className="rounded-pill fw-semibold"
                     >
-                      Prenota una lezione
+                      <BiMessageAlt /> Prenota una lezione
                     </Button>
                   ) : (
                     <>
@@ -145,7 +156,9 @@ const PaginaUtenti = () => {
                     </Badge>
                   ))}
                   {annuncioStock?.tipoLezione.map((tipo) => (
-                    <Badge>{tipo}</Badge>
+                    <Badge bg="warning" className="me-1">
+                      {tipo}
+                    </Badge>
                   ))}
                   <p className="lh-sm fw-bold w-100 p_lesson_description_title mt-2">
                     {annuncioStock?.titoloAnnuncio}

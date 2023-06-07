@@ -75,7 +75,6 @@ const CreaAnnuncio = () => {
         dispatch({
           type: "IS_CREATED",
         });
-        //navigate("/");
       } else {
         alert("qualcosa è andato storto");
       }
@@ -85,7 +84,7 @@ const CreaAnnuncio = () => {
   };
   return (
     <div id="crea_annuncio_container">
-      <Container className="h-100 mt-5">
+      <Container className="h-100 mt-5 d-flex align-items-center">
         {isCreated && (
           <Modal
             show={modalShow}
@@ -98,7 +97,7 @@ const CreaAnnuncio = () => {
             </Modal.Body>
           </Modal>
         )}
-        <Row className="justify-content-evenly">
+        <Row className="justify-content-evenly w-100">
           <Col className="d-flex justify-content-around " xs={12} md={5}>
             <Card
               style={{ maxWidth: "17em", maxHeight: "20em" }}
@@ -276,7 +275,7 @@ const CreaAnnuncio = () => {
               </div>
             )}
             {step.isStepQuattro && (
-              <div className="d-flex flex-column justify-content-between h-100">
+              <div className="d-flex flex-column justify-content-evenly h-100">
                 <Form>
                   <h2>
                     <span className="text-danger">Tariffa</span> Oraria

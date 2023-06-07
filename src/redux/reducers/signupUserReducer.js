@@ -1,4 +1,4 @@
-import { SET_USER_INFORMATION } from "../actions";
+import { IS_SIGNUP, SET_USER_INFORMATION } from "../actions";
 
 const initialState = {
   userSignUp: {
@@ -7,6 +7,7 @@ const initialState = {
     email: "",
     password: "",
   },
+  isSignup: false,
 };
 const signupUserReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,6 +15,12 @@ const signupUserReducer = (state = initialState, action) => {
       return {
         ...state,
         userSignUp: action.payload,
+      };
+
+    case IS_SIGNUP:
+      return {
+        ...state,
+        isSignup: true,
       };
     default:
       return state;

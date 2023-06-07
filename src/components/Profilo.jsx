@@ -13,21 +13,23 @@ import {
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
-import { materieInsegnabili } from "../redux/actions";
+import { handleLogout, materieInsegnabili, removeAnnuncio } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const Profilo = () => {
   const userName = useSelector((state) => state.userLogin.userLogin);
   const editAnnuncio = useSelector((state) => state.annuncioEdit.annuncioEdit);
-  console.log("Annuncio da reducer", editAnnuncio);
   const fileInputRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [formValue, setFormValue] = useState("");
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState();
   const [refresh, setRefresh] = useState(false);
   const [idAnnuncioEdit, setIdAnnuncioEdit] = useState("");
   const [buttonState, setButtonState] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [image, setImage] = useState(null);
+  console.log("User pe modifica utente", user);
 
   const [annuncioEdit, setAnnuncioEdit] = useState({
     listaMaterie: [],
@@ -69,6 +71,7 @@ const Profilo = () => {
       if (response.ok) {
         const fetchedUser = await response.json();
         setUser(fetchedUser);
+        console.log("fetchedUser", fetchedUser);
       } else {
         alert("response not ok");
       }
@@ -86,7 +89,7 @@ const Profilo = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:8080/api/auth/modificaUtente/${user.id}`,
+        `http://localhost:8080/api/auth/modificaUtente/${user?.id}`,
         {
           method: "PUT",
           body: JSON.stringify(user),
@@ -136,10 +139,10 @@ const Profilo = () => {
         `http://localhost:8080/annuncio/eliminaAnnuncio/${id}`,
         {
           method: "DELETE",
-          headers: {
+          /*{headers: {
             Authorization: `Bearer ${userName?.accessToken}`,
             "content-Type": "application/json",
-          },
+          },}*/
         }
       );
       if (response.ok) {
@@ -151,11 +154,6 @@ const Profilo = () => {
       alert("FATAL ERROR", error);
     }
   };
-
-  //update dopo aver cancellato una pagina
-  useEffect(() => {
-    fetchUser();
-  }, [refresh]);
 
   //FETCH DI AGGIUNTA IMMAGINE------------------------------------------------------------------------------------------
   const handleSetImage = async () => {
@@ -205,6 +203,30 @@ const Profilo = () => {
       alert("FATAL ERROR", error);
     }
   };
+
+  //FETCH DI CANCELLAZIONE ACCOUNT
+  const handleDeleteUtente = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/auth/eliminaUtente/${user?.id}`,
+        { method: "DELETE" }
+      );
+      if (response.ok) {
+        navigate("/");
+        handleLogout();
+      } else {
+        navigate("*");
+      }
+    } catch (error) {
+      alert("FATAL ERROR", error);
+      navigate("*");
+    }
+  };
+
+  //update dopo aver cancellato una pagina
+  useEffect(() => {
+    fetchUser();
+  }, [refresh]);
 
   return (
     <Container>
@@ -308,9 +330,7 @@ const Profilo = () => {
                 procedere.
               </p>
 
-              <InputGroup className="mb-3 border-0">
-                <InputGroup.Checkbox aria-label="Checkbox for following text input" />
-              </InputGroup>
+              <Button onClick={() => handleDeleteUtente()}>Cancella</Button>
             </Card.Body>
           </Card>
         </Col>
@@ -358,7 +378,7 @@ const Profilo = () => {
                 <Accordion className="w-100 justify-content-between">
                   <Accordion.Item eventKey="0" className="border-0">
                     <Accordion.Header>
-                      {a.listaMaterie}
+                      {a.listaMaterie.join("-")}
                       <div className="d-flex ">
                         <ion-icon
                           name="trash-bin-outline"

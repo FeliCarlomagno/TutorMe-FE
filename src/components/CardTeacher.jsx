@@ -11,6 +11,8 @@ const CardTeacher = () => {
   const navigate = useNavigate();
   const params = useParams();
 
+  console.log("Teachers", teachersInStock);
+
   useEffect(() => {
     dispatch(getTeacherAction());
   }, []);
@@ -49,8 +51,13 @@ const CardTeacher = () => {
                   className="rounded-4"
                 />
                 <Card.Body>
-                  <Card.Title>{teacher.user?.name}</Card.Title>
-                  <Card.Text>{teacher.listaMaterie}</Card.Text>
+                  <Card.Title className="d-flex flex-column justify-content-center text-center">
+                    {teacher.user?.name}
+                    {teacher?.listaMaterie.map((m) => (
+                      <Badge bg="danger mt-1">{m}</Badge>
+                    ))}
+                  </Card.Title>
+                  <Card.Text>{teacher?.titoloAnnuncio}</Card.Text>
                   <Badge bg="primary">{teacher.tariffaOraria} €/h</Badge>
                 </Card.Body>
               </Card>

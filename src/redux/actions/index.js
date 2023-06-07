@@ -1,5 +1,3 @@
-import { useSelector } from "react-redux";
-
 export const ADD_TO_FAVOURITE = "ADD_TO_FAVOURITE";
 export const SET_USER_INFORMATION = "SET_USER_INFORMATION";
 export const GET_TEACHER = "GET_TEACHER";
@@ -118,6 +116,7 @@ export const materieInsegnabili = [
   "Diritto internazionale",
   "Sviluppo di app mobile",
 ];
+export const IS_SIGNUP = "IS_SIGNUP";
 
 //FUNZIONE CHE FETCHA GLI INSEGNANTI:
 export const getTeacherAction = () => {

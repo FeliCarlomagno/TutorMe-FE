@@ -72,7 +72,7 @@ const PaginaPrenotazione = () => {
                     className=" p-1 py-3 img_Annuncio_selected "
                   />
                   <Card.Title>{annuncioStock?.user.name}</Card.Title>
-                  <span className="text-primary">
+                  <span className="text-danger">
                     <AiFillStar />
                     <AiFillStar />
                     <AiFillStar />
@@ -86,7 +86,10 @@ const PaginaPrenotazione = () => {
               <Card className="border-0 shadow-sm rounded-4 bg-transparent">
                 <Card.Body>
                   <h2>Organizza</h2>
-                  <p>la tua prima lezione con {annuncioStock?.user.name}</p>
+                  <p>
+                    la tua prima lezione con
+                    <span className="text-danger">{annuncioStock?.user.name}</span>
+                  </p>
                   <Form onSubmit={handelSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicDescription">
                       <Form.Label>
@@ -123,15 +126,17 @@ const PaginaPrenotazione = () => {
                         }}
                       />
                     </Form.Group>
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      onClick={() => {
-                        setModalShow(true);
-                      }}
-                    >
-                      Submit
-                    </Button>
+                    <div className="w-100 d-flex justify-content-center">
+                      <Button
+                        variant="warning"
+                        type="submit"
+                        onClick={() => {
+                          setModalShow(true);
+                        }}
+                      >
+                        Prenota
+                      </Button>
+                    </div>
                   </Form>
                 </Card.Body>
               </Card>
