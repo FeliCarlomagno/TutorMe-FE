@@ -88,14 +88,14 @@ const PaginaPrenotazione = () => {
                   <h2>Organizza</h2>
                   <p>
                     la tua prima lezione con
-                    <span className="text-danger">{annuncioStock?.user.name}</span>
+                    <span className="text-danger">{annuncioStock?.user?.username}</span>
                   </p>
                   <Form onSubmit={handelSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicDescription">
                       <Form.Label>
                         Presentati a
-                        <span className="fw-bold"> {annuncioStock?.user.name}</span> e
-                        specifica le tue necessità e difficoltà
+                        <span className="fw-bold"> {annuncioStock?.user?.username}</span>{" "}
+                        e specifica le tue necessità e difficoltà
                       </Form.Label>
                       <Form.Control
                         className="border-0 shadow-sm"

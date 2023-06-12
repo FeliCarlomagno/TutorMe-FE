@@ -83,10 +83,8 @@ const PaginaUtenti = () => {
       );
       if (response.ok) {
         const responseData = await response.json();
-        alert("Tutto ok");
         setSelectedUser(responseData);
       } else {
-        //alert("QUALCOSA NON VA");
       }
     } catch (error) {
       alert("FATAL ERROR", error);
@@ -114,9 +112,9 @@ const PaginaUtenti = () => {
                     src="https://picsum.photos/200/200"
                     className=" p-1 py-3 img_Annuncio_selected "
                   />
-                  <Card.Title>{annuncioStock?.user.name}</Card.Title>
+                  <Card.Title>{annuncioStock?.user?.usarname}</Card.Title>
 
-                  <h3> Riguardo a {annuncioStock?.user?.name}</h3>
+                  <h3> Riguardo a {annuncioStock?.user?.username}</h3>
                   <p className="teacher_description">{selectedUser?.descrizione}</p>
 
                   {userLogged?.username ? (
