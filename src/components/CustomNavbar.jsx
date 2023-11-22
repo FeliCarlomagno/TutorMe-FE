@@ -1,24 +1,14 @@
 import { useState } from "react";
-import {
-  Navbar,
-  Nav,
-  Button,
-  Dropdown,
-  Form,
-  Row,
-  Container,
-  Offcanvas,
-  Col,
-} from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { Navbar, Nav, Button, Dropdown, Form, Container, Offcanvas } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CustomModal from "./CustomModal";
-import { handleLogout } from "../redux/actions";
+import { LOGOUT, handleLogout } from "../redux/actions";
 import LogIn from "./LogIn";
 
 const CustomNavbar = () => {
   const userName = useSelector((state) => state.userLogin.userLogin?.username);
-
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchValue, setSearchvalue] = useState(null);
 
@@ -37,14 +27,14 @@ const CustomNavbar = () => {
             aria-labelledby="offcanvasNavbarLabel-expand-lg"
             placement="end"
           >
-            <Offcanvas.Header
-              closeButton
-              className="justify-content-end"
-            ></Offcanvas.Header>
+            <Offcanvas.Header closeButton className="justify-content-end"></Offcanvas.Header>
             <Offcanvas.Body className=" justify-content-between">
               <div className="w-100 offcanvas_body_small_screen">
                 <div className="d-flex">
-                  <Form className=" d-flex align-items-center justify-content-center">
+                  <Form
+                    className=" d-flex align-items-center justify-content-center"
+                    onSubmit={(e) => e.preventDefault()}
+                  >
                     <Form.Group controlId="formBasicMateria">
                       <Form.Control
                         type="text"
@@ -59,6 +49,7 @@ const CustomNavbar = () => {
                       onClick={() => {
                         navigate("/teachers/" + searchValue);
                       }}
+                      type="submit"
                     >
                       🔍
                     </Button>
@@ -78,9 +69,7 @@ const CustomNavbar = () => {
                           </Dropdown.Toggle>
                           <Dropdown.Menu className="me-5 border-0 shadow">
                             <Link to="/creaAnnuncio" className="text-decoration-none">
-                              <Dropdown.Item href="#/action-1">
-                                Crea Annuncio
-                              </Dropdown.Item>
+                              <Dropdown.Item href="#/action-1">Crea Annuncio</Dropdown.Item>
                             </Link>
                             <Link to="/profilo" className="text-decoration-none">
                               <Dropdown.Item href="#/action-2">Profilo</Dropdown.Item>
@@ -88,7 +77,9 @@ const CustomNavbar = () => {
                             <Dropdown.Item
                               href="#/action-3"
                               onClick={() => {
-                                handleLogout();
+                                dispatch({
+                                  type: LOGOUT,
+                                });
                                 navigate("/");
                               }}
                             >
@@ -107,9 +98,7 @@ const CustomNavbar = () => {
                           ACCEDI
                         </Button>
                         <Link to="/signUp">
-                          <Button className="rounded-pill ms-3 shadow-sm">
-                            Dare lezioni
-                          </Button>
+                          <Button className="rounded-pill ms-3 shadow-sm">Dare lezioni</Button>
                         </Link>
                       </>
                     )}
@@ -137,7 +126,9 @@ const CustomNavbar = () => {
                         <Dropdown.Item
                           href="#/action-3"
                           onClick={() => {
-                            handleLogout();
+                            dispatch({
+                              type: LOGOUT,
+                            });
                             navigate("/");
                           }}
                         >
@@ -159,9 +150,7 @@ const CustomNavbar = () => {
                       Accedi
                     </Button>
                     <Link to="/signUp">
-                      <Button className="rounded-pill shadow-sm w-100 mt-2 fw-semibold">
-                        Dare Lezioni
-                      </Button>
+                      <Button className="rounded-pill shadow-sm w-100 mt-2 fw-semibold">Dare Lezioni</Button>
                     </Link>
                   </>
                 )}
