@@ -1,16 +1,14 @@
 import { useState } from "react";
 import { Col, Container, Row, Button, Form, Card, Alert, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { SEND_ANNUNCIO } from "../redux/actions";
+import { addAnnuncioInfoAction } from "../redux/actions";
 import { materieInsegnabili } from "../redux/actions";
-import { useNavigate } from "react-router-dom";
 
 const CreaAnnuncio = () => {
   const userName = useSelector((state) => state.userLogin?.userLogin);
   const isCreated = useSelector((state) => state.annuncioCreato?.isCreated);
   console.log("Created", isCreated);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [modalShow, setModalShow] = useState(false);
 
   const [annuncio, setAnnuncio] = useState({
@@ -53,45 +51,11 @@ const CreaAnnuncio = () => {
     }
   };
 
-  //FETCH PER INVIARE I DATI DI UN ANNUNCIO:
-  const addAnnuncioInfo = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/annuncio/creaAnnuncio/${userName?.username}`,
-        {
-          method: "POST",
-          body: JSON.stringify(annuncio),
-          headers: {
-            Authorization: `Bearer ${userName?.accessToken}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.ok) {
-        dispatch({
-          type: SEND_ANNUNCIO,
-          payload: annuncio,
-        });
-        dispatch({
-          type: "IS_CREATED",
-        });
-      } else {
-        alert("qualcosa è andato storto");
-      }
-    } catch (error) {
-      alert("Errore", error);
-    }
-  };
   return (
     <div id="crea_annuncio_container">
       <Container className="h-100 mt-5 d-flex align-items-center">
         {isCreated && (
-          <Modal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            size="xl"
-            className="modal_isCreated"
-          >
+          <Modal show={modalShow} onHide={() => setModalShow(false)} size="xl" className="modal_isCreated">
             <Modal.Body className="bg-transparent modal_isCreated_body">
               <h1>Annuncio creato</h1>
             </Modal.Body>
@@ -106,11 +70,10 @@ const CreaAnnuncio = () => {
               <Card.Body className="p-4">
                 <h1>Tutor Pill</h1>
                 <p className="pt-4 ">
-                  TutorMe ti da la possibilità di condividere le tue passioni e le tue
-                  conoscenze in tantissime materie.
+                  TutorMe ti da la possibilità di condividere le tue passioni e le tue conoscenze in
+                  tantissime materie.
                   <br />
-                  Crea il tuo annuncio, pubblicalo sulla piattaforma e sei pronto per
-                  cominciare!
+                  Crea il tuo annuncio, pubblicalo sulla piattaforma e sei pronto per cominciare!
                 </p>
               </Card.Body>
             </Card>
@@ -188,8 +151,7 @@ const CreaAnnuncio = () => {
                       className="border-0"
                     />
                     <Form.Label className="form_label_annuncio">
-                      *Inserisci un breve titolo per il tuo annuncio ma che sia chiaro su
-                      cosa vuoi fare
+                      *Inserisci un breve titolo per il tuo annuncio ma che sia chiaro su cosa vuoi fare
                     </Form.Label>
                   </Form.Group>
                 </Form>
@@ -299,8 +261,8 @@ const CreaAnnuncio = () => {
                         className="border-0 justify-content-center"
                       />
                       <Form.Label className="form_label_annuncio">
-                        *Inserisci una tariffa oraria che pensi possa essere adeguata per
-                        te in base alla tua esperienza e mansione
+                        *Inserisci una tariffa oraria che pensi possa essere adeguata per te in base alla tua
+                        esperienza e mansione
                       </Form.Label>
                     </Col>
                   </Form.Group>
@@ -365,9 +327,8 @@ const CreaAnnuncio = () => {
                     DAL VIVO
                   </Button>
                   <p className="form_label_annuncio">
-                    *Indica ai tuoi futuri studenti in che modo avrai intenzione di
-                    svolgere le lezioni. Ricordati sempre che potrai accordarti con loro
-                    per una posizione diversa in ogni momento
+                    *Indica ai tuoi futuri studenti in che modo avrai intenzione di svolgere le lezioni.
+                    Ricordati sempre che potrai accordarti con loro per una posizione diversa in ogni momento
                   </p>
                 </div>
                 <div className="d-flex justify-content-center">
@@ -385,7 +346,7 @@ const CreaAnnuncio = () => {
 
                   <Button
                     onClick={(e) => {
-                      addAnnuncioInfo();
+                      dispatch(addAnnuncioInfoAction(annuncio, userName));
                       setModalShow(true);
                     }}
                     className="ms-1 bg-danger border-0"
@@ -395,17 +356,6 @@ const CreaAnnuncio = () => {
                 </div>
               </div>
             )}
-            {/*step.isStepSei && (
-            <div>
-              <Button
-                onClick={(e) => {
-                  addAnnuncioInfo();
-                }}
-              >
-                Crea Annuncio
-              </Button>
-            </div>
-              )*/}
           </Col>
         </Row>
       </Container>
