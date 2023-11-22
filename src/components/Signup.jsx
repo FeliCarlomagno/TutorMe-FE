@@ -48,12 +48,7 @@ const Singup = () => {
     <div id="signup_container">
       <Container className="p-5 m-5 h-100">
         {isSingup && (
-          <Modal
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-            size="xl"
-            className="modal_isCreated"
-          >
+          <Modal show={modalShow} onHide={() => setModalShow(false)} size="xl" className="modal_isCreated">
             <Modal.Body className="bg-transparent modal_isCreated_body">
               <h1>Profilo Creato. Benvenuto {isSingup?.userSignUp?.name}</h1>
             </Modal.Body>
@@ -63,11 +58,10 @@ const Singup = () => {
           <Col className="d-flex flex-column justify-content-center p-5">
             <h1 className="text-danger">Dare lezioni Fare crescere gli allievi</h1>
             <p>
-              TutorMe ti offre la possibilità di condividere le tue conoscenze e insegnare
-              in oltre 500 materie diverse. Che tu sia uno studente, un autodidatta, un
-              diplomato o un laureato, accogliamo con entusiasmo tutti i profili di
-              appassionati. Sia che tu sia esperto in lingue, sport, musica, arte, tempo
-              libero o sostegno scolastico, c'è spazio per te su <span>TutorMe.</span>
+              TutorMe ti offre la possibilità di condividere le tue conoscenze e insegnare in oltre 500
+              materie diverse. Che tu sia uno studente, un autodidatta, un diplomato o un laureato, accogliamo
+              con entusiasmo tutti i profili di appassionati. Sia che tu sia esperto in lingue, sport, musica,
+              arte, tempo libero o sostegno scolastico, c'è spazio per te su <span>TutorMe.</span>
               Unisciti a noi e inizia a dare lezioni private nella materia che ami!
             </p>
           </Col>
@@ -135,7 +129,9 @@ const Singup = () => {
                   >
                     Iscriviti
                   </Button>
-                  <p className="text-center mt-2">Hai già un account? Accedi</p>
+                  <p className="text-center mt-2">
+                    Hai già un account? <span className="text-danger">Accedi</span>
+                  </p>
                 </Form>
               </Card.Body>
             </Card>
