@@ -1,8 +1,8 @@
-import { SET_LOGIN_INFORMATION } from "../actions";
+import { SET_LOGIN_INFORMATION, SET_IS_LOGGED, LOGOUT } from "../actions";
 
 const initialState = {
   userLogin: null,
-  isLogged: null,
+  isLogged: false,
 };
 
 const loginUserReducer = (state = initialState, action) => {
@@ -13,11 +13,18 @@ const loginUserReducer = (state = initialState, action) => {
         userLogin: action.payload,
       };
 
-    case "SET_IS_LOGGED":
+    case SET_IS_LOGGED:
       return {
         ...state,
         isLogged: true,
       };
+
+    case LOGOUT:
+      return {
+        userLogin: null,
+        isLogged: false,
+      };
+
     default:
       return state;
   }
