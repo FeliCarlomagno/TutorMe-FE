@@ -1,4 +1,4 @@
-import { SEND_ANNUNCIO } from "../actions";
+import { SEND_ANNUNCIO, IS_CREATED } from "../actions";
 
 const initialState = {
   annuncioCreato: {},
@@ -13,7 +13,7 @@ const annuncioReducer = (state = initialState, action) => {
         annuncio: action.payload,
       };
 
-    case "IS_CREATED":
+    case IS_CREATED:
       return {
         ...state,
         isCreated: true,

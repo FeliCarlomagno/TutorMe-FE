@@ -1,4 +1,4 @@
-import { GET_ANNUNCIO_SELEZIONATO } from "../actions";
+import { GET_ANNUNCIO_SELEZIONATO, GET_ANNUNCI_ERROR } from "../actions";
 
 const initialState = {
   hasError: null,
@@ -12,7 +12,7 @@ const annuncioSelezionatoReducer = (state = initialState, action) => {
         annuncioSelezionato: action.payload,
       };
 
-    case "GET_ANNUNCI_ERROR":
+    case GET_ANNUNCI_ERROR:
       return {
         hasError: true,
       };
