@@ -3,8 +3,15 @@ export const SET_USER_INFORMATION = "SET_USER_INFORMATION";
 export const GET_TEACHER = "GET_TEACHER";
 export const GET_TEACHER_ERROR = "GET_TEACHER_ERROR";
 export const SET_LOGIN_INFORMATION = "SET_LOGIN_INFORMATION";
+export const SET_IS_LOGGED = "SET_IS_LOGGED";
 export const SEND_ANNUNCIO = "SEND_ANNUNCIO";
+export const IS_CREATED = "IS_CREATED";
 export const GET_ANNUNCIO_SELEZIONATO = "GET_ANNUNCIO_SELEZIONATO";
+export const GET_ANNUNCI_ERROR = "GET_ANNUNCI_ERROR";
+export const IS_SIGNUP = "IS_SIGNUP";
+export const GET_EDIT_ANNUNCIO = "GET_EDIT_ANNUNCIO";
+export const SET_ANNUNCIO_EDIT = "SET_ANNUNCIO_EDIT";
+export const LOGOUT = "LOGOUT";
 export const materieInsegnabili = [
   "Matematica",
   "Inglese",
@@ -116,7 +123,6 @@ export const materieInsegnabili = [
   "Diritto internazionale",
   "Sviluppo di app mobile",
 ];
-export const IS_SIGNUP = "IS_SIGNUP";
 
 //FUNZIONE CHE FETCHA GLI INSEGNANTI:
 export const getTeacherAction = () => {
@@ -161,4 +167,33 @@ export const addToFavourite = (insegnante) => ({
 //Funzione disconnetti
 export const handleLogout = () => {
   window.location.reload();
+};
+
+//funzione di aggiunta nel database di un nuovo annuncio creato
+export const addAnnuncioInfoAction = (annuncio, userName) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:8080/annuncio/creaAnnuncio/${userName?.username}`, {
+        method: "POST",
+        body: JSON.stringify(annuncio),
+        headers: {
+          Authorization: `Bearer ${userName?.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        dispatch({
+          type: SEND_ANNUNCIO,
+          payload: annuncio,
+        });
+        dispatch({
+          type: "IS_CREATED",
+        });
+      } else {
+        alert("qualcosa è andato storto");
+      }
+    } catch (error) {
+      alert("Errore", error);
+    }
+  };
 };
