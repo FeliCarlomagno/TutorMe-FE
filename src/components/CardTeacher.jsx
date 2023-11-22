@@ -22,7 +22,7 @@ const CardTeacher = () => {
       <Row>
         <h2 className="mt-5">
           Ricerca per
-          <span className="text-primary">{params.searchValue.toUpperCase()}</span>
+          <span className="text-primary ms-2">{params.searchValue.toUpperCase()}</span>
         </h2>
         {hasFetchError && navigate("*")}
         {teachersInStock
@@ -32,11 +32,7 @@ const CardTeacher = () => {
             )
           )
           .map((teacher, i) => (
-            <Col
-              xs={12}
-              md={3}
-              className="d-flex , flex-direction-row, wrap, space-between mt-5"
-            >
+            <Col xs={12} md={3} className="d-flex , flex-direction-row, wrap, space-between mt-5">
               <Card
                 style={{ width: "18rem" }}
                 key={i}
@@ -45,11 +41,7 @@ const CardTeacher = () => {
                 }}
                 className="mb-2 mx-0 rounded-4 p-1 card_teacher bg-secondary"
               >
-                <Card.Img
-                  variant="top"
-                  src="https://picsum.photos/500/500"
-                  className="rounded-4"
-                />
+                <Card.Img variant="top" src="https://picsum.photos/500/500" className="rounded-4" />
                 <Card.Body>
                   <Card.Title className="d-flex flex-column justify-content-center text-center">
                     {teacher.user?.name}
