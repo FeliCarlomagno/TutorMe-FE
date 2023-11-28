@@ -14,9 +14,7 @@ const PaginaPrenotazione = () => {
     isBookedUp: false,
   });
 
-  const annuncioStock = useSelector(
-    (state) => state.annuncioSelezionato.annuncioSelezionato
-  );
+  const annuncioStock = useSelector((state) => state.annuncioSelezionato.annuncioSelezionato);
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -48,12 +46,7 @@ const PaginaPrenotazione = () => {
       <div id="div_PaginaPrenotazione">
         <Container className="d-flex justify-content-evenly align-items-center h-100">
           {prenotazione.isBookedUp && (
-            <Modal
-              show={modalShow}
-              onHide={() => setModalShow(false)}
-              size="xl"
-              className="modal_isCreated "
-            >
+            <Modal show={modalShow} onHide={() => setModalShow(false)} size="xl" className="modal_isCreated ">
               <Modal.Body className="bg-transparent modal_isBookedUp_body text-dark ">
                 <h1 className="text-center">Prenotazione effettuata</h1>
               </Modal.Body>
@@ -88,13 +81,23 @@ const PaginaPrenotazione = () => {
                   <h2>Organizza</h2>
                   <p>
                     la tua prima lezione con
-                    <span className="text-danger">{annuncioStock?.user?.username}</span>
+                    <span className="text-danger ms-2">
+                      {annuncioStock?.user?.username
+                        .split(" ")
+                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                        .join(" ")}
+                    </span>
                   </p>
                   <Form onSubmit={handelSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicDescription">
                       <Form.Label>
                         Presentati a
-                        <span className="fw-bold"> {annuncioStock?.user?.username}</span>{" "}
+                        <span className="fw-bold ms-1">
+                          {annuncioStock?.user?.username
+                            .split(" ")
+                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                            .join(" ")}
+                        </span>{" "}
                         e specifica le tue necessità e difficoltà
                       </Form.Label>
                       <Form.Control
@@ -112,9 +115,7 @@ const PaginaPrenotazione = () => {
                       />
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicDate">
-                      <Form.Label className="fs-6">
-                        Aggiungi una breve presentazione su di te
-                      </Form.Label>
+                      <Form.Label className="fs-6">Aggiungi una breve presentazione su di te</Form.Label>
                       <Form.Control
                         className="border-0 shadow-sm"
                         type="date"

@@ -22,6 +22,7 @@ const signupUserReducer = (state = initialState, action) => {
         ...state,
         isSignup: true,
       };
+
     default:
       return state;
   }
