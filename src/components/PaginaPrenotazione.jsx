@@ -4,9 +4,9 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 
-const PaginaPrenotazione = () => {
+const PaginaPrenotazione = (props) => {
   const user = useSelector((state) => state.userLogin.userLogin);
-  const params = useParams();
+  //const params = useParams();
   const [modalShow, setModalShow] = useState(false);
   const [prenotazione, setPrenotazione] = useState({
     descrizionePrenotazione: "",
@@ -40,6 +40,8 @@ const PaginaPrenotazione = () => {
       alert("FATAL ERROR", error);
     }
   };
+
+  console.log("Informazioni user passate come prop: ", props.selectedUser.email);
 
   return (
     <>
