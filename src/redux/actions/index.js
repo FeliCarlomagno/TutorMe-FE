@@ -128,8 +128,7 @@ export const materieInsegnabili = [
 export const getTeacherAction = () => {
   return async (dispatch, getState) => {
     const state = getState();
-    const token = state.userLogin?.userLogin?.accessToken;
-    console.log("Token", token);
+    //const token = state.userLogin?.userLogin?.accessToken;
 
     //possiamo chiamare la funzione dispatch(primo parametro, che è un dispatcher interno alla funzione) dopo la funzione asincrona
     try {
