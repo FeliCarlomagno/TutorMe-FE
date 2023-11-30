@@ -1,17 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_ANNUNCIO_SELEZIONATO } from "../redux/actions";
-import {
-  Button,
-  Col,
-  Container,
-  Row,
-  Card,
-  Badge,
-  Toast,
-  Modal,
-  Spinner,
-} from "react-bootstrap";
+import { Button, Col, Container, Row, Card, Badge, Toast, Modal, Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import PaginaPrenotazione from "./PaginaPrenotazione";
 import { BiMessageAlt } from "react-icons/bi";
@@ -33,22 +23,17 @@ const PaginaUtenti = () => {
 
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const annuncioStock = useSelector(
-    (state) => state.annuncioSelezionato.annuncioSelezionato
-  );
+  const annuncioStock = useSelector((state) => state.annuncioSelezionato.annuncioSelezionato);
 
   console.log("Annuncio Stok", annuncioStock);
 
   const fetchAnnunci = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/annuncio/annuncioById/${params.annuncioId}`,
-        {
-          /*headers: {
+      const response = await fetch(`http://localhost:8080/annuncio/annuncioById/${params.annuncioId}`, {
+        /*headers: {
             Authorization: `Bearer ${userLogged?.accessToken}`,
           },*/
-        }
-      );
+      });
       if (response.ok) {
         const fetchedAnnunci = await response.json();
         dispatch({
@@ -131,13 +116,7 @@ const PaginaUtenti = () => {
                       <Button onClick={toggleShowA} className="mb-2">
                         Prenota
                       </Button>
-                      <Toast
-                        show={showA}
-                        onClose={toggleShowA}
-                        className="border-0"
-                        delay={3000}
-                        autohide
-                      >
+                      <Toast show={showA} onClose={toggleShowA} className="border-0" delay={3000} autohide>
                         <Toast.Body>Accedi per poter prenotare</Toast.Body>
                       </Toast>
                     </>
@@ -148,13 +127,13 @@ const PaginaUtenti = () => {
             <Col>
               <Card className="border-0 shadow-sm rounded-4 ">
                 <Card.Body>
-                  {annuncioStock?.listaMaterie.map((a) => (
-                    <Badge bg="primary" className="me-1">
+                  {annuncioStock?.listaMaterie.map((a, i) => (
+                    <Badge bg="primary" className="me-1" key={i}>
                       {a}
                     </Badge>
                   ))}
-                  {annuncioStock?.tipoLezione.map((tipo) => (
-                    <Badge bg="warning" className="me-1">
+                  {annuncioStock?.tipoLezione.map((tipo, i) => (
+                    <Badge bg="warning" className="me-1" key={i}>
                       {tipo}
                     </Badge>
                   ))}
@@ -162,9 +141,7 @@ const PaginaUtenti = () => {
                     {annuncioStock?.titoloAnnuncio}
                   </p>
                   <h3 className="fs-6 fw-bolder">Riguardo alla tua lezione</h3>
-                  <p className="p_lesson_description">
-                    {annuncioStock?.descrizioneAnnuncio}
-                  </p>
+                  <p className="p_lesson_description">{annuncioStock?.descrizioneAnnuncio}</p>
                   <Card.Text>Tariffa:{annuncioStock?.tariffaOraria}€/h</Card.Text>
                 </Card.Body>
               </Card>
@@ -198,9 +175,7 @@ const PaginaUtenti = () => {
                     </Col>
                   </Row>
                   <Row>
-                    <p className="m-0">
-                      Mi sono trovato splendidamente. Gentile e qualificata
-                    </p>
+                    <p className="m-0">Mi sono trovato splendidamente. Gentile e qualificata</p>
                   </Row>
                 </Card.Body>
               </Card>
@@ -231,7 +206,7 @@ const PaginaUtenti = () => {
             centered
           >
             <Modal.Body>
-              <PaginaPrenotazione />
+              <PaginaPrenotazione selectedUser={selectedUser} />
             </Modal.Body>
           </Modal>
         </Container>
