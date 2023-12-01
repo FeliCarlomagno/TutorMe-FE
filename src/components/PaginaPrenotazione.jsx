@@ -3,6 +3,8 @@ import { Button, Card, Col, Container, Form, Modal, Row } from "react-bootstrap"
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
+import emailjs from "@emailjs/browser";
+import { firstLetterUpperCase } from "../redux/actions";
 
 const PaginaPrenotazione = (props) => {
   const user = useSelector((state) => state.userLogin.userLogin);
@@ -16,7 +18,25 @@ const PaginaPrenotazione = (props) => {
 
   const annuncioStock = useSelector((state) => state.annuncioSelezionato.annuncioSelezionato);
 
-  const handelSubmit = async (e) => {
+  const templateParams = {
+    username: firstLetterUpperCase(annuncioStock?.user?.username),
+    email: props.selectedUser?.email,
+    username_teacher: firstLetterUpperCase(user?.username),
+    advertisment: annuncioStock.listaMaterie,
+  };
+
+  const sendEmail = () => {
+    emailjs.send("service_tutorme_trial", "template_tutorme_trial", templateParams, "IVYu6FhHixUbS70t5").then(
+      (response) => {
+        console.log(response.status, response.text);
+      },
+      (error) => {
+        console.log("FAILED...", error);
+      }
+    );
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await fetch(
@@ -30,18 +50,16 @@ const PaginaPrenotazione = (props) => {
           },
         }
       );
-      //const data = await response;
       if (response.ok) {
         setPrenotazione({ isBookedUp: true });
+        sendEmail();
       } else {
-        alert("Qualcosa non va bene non puoi ");
+        alert("Hai già prenotato questo annuncio!");
       }
     } catch (error) {
-      alert("FATAL ERROR", error);
+      alert("FATAL ERROR ", error);
     }
   };
-
-  console.log("Informazioni user passate come prop: ", props.selectedUser.email);
 
   return (
     <>
@@ -84,21 +102,15 @@ const PaginaPrenotazione = (props) => {
                   <p>
                     la tua prima lezione con
                     <span className="text-danger ms-2">
-                      {annuncioStock?.user?.username
-                        .split(" ")
-                        .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                        .join(" ")}
+                      {firstLetterUpperCase(annuncioStock?.user?.username)}
                     </span>
                   </p>
-                  <Form onSubmit={handelSubmit}>
+                  <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicDescription">
                       <Form.Label>
                         Presentati a
                         <span className="fw-bold ms-1">
-                          {annuncioStock?.user?.username
-                            .split(" ")
-                            .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                            .join(" ")}
+                          {firstLetterUpperCase(annuncioStock?.user?.username)}
                         </span>{" "}
                         e specifica le tue necessità e difficoltà
                       </Form.Label>
