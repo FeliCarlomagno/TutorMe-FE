@@ -3,13 +3,14 @@ import { Col, Container, Row, Button, Form, Card, Alert, Modal } from "react-boo
 import { useDispatch, useSelector } from "react-redux";
 import { addAnnuncioInfoAction } from "../redux/actions";
 import { materieInsegnabili } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const CreaAnnuncio = () => {
   const userName = useSelector((state) => state.userLogin?.userLogin);
   const isCreated = useSelector((state) => state.annuncioCreato?.isCreated);
-  console.log("Created", isCreated);
   const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
+  const navigate = useNavigate();
 
   const [annuncio, setAnnuncio] = useState({
     listaMaterie: [],
@@ -41,8 +42,8 @@ const CreaAnnuncio = () => {
   const [formValue, setFormValue] = useState("");
 
   const handleSet = (e) => {
-    //se annuncio.listaMaterie include al suo interno
-    // un valore uguale al valore dell'input, non aggiunge nuovamente il valore
+    /*se annuncio.listaMaterie include al suo interno
+    un valore uguale al valore dell'input, non aggiunge nuovamente il valore*/
     if (!annuncio.listaMaterie.includes(e.target.value)) {
       setAnnuncio({
         ...annuncio,
@@ -114,7 +115,8 @@ const CreaAnnuncio = () => {
                 </div>
                 <div className="d-flex justify-content-center">
                   <Button
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       setStep({
                         ...step,
                         isStepUno: false,
@@ -345,9 +347,13 @@ const CreaAnnuncio = () => {
                   </Button>
 
                   <Button
-                    onClick={(e) => {
+                    onClick={() => {
                       dispatch(addAnnuncioInfoAction(annuncio, userName));
                       setModalShow(true);
+                      setTimeout(() => {
+                        setModalShow(false);
+                        navigate("/");
+                      }, 1600);
                     }}
                     className="ms-1 bg-danger border-0"
                   >
