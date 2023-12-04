@@ -39,9 +39,16 @@ const CardTeacher = () => {
                 onClick={(e) => {
                   navigate("/paginaAnnuncioSelezionato/" + teacher.id);
                 }}
-                className="mb-2 mx-0 rounded-4 p-1 card_teacher bg-secondary"
+                className="mb-2 mx-0 rounded-4 p-1 card_teacher bg-secondary "
               >
-                <Card.Img variant="top" src="https://picsum.photos/500/500" className="rounded-4" />
+                <div className="overflow-hidden rounded-4">
+                  <Card.Img
+                    variant="top"
+                    src="https://picsum.photos/500/500"
+                    className="rounded-4 cardTeacher-img"
+                  />
+                </div>
+
                 <Card.Body>
                   <Card.Title className="d-flex flex-column justify-content-center text-center">
                     {teacher.user?.name}
