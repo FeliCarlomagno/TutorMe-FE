@@ -4,7 +4,7 @@ import { SET_LOGIN_INFORMATION } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-const LogIn = () => {
+const LogIn = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -81,11 +81,18 @@ const LogIn = () => {
               <p className="text-black">
                 Non hai ancora un account?
                 <Link to="/signup">
-                  <span className="text-decoration-none">Iscriviti</span>
+                  <span className="text-decoration-none"> Iscriviti</span>
                 </Link>
               </p>
 
-              <Button variant="primary" type="submit" className="rounded-pill">
+              <Button
+                variant="primary"
+                type="submit"
+                className="rounded-pill"
+                onClick={() => {
+                  setTimeout(props.onHide, 1000);
+                }}
+              >
                 Accedi
               </Button>
             </Form>

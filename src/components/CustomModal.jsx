@@ -5,7 +5,7 @@ const CustomModal = (props) => {
   return (
     <Modal {...props} size="md" aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Body>
-        <LogIn />
+        <LogIn onHide={props.onHide} />
       </Modal.Body>
     </Modal>
   );
