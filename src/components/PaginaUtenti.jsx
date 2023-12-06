@@ -78,7 +78,7 @@ const PaginaUtenti = () => {
 
   useEffect(() => {
     fetchSearchProfile();
-  }, []);
+  }, [selectedUser]);
 
   return (
     <>
