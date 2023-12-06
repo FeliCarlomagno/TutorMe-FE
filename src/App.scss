@@ -107,11 +107,32 @@ body {
 //CARD TEACHER:
 .card_teacher {
   border: none;
+  position: relative;
+  .card-teacher-title {
+    position: absolute;
+    top: 64%;
+    left: 18%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: white; /* Colore del testo */
+    text-shadow: -0.52px -0.52px 0 #000, 0.52px -0.52px 0 #000, -0.52px 0.52px 0 #000, 0.52px 0.52px 0 #000;
+    font-size: 25px; /* Dimensione del testo */
+    text-align: center;
+    @media screen and (min-width: 771px) and (max-width: 1400px) {
+      top: 65%; /* Modifica il valore per adattarsi alle nuove dimensioni */
+    }
+
+    @media screen and (min-width: 718px) and (max-width: 767px) {
+      top: 65%; /* Modifica il valore per adattarsi alle nuove dimensioni */
+    }
+  }
 }
 
-.cardTeacher-img:hover {
-  transform: scale(1.3);
-  transition: transform 0.3s ease;
+.cardTeacher-img {
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.3);
+  }
 }
 
 //ROW-HOME----------------------------------------------------------
@@ -502,4 +523,8 @@ body {
     align-items: center;
     height: 100vh;
   }
+}
+
+.favourite-button {
+  max-width: 50px;
 }
