@@ -32,7 +32,7 @@ const CardTeacher = () => {
             )
           )
           .map((teacher, i) => (
-            <Col xs={12} md={3} className="d-flex , flex-direction-row, wrap, space-between mt-5">
+            <Col xs={12} md={6} className="d-flex , flex-direction-row, wrap, space-between mt-5">
               <Card
                 style={{ width: "18rem" }}
                 key={i}
@@ -41,23 +41,21 @@ const CardTeacher = () => {
                 }}
                 className="mb-2 mx-0 rounded-4 p-1 card_teacher bg-secondary "
               >
-                <div className="overflow-hidden rounded-4">
+                <div className="overflow-hidden rounded-4 w-100">
                   <Card.Img
                     variant="top"
                     src="https://picsum.photos/500/500"
-                    className="rounded-4 cardTeacher-img"
+                    className="rounded-4 cardTeacher-img "
+                    alt="ad profile picture"
                   />
                 </div>
 
-                <Card.Body>
-                  <Card.Title className="d-flex flex-column justify-content-center text-center">
+                <Card.Body className="d-flex flex-column justify-content-between">
+                  <Card.Title className="d-flex flex-column justify-content-center text-center card-teacher-title">
                     {teacher.user?.name}
-                    {teacher?.listaMaterie.map((m) => (
-                      <Badge bg="danger mt-1">{m}</Badge>
-                    ))}
                   </Card.Title>
                   <Card.Text>{teacher?.titoloAnnuncio}</Card.Text>
-                  <Badge bg="primary">{teacher.tariffaOraria} €/h</Badge>
+                  <Badge bg="primary w-25">{teacher.tariffaOraria} €/h</Badge>
                 </Card.Body>
               </Card>
             </Col>
