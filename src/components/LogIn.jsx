@@ -46,7 +46,7 @@ const LogIn = (props) => {
   return (
     <>
       <Container>
-        <Row className="d-flex text-center">
+        <Row className="d-flex text-center justify-content-center">
           {isLogged && <Alert> Accesso eseguito</Alert>}
           <Col>
             <h2 className="mb-5 text-black">Connettiti</h2>
@@ -81,7 +81,14 @@ const LogIn = (props) => {
               <p className="text-black">
                 Non hai ancora un account?
                 <Link to="/signup">
-                  <span className="text-decoration-none"> Iscriviti</span>
+                  <span
+                    className="text-decoration-none"
+                    onClick={() => {
+                      props.onHide();
+                    }}
+                  >
+                    Iscriviti
+                  </span>
                 </Link>
               </p>
 
