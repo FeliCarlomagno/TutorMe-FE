@@ -127,7 +127,6 @@ export const materieInsegnabili = [
 //FUNZIONE CHE FETCHA GLI INSEGNANTI:
 export const getTeacherAction = () => {
   return async (dispatch, getState) => {
-    const state = getState();
     //const token = state.userLogin?.userLogin?.accessToken;
 
     //possiamo chiamare la funzione dispatch(primo parametro, che è un dispatcher interno alla funzione) dopo la funzione asincrona
@@ -198,9 +197,32 @@ export const addAnnuncioInfoAction = (annuncio, userName) => {
 };
 
 //funzione prima lettera di una stringa in maiuscolo
-export const firstLetterUpperCase = (string) => {
+export const firstLetterUpperCaseAction = (string) => {
   return string
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
     .join(" ");
+};
+
+//fetch di utente selezionato da un annuncio:
+
+export const searchFetchedProfileAction = (setSelectedUser, url) => {
+  return async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/auth/trovaUtenteByUsername` + url, {
+        method: "GET",
+        /*headers: {
+            Authorization: `Bearer ${userLogged?.accessToken}`,
+          },*/
+      });
+      if (response.ok) {
+        const responseData = await response.json();
+        setSelectedUser(responseData);
+        console.log("chiamata action");
+      } else {
+      }
+    } catch (error) {
+      alert("FATAL ERROR", error);
+    }
+  };
 };

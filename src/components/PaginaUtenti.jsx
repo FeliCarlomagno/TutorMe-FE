@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GET_ANNUNCIO_SELEZIONATO } from "../redux/actions";
+import {
+  GET_ANNUNCIO_SELEZIONATO,
+  firstLetterUpperCaseAction,
+  searchFetchedProfileAction,
+} from "../redux/actions";
 import { Button, Col, Container, Row, Card, Badge, Toast, Modal, Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import PaginaPrenotazione from "./PaginaPrenotazione";
@@ -18,14 +22,9 @@ const PaginaUtenti = () => {
 
   //STATO MODALE
   const [modalShow, setModalShow] = useState(false);
-
-  console.log("parametri ricevuti da cardTeacher", params);
-
   const [selectedUser, setSelectedUser] = useState(null);
 
   const annuncioStock = useSelector((state) => state.annuncioSelezionato.annuncioSelezionato);
-
-  console.log("Annuncio Stok", annuncioStock);
 
   const fetchAnnunci = async () => {
     try {
@@ -55,7 +54,8 @@ const PaginaUtenti = () => {
   }, []);
 
   //-----------fetch utente----------------
-  const fetchSearchProfile = async () => {
+
+  const fetchSearchedProfile = async () => {
     try {
       const response = await fetch(
         `http://localhost:8080/api/auth/trovaUtenteByUsername/${annuncioStock?.user?.username}`,
@@ -77,8 +77,9 @@ const PaginaUtenti = () => {
   };
 
   useEffect(() => {
-    fetchSearchProfile();
-  }, [selectedUser]);
+    fetchSearchedProfile();
+    //searchFetchedProfileAction(setSelectedUser, "annuncioStock.user.username");
+  }, []);
 
   return (
     <>
@@ -99,7 +100,12 @@ const PaginaUtenti = () => {
                   />
                   <Card.Title>{annuncioStock?.user?.usarname}</Card.Title>
 
-                  <h3> Riguardo a {annuncioStock?.user?.username}</h3>
+                  <h3>
+                    Riguardo a
+                    <span className="fw-bold text-danger ms-1">
+                      {firstLetterUpperCaseAction(annuncioStock?.user?.username)}
+                    </span>
+                  </h3>
                   <p className="teacher_description">{selectedUser?.descrizione}</p>
 
                   {userLogged?.username ? (
