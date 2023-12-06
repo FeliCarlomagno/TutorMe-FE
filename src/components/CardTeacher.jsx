@@ -11,8 +11,6 @@ const CardTeacher = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  console.log("Teachers", teachersInStock);
-
   useEffect(() => {
     dispatch(getTeacherAction());
   }, []);
