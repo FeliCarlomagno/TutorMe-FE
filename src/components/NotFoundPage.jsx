@@ -8,7 +8,7 @@ const NotFoundPage = () => {
         <Row className="justify-content-center">
           <Col xs={12} md={6} className="text-center">
             <Link to="/">
-              <Button>TORNA INDIETRO</Button>
+              <Button className="mt-2">TORNA INDIETRO</Button>
             </Link>
           </Col>
         </Row>
