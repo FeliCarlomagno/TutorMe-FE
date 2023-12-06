@@ -2,7 +2,8 @@ import { Container, Row, Col, Form, Button, Card, Modal } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux";
 import { IS_SIGNUP, SET_USER_INFORMATION } from "../redux/actions";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import CustomModal from "./CustomModal";
 
 const Singup = () => {
   const isSingup = useSelector((state) => state?.userSignUp);
@@ -130,7 +131,10 @@ const Singup = () => {
                     Iscriviti
                   </Button>
                   <p className="text-center mt-2">
-                    Hai già un account? <span className="text-danger">Accedi</span>
+                    Hai già un account?
+                    <Link to="/login" className="text-decoration-none">
+                      <span className="text-danger">Accedi</span>
+                    </Link>
                   </p>
                 </Form>
               </Card.Body>
