@@ -3,7 +3,7 @@ import { Navbar, Nav, Button, Dropdown, Form, Container, Offcanvas } from "react
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CustomModal from "./CustomModal";
-import { LOGOUT, handleLogout } from "../redux/actions";
+import { LOGOUT } from "../redux/actions";
 import LogIn from "./LogIn";
 
 const CustomNavbar = () => {
@@ -116,6 +116,7 @@ const CustomNavbar = () => {
                       >
                         {userName.toUpperCase()}
                       </Dropdown.Toggle>
+
                       <Dropdown.Menu className="me-5 border-0 shadow">
                         <Link to="/creaAnnuncio" className="text-decoration-none">
                           <Dropdown.Item href="#/action-1">Crea Annuncio</Dropdown.Item>
@@ -135,10 +136,10 @@ const CustomNavbar = () => {
                           Disconnettiti
                         </Dropdown.Item>
                       </Dropdown.Menu>
+                      <Button className="rounded-pill mt-2 button d-flex align-items-center shadow-sm favourite-button">
+                        <ion-icon name="heart-outline" className="fs-2"></ion-icon>
+                      </Button>
                     </Dropdown>
-                    <Button className="rounded-pill ms-3 button d-flex align-items-center shadow-sm">
-                      <ion-icon name="heart-outline" className="fs-2"></ion-icon>
-                    </Button>
                   </>
                 ) : (
                   <>
