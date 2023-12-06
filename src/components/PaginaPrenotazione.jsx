@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import emailjs from "@emailjs/browser";
-import { firstLetterUpperCase } from "../redux/actions";
+import { firstLetterUpperCaseAction } from "../redux/actions";
 
 const PaginaPrenotazione = (props) => {
   const user = useSelector((state) => state.userLogin.userLogin);
@@ -19,9 +19,9 @@ const PaginaPrenotazione = (props) => {
   const annuncioStock = useSelector((state) => state.annuncioSelezionato.annuncioSelezionato);
 
   const templateParams = {
-    username: firstLetterUpperCase(annuncioStock?.user?.username),
+    username: firstLetterUpperCaseAction(annuncioStock?.user?.username),
     email: props.selectedUser?.email,
-    username_teacher: firstLetterUpperCase(user?.username),
+    username_teacher: firstLetterUpperCaseAction(user?.username),
     advertisment: annuncioStock.listaMaterie,
   };
 
@@ -100,17 +100,17 @@ const PaginaPrenotazione = (props) => {
                 <Card.Body>
                   <h2>Organizza</h2>
                   <p>
-                    la tua prima lezione con
+                    La tua prima lezione con
                     <span className="text-danger ms-2">
-                      {firstLetterUpperCase(annuncioStock?.user?.username)}
+                      {firstLetterUpperCaseAction(annuncioStock?.user?.username)}👇
                     </span>
                   </p>
                   <Form onSubmit={handleSubmit}>
                     <Form.Group className="mb-3" controlId="formBasicDescription">
-                      <Form.Label>
+                      <Form.Label className="text-secondary">
                         Presentati a
                         <span className="fw-bold ms-1">
-                          {firstLetterUpperCase(annuncioStock?.user?.username)}
+                          {firstLetterUpperCaseAction(annuncioStock?.user?.username)}
                         </span>{" "}
                         e specifica le tue necessità e difficoltà
                       </Form.Label>
@@ -128,8 +128,10 @@ const PaginaPrenotazione = (props) => {
                         }}
                       />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicDate">
-                      <Form.Label className="fs-6">Aggiungi una breve presentazione su di te</Form.Label>
+                    <Form.Group className="mb-3 mt-5" controlId="formBasicDate">
+                      <Form.Label className="fs-6 text-secondary">
+                        Scegli una data per la vostra lezione
+                      </Form.Label>
                       <Form.Control
                         className="border-0 shadow-sm"
                         type="date"
