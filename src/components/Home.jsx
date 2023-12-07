@@ -17,7 +17,7 @@ const Home = () => {
             <h1>IMPARA CON NOI</h1>
             <h2>Scegli tra migliaia di tutor e corsi </h2>
             <Form className=" d-flex align-items-center justify-content-center mt-3 ">
-              <Form.Group controlId="formBasicMateria" id="form_container_principal">
+              <Form.Group id="form_container_principal">
                 <Form.Control
                   type="text"
                   className="rounded-pill border-0 shadow-sm"
