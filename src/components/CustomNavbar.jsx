@@ -1,18 +1,33 @@
-import { useState } from "react";
-import { Navbar, Nav, Button, Dropdown, Form, Container, Offcanvas } from "react-bootstrap";
+import { useRef, useState } from "react";
+import { Navbar, Nav, Button, Dropdown, Form, Container, Offcanvas, Overlay, Tooltip } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import CustomModal from "./CustomModal";
 import { LOGOUT } from "../redux/actions";
 import LogIn from "./LogIn";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 const CustomNavbar = () => {
   const userName = useSelector((state) => state.userLogin.userLogin?.username);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [searchValue, setSearchvalue] = useState(null);
+  const [searchValue, setSearchvalue] = useState("");
 
   const [modalShow, setModalShow] = useState(false);
+
+  //Tooltip
+  const [show, setShow] = useState(false);
+  const target = useRef(null);
+  const handleButtonClick = () => {
+    if (searchValue === "") {
+      setShow(true);
+      setTimeout(() => {
+        setShow(false);
+      }, 1500);
+    } else {
+      navigate("/teachers/" + searchValue);
+    }
+  };
 
   return (
     <>
@@ -41,18 +56,24 @@ const CustomNavbar = () => {
                         className="rounded-pill form_navbar shadow-sm"
                         placeholder="Cosa vuoi imparare?"
                         value={searchValue}
-                        onChange={(e) => setSearchvalue(e.target.value)}
+                        onChange={(e) => {
+                          setSearchvalue(e.target.value);
+                        }}
                       />
                     </Form.Group>
                     <Button
                       className="w-5 ms-1 rounded-pill shadow-sm"
-                      onClick={() => {
-                        navigate("/teachers/" + searchValue);
-                      }}
+                      ref={target}
+                      onClick={handleButtonClick}
                       type="submit"
                     >
                       🔍
                     </Button>
+                    {show && (
+                      <Overlay placement="right" show={show} target={target.current}>
+                        {(props) => <Tooltip {...props}>Inserisci una Materia da ricercare!</Tooltip>}
+                      </Overlay>
+                    )}
                   </Form>
                 </div>
 
