@@ -528,3 +528,15 @@ body {
 .favourite-button {
   max-width: 50px;
 }
+
+//tooltip navbar
+.tooltip-inner {
+  background-color: $primary;
+  color: #000;
+  font-weight: 600;
+}
+
+.bs-tooltip-end .tooltip-arrow::before,
+.bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
+  display: none;
+}
