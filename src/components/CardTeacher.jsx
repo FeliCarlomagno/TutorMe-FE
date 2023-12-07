@@ -30,10 +30,9 @@ const CardTeacher = () => {
             )
           )
           .map((teacher, i) => (
-            <Col xs={12} md={6} className="d-flex , flex-direction-row, wrap, space-between mt-5">
+            <Col xs={12} md={6} className="d-flex , flex-direction-row, wrap, space-between mt-5" key={i}>
               <Card
                 style={{ width: "18rem" }}
-                key={i}
                 onClick={(e) => {
                   navigate("/paginaAnnuncioSelezionato/" + teacher.id);
                 }}
