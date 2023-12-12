@@ -19,6 +19,13 @@ const loginUserReducer = (state = initialState, action) => {
         isLogged: true,
       };
 
+    case "EDIT_USER": {
+      return {
+        ...state,
+        userLogin: action.payload,
+      };
+    }
+
     case LOGOUT:
       return {
         userLogin: null,

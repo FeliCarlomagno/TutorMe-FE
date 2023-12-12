@@ -1,26 +1,18 @@
 import { useEffect, useState, useRef } from "react";
-import {
-  Col,
-  Container,
-  Row,
-  Form,
-  Button,
-  Card,
-  Accordion,
-  Modal,
-  FormGroup,
-} from "react-bootstrap";
+import { Col, Container, Row, Form, Button, Card, Accordion, Modal, FormGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
 import { handleLogout, materieInsegnabili } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const Profilo = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const userName = useSelector((state) => state.userLogin.userLogin);
   const editAnnuncio = useSelector((state) => state.annuncioEdit.annuncioEdit);
   const fileInputRef = useRef();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const [formValue, setFormValue] = useState("");
   const [user, setUser] = useState();
   const [refresh, setRefresh] = useState(false);
@@ -38,8 +30,7 @@ const Profilo = () => {
     isCreate: false,
   });
 
-  //funzione di input file per trasformare un bottone in un input
-
+  //funzione di input file per trasformare un bottone in un input(per il setting dell'immagine di profilo)
   const handleButtonClick = () => {
     fileInputRef.current.click();
   };
@@ -48,17 +39,14 @@ const Profilo = () => {
     const file = event.target.files[0];
     setImage(file);
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/auth/setImmagine/${userName?.username}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(image),
-          headers: {
-            Authorization: `Bearer ${userName?.accessToken}`,
-            "content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:8080/api/auth/setImmagine/${userName?.username}`, {
+        method: "PUT",
+        body: JSON.stringify(image),
+        headers: {
+          Authorization: `Bearer ${userName?.accessToken}`,
+          "content-Type": "application/json",
+        },
+      });
       if (response.ok) {
         alert("Immagine caricata con successo");
       } else {
@@ -69,7 +57,7 @@ const Profilo = () => {
     }
   };
 
-  //funzione bottoni cambio di stato:
+  //funzione bottoni cambio di stato(da implementare per l'editAnnuncio):
   const handleButtonState = (i) => {
     const updatedButtonStates = [...buttonState];
     updatedButtonStates[i] = !updatedButtonStates[i];
@@ -89,7 +77,6 @@ const Profilo = () => {
       if (response.ok) {
         const fetchedUser = await response.json();
         setUser(fetchedUser);
-        console.log("fetchedUser", fetchedUser);
       } else {
         alert("response not ok");
       }
@@ -98,25 +85,18 @@ const Profilo = () => {
     }
   };
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
   //FETCH di modifica utente:--------------------------------------------------------
   const handleEdit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/auth/modificaUtente/${user?.id}`,
-        {
-          method: "PUT",
-          body: JSON.stringify(user),
-          headers: {
-            Authorization: `Bearer ${userName?.accessToken}`,
-            "content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:8080/api/auth/modificaUtente/${user?.id}`, {
+        method: "PUT",
+        body: JSON.stringify(user),
+        headers: {
+          Authorization: `Bearer ${userName?.accessToken}`,
+          "content-Type": "application/json",
+        },
+      });
       if (response.ok) {
         alert("TUTTO OK");
       } else {
@@ -130,16 +110,13 @@ const Profilo = () => {
   //FETCH DI CANCELLAZIONE PRENOTAZIONE-----------------------------------------------------------
   const handleDeletePrenotazione = async (id) => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/prenotazioni/eliminaPrenotazione/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${userName?.accessToken}`,
-            "content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:8080/prenotazioni/eliminaPrenotazione/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${userName?.accessToken}`,
+          "content-Type": "application/json",
+        },
+      });
       if (response.ok) {
         setRefresh(true);
       } else {
@@ -153,17 +130,14 @@ const Profilo = () => {
   //fetch elimina annunci-----------------------------------------------------------------------------
   const handleDeleteAnnunci = async (id) => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/annuncio/eliminaAnnuncio/${id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${userName?.accessToken}`,
-          },
-        }
-      );
+      const response = await fetch(`http://localhost:8080/annuncio/eliminaAnnuncio/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${userName?.accessToken}`,
+        },
+      });
       if (response.ok) {
-        setRefresh(true);
+        setRefresh((prevRefresh) => !prevRefresh);
       } else {
         alert("Qualcosa non va con l'eliminazione del tuo annuncio");
       }
@@ -202,10 +176,9 @@ const Profilo = () => {
   //FETCH DI CANCELLAZIONE ACCOUNT
   const handleDeleteUtente = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/auth/eliminaUtente/${user?.id}`,
-        { method: "DELETE" }
-      );
+      const response = await fetch(`http://localhost:8080/api/auth/eliminaUtente/${user?.id}`, {
+        method: "DELETE",
+      });
       if (response.ok) {
         navigate("/");
         handleLogout();
@@ -250,7 +223,7 @@ const Profilo = () => {
                 <Form.Group className="mb-3 rounded-4" controlId="formBasiclastEmail">
                   <Form.Control
                     type="email"
-                    placeholder="email"
+                    placeholder={user?.email}
                     className=" border border-2 border-light"
                   />
                 </Form.Group>
@@ -294,11 +267,7 @@ const Profilo = () => {
             <Card.Body>
               <p className="fw-semibold">Identità 🪪</p>
               <div className="upload_photo_div">
-                <img
-                  src="/assets/credit-card.png"
-                  alt="identty_card"
-                  className="identity_photo"
-                />
+                <img src="/assets/credit-card.png" alt="identty_card" className="identity_photo" />
               </div>
 
               <Form
@@ -307,12 +276,7 @@ const Profilo = () => {
                 method="PUT"
                 encType="multipart/form-data"
               >
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  className="d-none"
-                  onChange={handleFileChange}
-                />
+                <input type="file" ref={fileInputRef} className="d-none" onChange={handleFileChange} />
                 <Button className="mt-4 rounded-4" onClick={() => handleSetImage()}>
                   Carica una foto
                 </Button>
@@ -324,10 +288,9 @@ const Profilo = () => {
             <Card.Body>
               <p className="fw-semibold">Cancella account 😧</p>
               <p className="fs-6">
-                ATTENZIONE! Cancellando l'account perderai tutte le informazioni inserite,
-                tutte le lezioni saranno cancellate e non farai più parte di TutorMe.
-                L'azione che stai per compiere è irreversibile. Sii sicuro prima di
-                procedere.
+                ATTENZIONE! Cancellando l'account perderai tutte le informazioni inserite, tutte le lezioni
+                saranno cancellate e non farai più parte di TutorMe. L'azione che stai per compiere è
+                irreversibile. Sii sicuro prima di procedere.
               </p>
 
               <Button onClick={() => handleDeleteUtente()}>Cancella</Button>

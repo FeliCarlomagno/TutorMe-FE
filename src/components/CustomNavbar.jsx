@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import CustomModal from "./CustomModal";
 import { LOGOUT } from "../redux/actions";
 import LogIn from "./LogIn";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 const CustomNavbar = () => {
   const userName = useSelector((state) => state.userLogin.userLogin?.username);
@@ -31,8 +30,8 @@ const CustomNavbar = () => {
 
   return (
     <>
-      <Navbar key="sm" bg="light" expand="lg" className=" bg-transparent">
-        <Container fluid>
+      <Navbar key="sm" bg="light" expand="lg" className="bg-transparent ">
+        <Container fluid className="navbar_custom">
           <Link to="/" className="text-decoration-none">
             <Navbar.Brand className="logo fw-bold">TutorMe</Navbar.Brand>
           </Link>
