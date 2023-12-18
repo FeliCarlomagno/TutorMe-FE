@@ -126,7 +126,7 @@ export const materieInsegnabili = [
 
 //FUNZIONE CHE FETCHA GLI INSEGNANTI:
 export const getTeacherAction = () => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     //const token = state.userLogin?.userLogin?.accessToken;
 
     //possiamo chiamare la funzione dispatch(primo parametro, che è un dispatcher interno alla funzione) dopo la funzione asincrona
@@ -205,7 +205,6 @@ export const firstLetterUpperCaseAction = (string) => {
 };
 
 //fetch di utente selezionato da un annuncio:
-
 export const searchFetchedProfileAction = (setSelectedUser, url) => {
   return async () => {
     try {
@@ -223,6 +222,42 @@ export const searchFetchedProfileAction = (setSelectedUser, url) => {
       }
     } catch (error) {
       alert("FATAL ERROR", error);
+    }
+  };
+};
+
+//ACTION DI LOGIN
+export const loginAction = (e, user, navigate, timeout) => {
+  return async (dispatch) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        body: JSON.stringify(user),
+        headers: {
+          "content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+
+        dispatch({
+          type: SET_LOGIN_INFORMATION,
+          payload: data,
+        });
+
+        dispatch({
+          type: "SET_IS_LOGGED",
+        });
+
+        if (timeout) {
+          timeout();
+        }
+      } else {
+        navigate("*");
+      }
+    } catch (error) {
+      navigate("*");
     }
   };
 };
