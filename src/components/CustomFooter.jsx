@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const CustomFooter = () => {
   return (
     <>
-      <div className="text-light" id="footer">
+      <div className="text-light rounded-4" id="footer">
         <Container className="d-flex justify-content-center flex-column">
           <Row className="w-100 py-3 footer_row">
             <Col className="d-flex flex-column justify-content-between align-items-center lh-1">
@@ -24,16 +24,13 @@ const CustomFooter = () => {
               </div>
             </Col>
             <Col className="d-flex flex-column justify-content-evenly align-items-center footer_end">
-              <h3 className="fs-3 d-none d-sm-block">Seguici</h3>
+              <h3 className="fs-3 d-none d-sm-block h3_footer">Seguici</h3>
               <Link to="https://www.instagram.com/feli_carlomagno/" target="_blank">
                 <Button className="rounded-circle d-flex align-items-center b-0 p-2">
                   <ion-icon name="logo-instagram"></ion-icon>
                 </Button>
               </Link>
-              <Link
-                to="https://www.linkedin.com/in/feliciano-carlomagno-85743020b/"
-                target="_blank"
-              >
+              <Link to="https://www.linkedin.com/in/feliciano-carlomagno-85743020b/" target="_blank">
                 <Button className="rounded-circle d-flex align-items-center b-0 p-2">
                   <ion-icon name="logo-linkedin"></ion-icon>
                 </Button>
