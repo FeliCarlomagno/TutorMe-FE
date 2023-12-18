@@ -132,8 +132,8 @@ const Singup = () => {
                   </Button>
                   <p className="text-center mt-2">
                     Hai già un account?
-                    <Link to="/login" className="text-decoration-none">
-                      <span className="text-danger">Accedi</span>
+                    <Link to="/signupPage" className="text-decoration-none">
+                      <span className="text-danger ms-1">Accedi</span>
                     </Link>
                   </p>
                 </Form>
