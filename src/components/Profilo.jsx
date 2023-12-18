@@ -30,6 +30,13 @@ const Profilo = () => {
     isCreate: false,
   });
 
+  //funzione bottoni cambio di stato(da implementare per l'editAnnuncio):
+  const handleButtonState = (i) => {
+    const updatedButtonStates = [...buttonState];
+    updatedButtonStates[i] = !updatedButtonStates[i];
+    setButtonState(updatedButtonStates);
+  };
+
   //funzione di input file per trasformare un bottone in un input(per il setting dell'immagine di profilo)
   const handleButtonClick = () => {
     fileInputRef.current.click();
@@ -57,13 +64,6 @@ const Profilo = () => {
     }
   };
 
-  //funzione bottoni cambio di stato(da implementare per l'editAnnuncio):
-  const handleButtonState = (i) => {
-    const updatedButtonStates = [...buttonState];
-    updatedButtonStates[i] = !updatedButtonStates[i];
-    setButtonState(updatedButtonStates);
-  };
-
   const fetchUser = async (e) => {
     try {
       const response = await fetch(
@@ -85,7 +85,7 @@ const Profilo = () => {
     }
   };
 
-  //FETCH di modifica utente:--------------------------------------------------------
+  //FETCH di modifica utente:______________________________________________________________________
   const handleEdit = async (e) => {
     e.preventDefault();
     try {
@@ -107,7 +107,7 @@ const Profilo = () => {
     }
   };
 
-  //FETCH DI CANCELLAZIONE PRENOTAZIONE-----------------------------------------------------------
+  //FETCH DI CANCELLAZIONE PRENOTAZIONE_______________________________________________________________
   const handleDeletePrenotazione = async (id) => {
     try {
       const response = await fetch(`http://localhost:8080/prenotazioni/eliminaPrenotazione/${id}`, {
@@ -127,7 +127,7 @@ const Profilo = () => {
     }
   };
 
-  //fetch elimina annunci-----------------------------------------------------------------------------
+  //FETCH ELIMINA ANNUNCIO__________________________________________________________________________
   const handleDeleteAnnunci = async (id) => {
     try {
       const response = await fetch(`http://localhost:8080/annuncio/eliminaAnnuncio/${id}`, {
