@@ -146,10 +146,10 @@ const Profilo = () => {
     }
   };
 
-  //FETCH DI AGGIUNTA IMMAGINE------------------------------------------------------------------------------------------
-  const handleSetImage = async () => {}; //---------------------------------------------------------------------------------------------------------------------------
+  //FETCH DI AGGIUNTA IMMAGINE_________________________________________________________________
+  const handleSetImage = async () => {};
 
-  //FETCH DI MODIFICA Annuncio
+  //FETCH DI MODIFICA Annuncio___________________________________________________________________
   const handleEditAnnuncio = async (e) => {
     try {
       const response = await fetch(
@@ -191,7 +191,7 @@ const Profilo = () => {
     }
   };
 
-  //update dopo aver cancellato una pagina
+  //update dopo aver cancellato un annuncio/prenotazione
   useEffect(() => {
     fetchUser();
   }, [refresh]);
