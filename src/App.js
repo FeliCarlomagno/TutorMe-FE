@@ -11,6 +11,7 @@ import LogIn from "./components/LogIn";
 import PaginaUtenti from "./components/PaginaUtenti";
 import PaginaPrenotazione from "./components/PaginaPrenotazione";
 import Profilo from "./components/Profilo";
+import SignupPage from "./components/SignupPage";
 
 function App() {
   return (
@@ -22,14 +23,11 @@ function App() {
           <Route path="/login" element={<LogIn />} />
           <Route path="/signUp" element={<Singup />} />
           <Route path="/teachers/:searchValue" element={<CardTeacher />} />
-          <Route
-            path="/paginaAnnuncioSelezionato/:annuncioId"
-            element={<PaginaUtenti />}
-          />
+          <Route path="/paginaAnnuncioSelezionato/:annuncioId" element={<PaginaUtenti />} />
           <Route path="/creaAnnuncio" element={<CreaAnnuncio />} />
           <Route path="/paginaPrenotazione/:annuncio" element={<PaginaPrenotazione />} />
           <Route path="/profilo" element={<Profilo />} />
-
+          <Route path="/signupPage" element={<SignupPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
