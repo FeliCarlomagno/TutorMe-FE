@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Col, Container, Row, Form, Button, Alert } from "react-bootstrap";
-import { SET_LOGIN_INFORMATION } from "../redux/actions";
+import { loginAction } from "../redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,31 +16,7 @@ const LogIn = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:8080/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-
-        dispatch({
-          type: SET_LOGIN_INFORMATION,
-          payload: data,
-        });
-
-        dispatch({
-          type: "SET_IS_LOGGED",
-        });
-      } else {
-        navigate("*");
-      }
-    } catch (error) {
-      navigate("*");
-    }
+    dispatch(loginAction(e, user, navigate));
   };
 
   return (
@@ -78,30 +54,29 @@ const LogIn = (props) => {
                 />
               </Form.Group>
 
-              <p className="text-black">
-                Non hai ancora un account?
-                <Link to="/signup">
-                  <span
-                    className="text-decoration-none"
-                    onClick={() => {
-                      props.onHide();
-                    }}
-                  >
-                    Iscriviti
-                  </span>
-                </Link>
-              </p>
-
               <Button
                 variant="primary"
                 type="submit"
-                className="rounded-pill"
+                className="rounded-pill mb-2"
                 onClick={() => {
                   setTimeout(props.onHide, 1000);
                 }}
               >
                 Accedi
               </Button>
+              <p className="mb-0">
+                Non hai ancora un account?
+                <Link to="/signup" className="text-decoration-none fs-6 ">
+                  <span
+                    onClick={() => {
+                      props.onHide();
+                    }}
+                    className="ms-1"
+                  >
+                    Iscriviti
+                  </span>
+                </Link>
+              </p>
             </Form>
           </Col>
         </Row>
