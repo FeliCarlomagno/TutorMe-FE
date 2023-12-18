@@ -173,7 +173,7 @@ const Profilo = () => {
     }
   };
 
-  //FETCH DI CANCELLAZIONE ACCOUNT
+  //FETCH DI CANCELLAZIONE ACCOUNT_____________________________________________________________
   const handleDeleteUtente = async () => {
     try {
       const response = await fetch(`http://localhost:8080/api/auth/eliminaUtente/${user?.id}`, {
