@@ -181,7 +181,7 @@ const Home = () => {
                   <Button className="rounded-pill ms-3">Crea il tuo annuncio</Button>
                 </Link>
               ) : (
-                <Link to="/signUp" className="a_banner_tutor">
+                <Link to="/signup" className="a_banner_tutor">
                   <Button className="rounded-pill  button_banner_tutor">Dare lezioni</Button>
                 </Link>
               )}
