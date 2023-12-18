@@ -19,7 +19,9 @@ html {
 body {
   min-height: 100vh;
   min-width: 100%;
-  background-color: #eef3ee;
+  //background-color: #eef3ee;
+  background: rgb(238, 243, 238);
+  background: linear-gradient(180deg, rgba(238, 243, 238, 1) 0%, rgba(245, 255, 195, 1) 35%);
   background-repeat: no-repeat;
   font-family: "Manrope", sans-serif;
   font-family: "Montserrat", sans-serif;
@@ -351,7 +353,8 @@ body {
 }
 
 //form signup------------------------------------------------------------------------
-#signup_container {
+#signup_container,
+#signUpPage_container {
   display: flex;
   justify-content: center;
   min-height: 100vh;
@@ -359,6 +362,7 @@ body {
   background-image: url("../public/assets/5512.jpg");
   background-size: cover;
 }
+
 .signup_form_control {
   border-color: #eef3ee;
 }
@@ -420,7 +424,9 @@ body {
 //footer-----------------------------------------------------
 
 #footer {
-  background-color: black;
+  margin: 8px;
+  background-color: #000;
+
   .footer_row {
     p {
       font-size: 15px;
@@ -431,6 +437,8 @@ body {
         flex-direction: row !important;
       }
     }
+  }
+  .h3_footer {
   }
 }
 
