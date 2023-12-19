@@ -40,9 +40,16 @@ const CustomNavbar = () => {
             id="offcanvasNavbar-expand-lg"
             aria-labelledby="offcanvasNavbarLabel-expand-lg"
             placement="end"
+            className="mt-1 mb-1 rounded-start border-0"
           >
-            <Offcanvas.Header closeButton className="justify-content-end"></Offcanvas.Header>
-            <Offcanvas.Body className=" justify-content-between">
+            <Offcanvas.Header closeButton className="justify-content-between">
+              {userName && (
+                <Button className="rounded-pill  button d-flex align-items-center shadow-sm favourite-button fs-3">
+                  <ion-icon name="heart-outline"></ion-icon>
+                </Button>
+              )}
+            </Offcanvas.Header>
+            <Offcanvas.Body className=" justify-content-between ">
               <div className="w-100 offcanvas_body_small_screen">
                 <div className="d-flex">
                   <Form
@@ -118,7 +125,7 @@ const CustomNavbar = () => {
                           ACCEDI
                         </Button>
                         <Link to="/signUp">
-                          <Button className="rounded-pill ms-3 shadow-sm">Dare lezioni</Button>
+                          <Button className="rounded-pill ms-3 shadow-sm bg-light">Dare lezioni</Button>
                         </Link>
                       </>
                     )}
@@ -132,12 +139,12 @@ const CustomNavbar = () => {
                     <Dropdown>
                       <Dropdown.Toggle
                         id="dropdown-button-drop-up"
-                        className="variant-secondary rounded-4 fw-bold shadow-sm"
+                        className="variant-secondary rounded-4 fw-bold shadow-sm w-100"
                       >
                         {userName.toUpperCase()}
                       </Dropdown.Toggle>
 
-                      <Dropdown.Menu className="me-5 border-0 shadow">
+                      <Dropdown.Menu className=" border-0 shadow w-100">
                         <Link to="/creaAnnuncio" className="text-decoration-none">
                           <Dropdown.Item href="#/action-1">Crea Annuncio</Dropdown.Item>
                         </Link>
@@ -156,9 +163,6 @@ const CustomNavbar = () => {
                           Disconnettiti
                         </Dropdown.Item>
                       </Dropdown.Menu>
-                      <Button className="rounded-pill mt-2 button d-flex align-items-center shadow-sm favourite-button">
-                        <ion-icon name="heart-outline" className="fs-2"></ion-icon>
-                      </Button>
                     </Dropdown>
                   </>
                 ) : (
@@ -171,7 +175,9 @@ const CustomNavbar = () => {
                       Accedi
                     </Button>
                     <Link to="/signUp">
-                      <Button className="rounded-pill shadow-sm w-100 mt-2 fw-semibold">Dare Lezioni</Button>
+                      <Button className="rounded-pill shadow-sm w-100 mt-2 fw-semibold bg-light ">
+                        Dare Lezioni
+                      </Button>
                     </Link>
                   </>
                 )}

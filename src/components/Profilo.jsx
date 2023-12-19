@@ -200,7 +200,7 @@ const Profilo = () => {
     <Container>
       <Row className="justify-content-center profile_container">
         <Col xs={12} md={8} lg={4}>
-          <Card className="border-0 shadow-sm rounded-4">
+          <Card className="border-0 shadow-sm rounded-4 mt-2">
             <p className="text-center pt-3 m-0 fw-semibold">Info Generali 😎</p>
             <Card.Body>
               <Form className="p-2 rounded-4" onSubmit={handleEdit}>
@@ -284,7 +284,7 @@ const Profilo = () => {
             </Card.Body>
           </Card>
 
-          <Card className="border-0 rounded-4 text-center shadow-sm mt-2 mb-2">
+          <Card className="border-0 rounded-4 text-center shadow-sm mt-2 mb-2 ">
             <Card.Body>
               <p className="fw-semibold">Cancella account 😧</p>
               <p className="fs-6">
@@ -334,7 +334,7 @@ const Profilo = () => {
             ))}
           </Card>
 
-          <Card className="border-0 text-center shadow-sm rounded-4 mt-2 w-100">
+          <Card className="border-0 text-center shadow-sm rounded-4 mt-2 w-100 mb-2">
             <h4 className="mt-2">Lista Annunci</h4>
             {user?.listaAnnunci?.map((a, i) => (
               <Card.Body className="d-flex p-1" key={i}>
@@ -389,8 +389,8 @@ const Profilo = () => {
                 <Form.Group controlId="formBasicMateria">
                   <Form.Control
                     type="text"
-                    placeholder="Cosa vuoi imparare? ↧ scorri tra le materie"
-                    className="p-3 border-0 "
+                    placeholder="Cosa vuoi insegnare? ↧ "
+                    className="p-3 border-0 text-center"
                     value={formValue}
                     onChange={(e) => setFormValue(e.target.value)}
                   />

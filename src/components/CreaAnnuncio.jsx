@@ -54,7 +54,7 @@ const CreaAnnuncio = () => {
 
   return (
     <div id="crea_annuncio_container">
-      <Container className="h-100 mt-5 d-flex align-items-center">
+      <Container className="h-100 d-flex align-items-center justify-content-center">
         {isCreated && (
           <Modal show={modalShow} onHide={() => setModalShow(false)} size="xl" className="modal_isCreated">
             <Modal.Body className="bg-transparent modal_isCreated_body">
@@ -62,27 +62,28 @@ const CreaAnnuncio = () => {
             </Modal.Body>
           </Modal>
         )}
-        <Row className="justify-content-evenly w-100">
+        <Row className="justify-content-evenly h-100 w-100">
           <Col className="d-flex justify-content-around " xs={12} md={5}>
             <Card
               style={{ maxWidth: "17em", maxHeight: "20em" }}
               className="rounded-4 border-0 shadow mt-5 mb-5"
             >
               <Card.Body className="p-4">
-                <h1>Tutor Pill</h1>
+                <h1 className="fw-semibold text-center text-primary">Tutor Pill</h1>
                 <p className="pt-4 ">
-                  TutorMe ti da la possibilità di condividere le tue passioni e le tue conoscenze in
-                  tantissime materie.
+                  TutorMe ti da la possibilità di condividere le tue
+                  <span className="text-danger">passioni</span> e le tue{" "}
+                  <span className="text-danger">conoscenze</span> in tantissime materie.
                   <br />
                   Crea il tuo annuncio, pubblicalo sulla piattaforma e sei pronto per cominciare!
                 </p>
               </Card.Body>
             </Card>
           </Col>
-          <Col className="d-flex flex-column col_step_one text-center" xs={12} md={5}>
+          <Col className="d-flex flex-column col_step_one text-center mt-4" xs={12} md={5}>
             {step.isStepUno && (
               <>
-                <h2>Cosa Insegni?</h2>
+                <h2 className="text-danger">Cosa Insegni?</h2>
                 <Form className="m-2">
                   <Form.Group controlId="formBasicMateria">
                     <Form.Control
@@ -95,7 +96,7 @@ const CreaAnnuncio = () => {
                   </Form.Group>
                 </Form>
 
-                <div className="d-flex flex-column div_materie">
+                <div className="d-flex flex-column div_materie ">
                   {materieInsegnabili
                     .filter((v) => v.toLowerCase().includes(formValue.toLowerCase()))
                     .map((m, i) => (
@@ -106,14 +107,14 @@ const CreaAnnuncio = () => {
                           handleSet(m);
                           handleButtonClick(i);
                         }}
-                        className="mb-2 py-3  border-0"
+                        className="mb-2 py-3 border-0"
                         style={{ backgroundColor: buttonState[i] ? "#e3c579" : null }}
                       >
                         {m}
                       </Button>
                     ))}
                 </div>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center align-items-center">
                   <Button
                     onClick={(e) => {
                       e.preventDefault();
@@ -123,7 +124,7 @@ const CreaAnnuncio = () => {
                         isStepDue: true,
                       });
                     }}
-                    className="bg-danger mt-4 border-0"
+                    className="bg-danger my-2 border-0 "
                   >
                     Avanti
                   </Button>
@@ -131,7 +132,7 @@ const CreaAnnuncio = () => {
               </>
             )}
             {step.isStepDue && (
-              <div className="d-flex flex-column justify-content-between h-100">
+              <div className="d-flex flex-column justify-content-between h-50 ">
                 <h2>
                   <span className="text-danger">Titolo</span> del tuo annuncio
                 </h2>
@@ -157,7 +158,7 @@ const CreaAnnuncio = () => {
                     </Form.Label>
                   </Form.Group>
                 </Form>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center my-2">
                   <Button
                     onClick={(e) => {
                       setStep({
@@ -191,7 +192,7 @@ const CreaAnnuncio = () => {
                   <span className="text-danger">Descrivi</span> il tuo annuncio
                 </h2>
                 <Form>
-                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                  <Form.Group controlId="exampleForm.ControlTextarea1">
                     <Form.Control
                       type="text"
                       as="textarea"
@@ -211,7 +212,7 @@ const CreaAnnuncio = () => {
                     </Form.Label>
                   </Form.Group>
                 </Form>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center my-2">
                   <Button
                     onClick={(e) => {
                       setStep({
@@ -239,7 +240,7 @@ const CreaAnnuncio = () => {
               </div>
             )}
             {step.isStepQuattro && (
-              <div className="d-flex flex-column justify-content-evenly h-100">
+              <div className="d-flex flex-column justify-content-evenly h-50">
                 <Form>
                   <h2>
                     <span className="text-danger">Tariffa</span> Oraria
@@ -333,7 +334,7 @@ const CreaAnnuncio = () => {
                     Ricordati sempre che potrai accordarti con loro per una posizione diversa in ogni momento
                   </p>
                 </div>
-                <div className="d-flex justify-content-center">
+                <div className="d-flex justify-content-center my-2">
                   <Button
                     onClick={(e) => {
                       setStep({

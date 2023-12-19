@@ -39,7 +39,7 @@ const Home = () => {
           </Col>
           <Col xs={12} md={6}>
             <div className="photo_cointainer_home_top justify-content-center">
-              <img src="/assets/58167.jpg" alt="people_job" className="img_home rounded-4 shadow" />
+              <img src="/assets/58167.jpg" alt="people_job" className="img_home shadow rounded-4" />
             </div>
           </Col>
         </Row>
