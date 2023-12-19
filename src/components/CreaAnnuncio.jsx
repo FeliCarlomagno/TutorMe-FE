@@ -187,7 +187,7 @@ const CreaAnnuncio = () => {
               </div>
             )}
             {step.isStepTre && (
-              <div className="d-flex flex-column justify-content-between h-100">
+              <div className="d-flex flex-column justify-content-between h-50">
                 <h2>
                   <span className="text-danger">Descrivi</span> il tuo annuncio
                 </h2>
@@ -299,7 +299,7 @@ const CreaAnnuncio = () => {
               </div>
             )}
             {step.isStepCinque && (
-              <div className="d-flex flex-column justify-content-between h-100">
+              <div className="d-flex flex-column justify-content-between h-50">
                 <h2>
                   <span className="text-danger">Dove</span> insegni?
                 </h2>
