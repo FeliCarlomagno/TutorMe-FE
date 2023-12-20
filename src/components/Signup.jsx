@@ -7,8 +7,6 @@ import CustomModal from "./CustomModal";
 
 const Singup = () => {
   const isSingup = useSelector((state) => state?.userSignUp);
-  setInterval(() => {}, 3500);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,6 +36,9 @@ const Singup = () => {
         dispatch({
           type: IS_SIGNUP,
         });
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       } else {
       }
     } catch (error) {
@@ -47,7 +48,7 @@ const Singup = () => {
 
   return (
     <div id="signup_container">
-      <Container className="p-5 m-5 h-100">
+      <Container className="p-4 m-4 h-100">
         {isSingup && (
           <Modal show={modalShow} onHide={() => setModalShow(false)} size="xl" className="modal_isCreated">
             <Modal.Body className="bg-transparent modal_isCreated_body">
@@ -56,7 +57,7 @@ const Singup = () => {
           </Modal>
         )}
         <Row className="justify-content-center left_row_Signup">
-          <Col className="d-flex flex-column justify-content-center p-5">
+          <Col className="d-flex flex-column justify-content-evenly leftDiv_Signup rounded-4 mb-4">
             <h1 className="text-danger">Dare lezioni Fare crescere gli allievi</h1>
             <p>
               TutorMe ti offre la possibilità di condividere le tue conoscenze e insegnare in oltre 500
@@ -67,10 +68,10 @@ const Singup = () => {
             </p>
           </Col>
 
-          <Col xs={12} md={6} className="d-flex justify-content-center">
-            <Card style={{ width: "20em" }} className="py-3 px-2 border-0 shadow">
+          <Col xs={12} md={6} className="d-flex justify-content-center col_form_signup">
+            <Card style={{ width: "20em" }} className="py-3 px-2 border-0 shadow rounded-4">
               <Card.Body>
-                <h2 className="text-center fw-semibold">Crea il tuo account</h2>
+                <h2 className="text-center fw-semibold mb-4">Crea il tuo account</h2>
                 <Form onSubmit={handleSubmit}>
                   <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Control
