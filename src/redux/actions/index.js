@@ -123,6 +123,63 @@ export const materieInsegnabili = [
   "Diritto internazionale",
   "Sviluppo di app mobile",
 ];
+export const recensioniLezione = [
+  {
+    nome: "Alessia Rossi",
+    recensione:
+      "Lezione fantastica! Il docente ha spiegato in modo chiaro, mantenendo alta l'attenzione. Piattaforma intuitiva e coinvolgente.",
+    photo: " https://picsum.photos/300",
+  },
+  {
+    nome: "Marco Bianchi",
+    recensione:
+      "Materiale ben organizzato, spiegazioni chiare e dettagliate. Ottima interazione con il docente.",
+    photo: " https://picsum.photos/100",
+  },
+  {
+    nome: "Francesca Verdi",
+    recensione:
+      "Lezione interessante e informativa. Docente competente con esempi pratici. Piattaforma stabile.",
+    photo: " https://picsum.photos/200",
+  },
+  {
+    nome: "Luca Neri",
+    recensione:
+      "Lezione online eccezionale! Docente coinvolgente, attività interattive e flessibilità nell'apprendimento.",
+    photo: " https://picsum.photos/400",
+  },
+  {
+    nome: "Giulia Rossetti",
+    recensione: "Flessibilità apprezzata. Comunicazione efficace, partecipazione da qualsiasi luogo.",
+    photo: " https://picsum.photos/500",
+  },
+  {
+    nome: "Roberto Conti",
+    recensione:
+      "Lezione ben strutturata, ambiente collaborativo. Risposte immediate alle domande degli studenti.",
+    photo: " https://picsum.photos/600",
+  },
+  {
+    nome: "Elena Mancini",
+    recensione: "Esperienza positiva. Docente attento alle domande, registrazione utile per la revisione.",
+    photo: "https://picsum.photos/700",
+  },
+  {
+    nome: "Andrea Russo",
+    recensione: "Lezione utile e interattiva. Approccio pratico, discussione stimolante.",
+    photo: " https://picsum.photos/800",
+  },
+  {
+    nome: "Valentina Ferri",
+    recensione: "Lezione ben organizzata, flessibilità nell'accesso. Risorse aggiuntive apprezzate.",
+    photo: " https://picsum.photos/900",
+  },
+  {
+    nome: "Giovanni Leone",
+    recensione: "Eccellente lezione! Docente competente, piattaforma user-friendly, interazione arricchente.",
+    photo: " https://picsum.photos/150",
+  },
+];
 
 //FUNZIONE CHE FETCHA GLI INSEGNANTI:
 export const getTeacherAction = () => {
