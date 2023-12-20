@@ -30,7 +30,12 @@ const CardTeacher = () => {
             )
           )
           .map((teacher, i) => (
-            <Col xs={12} md={6} className="d-flex , flex-direction-row, wrap, space-between mt-5" key={i}>
+            <Col
+              xs={12}
+              md={6}
+              className="d-flex flex-direction-row wrap space-between mt-5 justify-content-center"
+              key={i}
+            >
               <Card
                 style={{ width: "18rem" }}
                 onClick={(e) => {
