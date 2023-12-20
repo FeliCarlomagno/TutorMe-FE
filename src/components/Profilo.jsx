@@ -20,6 +20,7 @@ const Profilo = () => {
   const [buttonState, setButtonState] = useState([]);
   const [modalShow, setModalShow] = useState(false);
   const [image, setImage] = useState(null);
+  const [showDelete, setShowDelete] = useState(false);
 
   const [annuncioEdit, setAnnuncioEdit] = useState({
     listaMaterie: [],
@@ -29,6 +30,9 @@ const Profilo = () => {
     tipoLezione: [],
     isCreate: false,
   });
+
+  const handleClose = () => setShowDelete(false);
+  const handleShow = () => setShowDelete(true);
 
   //funzione bottoni cambio di stato(da implementare per l'editAnnuncio):
   const handleButtonState = (i) => {
@@ -181,7 +185,6 @@ const Profilo = () => {
       });
       if (response.ok) {
         navigate("/");
-        handleLogout();
       } else {
         navigate("*");
       }
@@ -229,7 +232,7 @@ const Profilo = () => {
                 </Form.Group>
                 <Row xs={3} className="justify-content-center">
                   {/*INSERIRE FETCH DI MODIFICA UTENTE*/}
-                  <Button variant="primary" type="submit" className="rounded-4">
+                  <Button variant="primary fw-semibold" type="submit" className="rounded-4">
                     Invia
                   </Button>
                 </Row>
@@ -252,7 +255,7 @@ const Profilo = () => {
                     onChange={(e) => setUser({ ...user, descrizione: e.target.value })}
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit" className="rounded-4">
+                <Button variant="primary" type="submit" className="rounded-4 fw-semibold">
                   Invia
                 </Button>
               </Form>
@@ -277,7 +280,7 @@ const Profilo = () => {
                 encType="multipart/form-data"
               >
                 <input type="file" ref={fileInputRef} className="d-none" onChange={handleFileChange} />
-                <Button className="mt-4 rounded-4" onClick={() => handleSetImage()}>
+                <Button className="mt-4 rounded-4 fw-semibold" onClick={() => handleSetImage()}>
                   Carica una foto
                 </Button>
               </Form>
@@ -286,16 +289,31 @@ const Profilo = () => {
 
           <Card className="border-0 rounded-4 text-center shadow-sm mt-2 mb-2 ">
             <Card.Body>
-              <p className="fw-semibold">Cancella account 😧</p>
+              <p className="fw-semibold text-danger">Cancella account 😧</p>
               <p className="fs-6">
                 ATTENZIONE! Cancellando l'account perderai tutte le informazioni inserite, tutte le lezioni
                 saranno cancellate e non farai più parte di TutorMe. L'azione che stai per compiere è
                 irreversibile. Sii sicuro prima di procedere.
               </p>
 
-              <Button onClick={() => handleDeleteUtente()}>Cancella</Button>
+              <Button onClick={handleShow} className="rounded-pill fw-semibold">
+                Cancella
+              </Button>
             </Card.Body>
           </Card>
+          <Modal show={showDelete} onHide={handleClose} className="border-0 shadow">
+            <Modal.Body>
+              <p>Sei sicuro di voler cancellare il tuo account TutorMe?</p>
+            </Modal.Body>
+            <Modal.Footer className="d-flex justify-content-center">
+              <Button variant="secondary" onClick={handleClose} className="rounded-pill">
+                NO ci ho ripensato 😀
+              </Button>
+              <Button variant="primary" onClick={() => handleDeleteUtente()} className="rounded-pill">
+                SI sono sicuro 😔
+              </Button>
+            </Modal.Footer>
+          </Modal>
         </Col>
 
         <Col xs={12} md={8} lg={4} className="d-flex flex-column text-center">
