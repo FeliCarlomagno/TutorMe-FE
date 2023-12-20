@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GET_ANNUNCIO_SELEZIONATO,
   firstLetterUpperCaseAction,
+  recensioniLezione,
   searchFetchedProfileAction,
 } from "../redux/actions";
 import { Button, Col, Container, Row, Card, Badge, Toast, Modal, Spinner } from "react-bootstrap";
@@ -28,11 +29,7 @@ const PaginaUtenti = () => {
 
   const fetchAnnunci = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/annuncio/annuncioById/${params.annuncioId}`, {
-        /*headers: {
-            Authorization: `Bearer ${userLogged?.accessToken}`,
-          },*/
-      });
+      const response = await fetch(`http://localhost:8080/annuncio/annuncioById/${params.annuncioId}`, {});
       if (response.ok) {
         const fetchedAnnunci = await response.json();
         dispatch({
@@ -58,13 +55,7 @@ const PaginaUtenti = () => {
   const fetchSearchedProfile = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/api/auth/trovaUtenteByUsername/${annuncioStock?.user?.username}`,
-        {
-          method: "GET",
-          /*headers: {
-            Authorization: `Bearer ${userLogged?.accessToken}`,
-          },*/
-        }
+        `http://localhost:8080/api/auth/trovaUtenteByUsername/${annuncioStock?.user?.username}`
       );
       if (response.ok) {
         const responseData = await response.json();
@@ -78,7 +69,7 @@ const PaginaUtenti = () => {
 
   useEffect(() => {
     fetchSearchedProfile();
-    //searchFetchedProfileAction(setSelectedUser, "annuncioStock.user.username");
+    //searchFetchedProfileAction(setSelectedUser, "annuncioStock?.user?.username");
   }, []);
 
   return (
@@ -152,56 +143,23 @@ const PaginaUtenti = () => {
                 </Card.Body>
               </Card>
 
-              <Card className="border-1 rounded-4 mt-2 border-0 border-1 bg-transparent shadow card_teacher_transparent text-end">
-                <Card.Body>
-                  <Row>
-                    <Col className="mb-2">
-                      <Card.Img
-                        src="https://picsum.photos/201/201"
-                        className="img_annuncio_comments rounded-circle"
-                      />
-                      <span> Maria Lucia</span>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <p className="m-0">Insegnante qualificata e gentile</p>
-                  </Row>
-                </Card.Body>
-              </Card>
-
-              <Card className="border-0 rounded-4 mt-2 border-1 bg-transparent shadow text-end">
-                <Card.Body>
-                  <Row>
-                    <Col className="mb-2">
-                      <Card.Img
-                        src="https://picsum.photos/200/200"
-                        className="img_annuncio_comments rounded-circle"
-                      />
-                      <span> Luca</span>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <p className="m-0">Mi sono trovato splendidamente. Gentile e qualificata</p>
-                  </Row>
-                </Card.Body>
-              </Card>
-
-              <Card className="border-0 rounded-4 border-1 mt-2 bg-transparent shadow text-end">
-                <Card.Body>
-                  <Row>
-                    <Col className="mb-2">
-                      <Card.Img
-                        src="https://picsum.photos/210/210"
-                        className="img_annuncio_comments rounded-circle"
-                      />
-                      <span> Federica</span>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <p className="m-0">Persona super preparata e disponibile</p>
-                  </Row>
-                </Card.Body>
-              </Card>
+              <div id="reviews_div">
+                {recensioniLezione.map((recensione) => (
+                  <Card className="rounded-4 mt-2 border-0 bg-transparent shadow text-end">
+                    <Card.Body>
+                      <Row>
+                        <Col className="mb-2">
+                          <Card.Img src={recensione.photo} className="img_annuncio_comments rounded-circle" />
+                          <span> {recensione.nome}</span>
+                        </Col>
+                      </Row>
+                      <Row>
+                        <p className="m-0">{recensione.recensione}</p>
+                      </Row>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </div>
             </Col>
           </Row>
           <Modal
