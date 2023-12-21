@@ -1,4 +1,4 @@
-import { IS_SIGNUP, SET_USER_INFORMATION } from "../actions";
+import { IS_SIGNUP, LOGOUT, SET_USER_INFORMATION } from "../actions";
 
 const initialState = {
   userSignUp: {
@@ -22,6 +22,13 @@ const signupUserReducer = (state = initialState, action) => {
         ...state,
         isSignup: true,
       };
+
+    case LOGOUT: {
+      return {
+        userSignUp: null,
+        isSignup: false,
+      };
+    }
 
     default:
       return state;
