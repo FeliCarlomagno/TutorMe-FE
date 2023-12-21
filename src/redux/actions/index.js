@@ -265,12 +265,7 @@ export const firstLetterUpperCaseAction = (string) => {
 export const searchFetchedProfileAction = (setSelectedUser, url) => {
   return async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/auth/trovaUtenteByUsername` + url, {
-        method: "GET",
-        /*headers: {
-            Authorization: `Bearer ${userLogged?.accessToken}`,
-          },*/
-      });
+      const response = await fetch(`http://localhost:8080/api/auth/trovaUtenteByUsername` + url);
       if (response.ok) {
         const responseData = await response.json();
         setSelectedUser(responseData);
