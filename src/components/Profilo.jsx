@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Col, Container, Row, Form, Button, Card, Accordion, Modal, FormGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
-import { LOGOUT, handleLogout, materieInsegnabili } from "../redux/actions";
+import { LOGOUT, materieInsegnabili } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const Profilo = () => {
@@ -418,30 +418,36 @@ const Profilo = () => {
                 </Form.Group>
                 <div className="materieInsegnabili_edit d-flex flex-column mt-2">
                   {materieInsegnabili
-                    .filter((v) => v.toLowerCase().includes(formValue.toLowerCase()))
+                    .filter((v) =>
+                      /*v.toLowerCase().includes(formValue.toLowerCase())*/ v
+                        .toLowerCase()
+                        .startsWith(formValue.toLocaleLowerCase())
+                    )
                     .map((m, i) => (
                       <Button
                         value={m}
                         key={i}
                         className="mb-2 py-3  border-0"
                         style={{ backgroundColor: buttonState[i] ? "#e3c579" : null }}
-                        onClick={(e) =>
+                        onClick={(e) => {
                           setAnnuncioEdit({
                             ...annuncioEdit,
                             listaMaterie: [...annuncioEdit?.listaMaterie, e.target.value],
-                          })
-                        }
+                          });
+                          handleButtonState(i);
+                        }}
                       >
                         {m}
                       </Button>
                     ))}
                 </div>
                 <FormGroup>
+                  <Form.Label className="mb-0 mt-3 text_FormLabel">Titolo:</Form.Label>
                   <Form.Control
                     type="text"
                     as="textarea"
                     value={annuncioEdit?.titoloAnnuncio}
-                    className=" border border-2 border-light mt-2"
+                    className=" border border-2 border-light"
                     onChange={(e) =>
                       setAnnuncioEdit({
                         ...annuncioEdit,
@@ -452,11 +458,12 @@ const Profilo = () => {
                 </FormGroup>
 
                 <FormGroup>
+                  <Form.Label className="mb-0 mt-3 text_FormLabel">Descrizione:</Form.Label>
                   <Form.Control
                     type="text"
                     as="textarea"
                     value={annuncioEdit?.descrizioneAnnuncio}
-                    className=" border border-2 border-light mt-2"
+                    className=" border border-2 border-light "
                     onChange={(e) =>
                       setAnnuncioEdit({
                         ...annuncioEdit,
@@ -467,6 +474,7 @@ const Profilo = () => {
                 </FormGroup>
 
                 <FormGroup>
+                  <Form.Label className="mb-0 mt-3 text_FormLabel">Tariffa oraria:</Form.Label>
                   <Form.Control
                     type="text"
                     value={annuncioEdit?.tariffaOraria}
@@ -508,7 +516,7 @@ const Profilo = () => {
                   </div>
                 </FormGroup>
 
-                <div className="">
+                <div className="text-center">
                   <Button
                     onClick={(e) => {
                       dispatch({
@@ -518,9 +526,9 @@ const Profilo = () => {
 
                       handleEditAnnuncio();
                     }}
-                    className=" bg-danger border-0 mt-2 "
+                    className=" bg-danger border-0 mt-2"
                   >
-                    Crea Annuncio
+                    Modifica Annuncio
                   </Button>
                 </div>
               </Form>

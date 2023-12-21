@@ -3,6 +3,7 @@ $secondary: #dde5dd;
 $info: #e9f1eeee;
 $success: #edf5ed;
 $danger: rgb(206, 67, 67);
+$formLabel: #666666;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
@@ -559,4 +560,9 @@ body {
 .bs-tooltip-end .tooltip-arrow::before,
 .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
   display: none;
+}
+
+.text_FormLabel {
+  color: #666666;
+  font-size: 0.7em;
 }
