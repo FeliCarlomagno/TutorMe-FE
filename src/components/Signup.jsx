@@ -3,53 +3,66 @@ import { useDispatch, useSelector } from "react-redux";
 import { IS_SIGNUP, SET_USER_INFORMATION } from "../redux/actions";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import CustomModal from "./CustomModal";
 
 const Singup = () => {
   const isSingup = useSelector((state) => state?.userSignUp);
+  console.log(isSingup, "SONO IL VALORE DI ISsIGNUP", isSingup);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [modalShow, setModalShow] = useState(false);
+  const [validated, setValidated] = useState(false);
   const [user, setUser] = useState({
     name: "",
     username: "",
     email: "",
     password: "",
   });
-  const [modalShow, setModalShow] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://localhost:8080/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(user),
-        headers: {
-          "content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        dispatch({
-          type: SET_USER_INFORMATION,
-          payload: user,
+    const form = e.currentTarget;
+
+    if (form.checkValidity() === false) {
+      console.log("FORM NON VALIDO!");
+      e.stopPropagation();
+    } else {
+      console.log("FORM VALIDO");
+      try {
+        const response = await fetch("http://localhost:8080/api/auth/register", {
+          method: "POST",
+          body: JSON.stringify(user),
+          headers: {
+            "content-Type": "application/json",
+          },
         });
-        dispatch({
-          type: IS_SIGNUP,
-        });
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
-      } else {
+        if (response.ok) {
+          console.log("PERCHE PASSO????");
+          dispatch({
+            type: SET_USER_INFORMATION,
+            payload: user,
+          });
+          dispatch({
+            type: IS_SIGNUP,
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
+        } else {
+          navigate("*");
+        }
+      } catch (error) {
+        navigate("*");
       }
-    } catch (error) {
-      navigate("*");
     }
+
+    setValidated(true);
   };
 
   return (
     <div id="signup_container">
       <Container className="p-4 m-4 h-100">
-        {isSingup && (
+        {isSingup.isSignup && (
           <Modal show={modalShow} onHide={() => setModalShow(false)} size="xl" className="modal_isCreated">
             <Modal.Body className="bg-transparent modal_isCreated_body">
               <h1>Profilo Creato. Benvenuto {isSingup?.userSignUp?.name}</h1>
@@ -72,7 +85,7 @@ const Singup = () => {
             <Card style={{ width: "20em" }} className="py-3 px-2 border-0 shadow rounded-4">
               <Card.Body>
                 <h2 className="text-center fw-semibold mb-4">Crea il tuo account</h2>
-                <Form onSubmit={handleSubmit}>
+                <Form noValidate validated={validated} onSubmit={handleSubmit}>
                   <Form.Group className="mb-3" controlId="formBasicName">
                     <Form.Control
                       type="text"
@@ -82,11 +95,13 @@ const Singup = () => {
                         setUser({ ...user, name: e.target.value });
                       }}
                       className="signup_form_control"
+                      required
                     />
                   </Form.Group>
 
                   <Form.Group className="mb-3" controlId="formBasicUsurname">
                     <Form.Control
+                      required
                       type="text"
                       placeholder="Username"
                       value={user.username}
@@ -106,6 +121,7 @@ const Singup = () => {
                         setUser({ ...user, email: e.target.value });
                       }}
                       className="signup_form_control"
+                      required
                     />
                   </Form.Group>
 
@@ -118,6 +134,7 @@ const Singup = () => {
                         setUser({ ...user, password: e.target.value });
                       }}
                       className="signup_form_control"
+                      required
                     />
                   </Form.Group>
 
