@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Col, Container, Row, Form, Button, Card, Accordion, Modal, FormGroup } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
-import { handleLogout, materieInsegnabili } from "../redux/actions";
+import { LOGOUT, handleLogout, materieInsegnabili } from "../redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const Profilo = () => {
@@ -184,6 +184,9 @@ const Profilo = () => {
         method: "DELETE",
       });
       if (response.ok) {
+        dispatch({
+          type: LOGOUT,
+        });
         navigate("/");
       } else {
         navigate("*");

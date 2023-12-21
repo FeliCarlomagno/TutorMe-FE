@@ -93,9 +93,7 @@ const PaginaUtenti = () => {
 
                   <h3>
                     Riguardo a
-                    <span className="fw-bold text-danger ms-1">
-                      {firstLetterUpperCaseAction(annuncioStock?.user?.username)}
-                    </span>
+                    <span className="fw-bold text-danger ms-1">{annuncioStock?.user?.username}</span>
                   </h3>
                   <p className="teacher_description">{selectedUser?.descrizione}</p>
 
