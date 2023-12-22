@@ -5,18 +5,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 const LogIn = (props) => {
+  const isLogged = useSelector((state) => state.userLogin?.isLogged);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
-
-  const isLogged = useSelector((state) => state.userLogin?.isLogged);
+  const [validated, setValidated] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginAction(e, user, navigate));
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      console.log("FORM NON VALIDO!");
+      e.stopPropagation();
+    } else {
+      dispatch(loginAction(e, user, navigate));
+      setTimeout(props.onHide, 1000);
+    }
+    setValidated(true);
   };
 
   return (
@@ -26,13 +36,15 @@ const LogIn = (props) => {
           {isLogged && <Alert> Accesso eseguito</Alert>}
           <Col>
             <h2 className="mb-5 text-black">Connettiti</h2>
-            <Form onSubmit={handleSubmit}>
+            <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Form.Group className="mb-3" controlId="formBasicUsername">
                 <Form.Control
+                  required
                   type="text"
                   placeholder="Enter Username"
                   className="border-0"
                   value={user.username}
+                  autoComplete="off"
                   onChange={(e) => {
                     setUser({
                       ...user,
@@ -44,6 +56,7 @@ const LogIn = (props) => {
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Control
+                  required
                   type="password"
                   placeholder="Password"
                   className="border-0"
@@ -54,14 +67,7 @@ const LogIn = (props) => {
                 />
               </Form.Group>
 
-              <Button
-                variant="primary"
-                type="submit"
-                className="rounded-pill mb-2"
-                onClick={() => {
-                  setTimeout(props.onHide, 1000);
-                }}
-              >
+              <Button variant="primary" type="submit" className="rounded-pill mb-2">
                 Accedi
               </Button>
               <p className="mb-0">

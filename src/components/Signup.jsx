@@ -24,10 +24,8 @@ const Singup = () => {
     const form = e.currentTarget;
 
     if (form.checkValidity() === false) {
-      console.log("FORM NON VALIDO!");
       e.stopPropagation();
     } else {
-      console.log("FORM VALIDO");
       try {
         const response = await fetch("http://localhost:8080/api/auth/register", {
           method: "POST",
@@ -91,6 +89,7 @@ const Singup = () => {
                       type="text"
                       placeholder="Name"
                       value={user.name}
+                      autoComplete="off"
                       onChange={(e) => {
                         setUser({ ...user, name: e.target.value });
                       }}
@@ -105,6 +104,7 @@ const Singup = () => {
                       type="text"
                       placeholder="Username"
                       value={user.username}
+                      autoComplete="off"
                       onChange={(e) => {
                         setUser({ ...user, username: e.target.value });
                       }}
@@ -117,6 +117,7 @@ const Singup = () => {
                       type="email"
                       placeholder="Email"
                       value={user.email}
+                      autoComplete="off"
                       onChange={(e) => {
                         setUser({ ...user, email: e.target.value });
                       }}
@@ -130,6 +131,7 @@ const Singup = () => {
                       type="password"
                       placeholder="Password"
                       value={user.password}
+                      autoComplete="off"
                       onChange={(e) => {
                         setUser({ ...user, password: e.target.value });
                       }}

@@ -19,15 +19,13 @@ const SignupPage = () => {
     setModalShow(true);
     setTimeout(() => {
       setModalShow(false);
+      navigate("/");
     }, 1500);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(loginAction(e, user, navigate, modalTimeout));
-    setTimeout(() => {
-      navigate("/");
-    }, 1500);
   };
 
   return (
@@ -50,6 +48,7 @@ const SignupPage = () => {
                   placeholder="Enter Username"
                   className="border-0"
                   value={user.username}
+                  autoComplete="off"
                   onChange={(e) => {
                     setUser({
                       ...user,
@@ -63,6 +62,7 @@ const SignupPage = () => {
                   type="password"
                   placeholder="Password"
                   className="border-0"
+                  autoComplete="off"
                   value={user.password}
                   onChange={(e) => {
                     setUser({ ...user, password: e.target.value });
