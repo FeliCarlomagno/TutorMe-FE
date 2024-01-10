@@ -43,11 +43,11 @@ const CardTeacher = () => {
                 }}
                 className="mb-2 mx-0 rounded-4 p-1 card_teacher bg-secondary "
               >
-                <div className="overflow-hidden rounded-4 w-100">
+                <div className="overflow-hidden rounded-4 advCard-imgProfileContainer">
                   <Card.Img
                     variant="top"
-                    src="https://picsum.photos/500/500"
-                    className="rounded-4 cardTeacher-img "
+                    src={`data:image/jpeg;base64,${teacher?.user?.profileImage}`}
+                    className="rounded-4 cardTeacher-img"
                     alt="ad profile picture"
                   />
                 </div>
