@@ -129,10 +129,17 @@ body {
   }
 }
 
-.cardTeacher-img {
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.3);
+.advCard-imgProfileContainer {
+  width: 100%;
+  min-height: 15em;
+  .cardTeacher-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.3);
+    }
   }
 }
 
@@ -325,10 +332,7 @@ body {
   background-repeat: no-repeat;
   background-size: 70em;
   background-position-x: 2px;
-  .img_Annuncio_selected {
-    width: 7em;
-    border-radius: 50%;
-  }
+
   .teacher_description {
     font-size: 0.8em;
   }
@@ -353,7 +357,9 @@ body {
 
 .img_Annuncio_selected {
   width: 5em;
-  border-radius: 50%;
+  height: 5em;
+  object-fit: cover;
+  object-position: center;
 }
 
 //form signup------------------------------------------------------------------------
