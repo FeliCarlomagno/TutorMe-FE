@@ -85,9 +85,8 @@ const PaginaUtenti = () => {
               >
                 <Card.Body className="d-flex flex-column justify-content-evenly align-items-center">
                   <Card.Img
-                    variant="top"
-                    src="https://picsum.photos/200/200"
-                    className=" p-1 py-3 img_Annuncio_selected "
+                    src={`data:image/jpeg;base64,${selectedUser?.profileImage}`}
+                    className="img_Annuncio_selected rounded-circle"
                   />
                   <Card.Title>{annuncioStock?.user?.usarname}</Card.Title>
 
