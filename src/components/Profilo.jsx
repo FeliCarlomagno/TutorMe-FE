@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { Col, Container, Row, Form, Button, Card, Accordion, Modal, FormGroup } from "react-bootstrap";
+import { Col, Container, Row, Form, Button, Card, Accordion, Modal, FormGroup, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { BsPencil } from "react-icons/bs";
 import { LOGOUT, materieInsegnabili } from "../redux/actions";
@@ -21,6 +21,8 @@ const Profilo = () => {
   const [modalShow, setModalShow] = useState(false);
   const [image, setImage] = useState(null);
   const [showDelete, setShowDelete] = useState(false);
+  const [isSetImage, setIsSetImage] = useState(false);
+  const [smShow, setSmShow] = useState(false);
 
   const [annuncioEdit, setAnnuncioEdit] = useState({
     listaMaterie: [],
@@ -50,16 +52,16 @@ const Profilo = () => {
     const file = event.target.files[0];
     setImage(file);
     try {
+      const formData = new FormData();
+      formData.append("file", file);
       const response = await fetch(`http://localhost:8080/api/auth/setImmagine/${userName?.username}`, {
         method: "PUT",
-        body: JSON.stringify(image),
-        headers: {
-          Authorization: `Bearer ${userName?.accessToken}`,
-          "content-Type": "application/json",
-        },
+        body: formData,
       });
       if (response.ok) {
-        alert("Immagine caricata con successo");
+        setRefresh((prevRefresh) => !prevRefresh);
+        setIsSetImage(true);
+        setSmShow(true);
       } else {
         alert("qualcosa non va bene con il caricamento dell'immagine");
       }
@@ -122,7 +124,7 @@ const Profilo = () => {
         },
       });
       if (response.ok) {
-        setRefresh(true);
+        setRefresh((prevRefresh) => !prevRefresh);
       } else {
         alert("qualcosa è andato storto");
       }
@@ -266,16 +268,27 @@ const Profilo = () => {
             </Card.Body>
           </Card>
         </Col>
-
         {/* SEZIONE CENTRALE*/}
         <Col xs={12} md={8} lg={4}>
           <Card className="border-0 shadow-sm rounded-4 text-center">
             <Card.Body>
+              {isSetImage && (
+                <Modal
+                  size="sm"
+                  show={smShow}
+                  onHide={() => setSmShow(false)}
+                  aria-labelledby="example-modal-sizes-title-sm"
+                  className=""
+                >
+                  <Modal.Body className="text-center border border-0">
+                    Immagine di profilo modificata! ✅
+                  </Modal.Body>
+                </Modal>
+              )}
               <p className="fw-semibold">Identità 🪪</p>
               <div className="upload_photo_div">
                 <img src="/assets/credit-card.png" alt="identty_card" className="identity_photo" />
               </div>
-
               <Form
                 onClick={handleButtonClick}
                 action="`http://localhost:8080/api/auth/setImmagine`"
@@ -283,7 +296,12 @@ const Profilo = () => {
                 encType="multipart/form-data"
               >
                 <input type="file" ref={fileInputRef} className="d-none" onChange={handleFileChange} />
-                <Button className="mt-4 rounded-4 fw-semibold" onClick={() => handleSetImage()}>
+                <Button
+                  className="mt-4 rounded-4 fw-semibold"
+                  onClick={() => {
+                    handleSetImage();
+                  }}
+                >
                   Carica una foto
                 </Button>
               </Form>
@@ -318,13 +336,11 @@ const Profilo = () => {
             </Modal.Footer>
           </Modal>
         </Col>
-
         <Col xs={12} md={8} lg={4} className="d-flex flex-column text-center">
           <Card className="text-center rounded-4 d-block border-0 mb-2 shadow-sm">
             <Card.Img
-              variant="top"
-              src="https://picsum.photos/200/200"
-              className=" p-1 mt-3 img_Annuncio_selected "
+              src={`data:image/jpeg;base64,${user?.profileImage}`}
+              className="p-1 mt-3 img_Annuncio_selected rounded-circle"
             />
             <Card.Body>
               <Card.Title>{userName?.username}</Card.Title>
